@@ -16,8 +16,8 @@
     </div>
     <hr>
     <?php echo form_open_multipart(uri_string(),array('class'=>'form-horizontal'));?>
-    <?php echo form_hidden('assets_id',$picture['id']);?>
-    <?php echo form_hidden('assets_by_id',$picture['assets_by_id']);?>
+    <?php echo form_hidden('asset_id',$picture['id']);?>
+    <?php echo form_hidden('asset_by_id',$picture['asset_by_id']);?>
     <?php echo form_hidden('file_name',$picture['file_name']);?>
     <div class="form-group">
       <?php echo form_label('รูปภาพประจำตัว','',array('class'=>'control-label col-md-4'));?>

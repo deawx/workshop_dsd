@@ -26,11 +26,10 @@ class Profile extends Private_Controller {
     $this->form_validation->set_rules('lastname','นามสกุล','required|max_length[100]');
 		$this->form_validation->set_rules('nationality','สัญชาติ','required|max_length[100]');
     $this->form_validation->set_rules('religion','ศาสนา','required|max_length[100]');
-    $this->form_validation->set_rules('id_card','หมายเลขบัตรประชาชน','required|is_numeric|exact_length[13]');
+    $this->form_validation->set_rules('id_card','หมายเลขบัตรประชาชน','required|is_numeric|exact_length[13]|is_unique[profile.id_card]');
     $this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
     $this->form_validation->set_rules('m','เดือนเกิด','required|is_numeric');
     $this->form_validation->set_rules('y','ปีเกิด','required|is_numeric');
-
 		if ($this->form_validation->run() == FALSE) :
 			$this->session->set_flashdata('warning',validation_errors());
 		else:
@@ -50,9 +49,11 @@ class Profile extends Private_Controller {
 				'birthdate' => $birthdate
 			);
 			if ($this->profile->save($data)) :
+				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+			else:
 				$this->session->set_flashdata('warning',validation_errors());
-				redirect('account/profile');
 			endif;
+			redirect('account/profile');
 		endif;
 
     $this->data['menu'] = 'profile';
@@ -72,7 +73,7 @@ class Profile extends Private_Controller {
 			$data = array(
 				'id' => $this->input->post('profile_id'),
 				'user_id' => $this->id,
-				'address' => serialize($this->input->post('address[]')),
+				'address' => serialize($this->input->post('address')),
 				'email' => $this->input->post('email'),
 				'phone' => $this->input->post('phone'),
 				'fax' => $this->input->post('fax')
@@ -140,10 +141,10 @@ class Profile extends Private_Controller {
 		if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) :
 			$upload = array(
 				'allowed_types'	=> 'jpg|jpeg|png',
-				'upload_path'	=> FCPATH.'uploads',
+				'upload_path'	=> FCPATH.'uploads/profiles',
 				'file_ext_tolower' => TRUE,
 			);
-			$exist = $this->input->post('assets_id');
+			$exist = $this->input->post('asset_id');
 			if ($exist) :
 				$upload['file_name'] = $this->input->post('file_name');
 				$upload['overwrite'] = TRUE;
@@ -160,25 +161,30 @@ class Profile extends Private_Controller {
 				$this->image_lib->initialize($resize);
 				if ($this->image_lib->resize()) :
 					$data = $this->upload->data();
-					$data['id'] = $this->input->post('assets_id');
-					$data['file_name'] = $this->input->post('file_name');
+					$data['id'] = ($this->input->post('asset_id')) ? $this->input->post('asset_id') : NULL;
+					$data['file_name'] = ($this->input->post('file_name')) ? $this->input->post('file_name') : $this->upload->data('file_name');
 					if ($this->assets->save($data)) :
-						$assets_id = ($this->db->insert_id()) ? $this->db->insert_id() : $this->input->post('assets_id');
-						$this->assets->save(array(
-							'id' => $this->input->post('assets_by_id'),
-							'assets_id' => $assets_id,
-							'users_id' => $this->id,
+						$id = ($this->input->post('asset_by_id')) ? $this->input->post('asset_by_id') : NULL;
+						$asset_id = ($this->db->insert_id()) ? $this->db->insert_id() : $this->input->post('asset_id');
+						if ($this->assets->save(array(
+							'id' => $id,
+							'asset_id' => $asset_id,
+							'user_id' => $this->id,
 							'upload_date' => time(),
 							'is_avatar' => TRUE
-						),'assets_by');
+						),'assets_by')) :
+							$this->session->set_flashdata('message','อัพโหลดไฟล์เสร็จสิ้น');
+						else:
+							$this->session->set_flashdata('danger',$this->db->error());
+						endif;
 					else:
-						$this->session->set_flashdata('message',$this->db->error(),'danger');
+						$this->session->set_flashdata('danger',$this->db->error());
 					endif;
 				else:
-					$this->session->set_flashdata('message',$this->image_lib->display_errors(),'danger');
+					$this->session->set_flashdata('danger',$this->image_lib->display_errors());
 				endif;
 			else:
-				$this->session->set_flashdata('message',$this->upload->display_errors(),'danger');
+				$this->session->set_flashdata('danger',$this->upload->display_errors());
 			endif;
 		endif;
 		$this->data['menu'] = 'change_picture';

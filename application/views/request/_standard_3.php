@@ -1,5 +1,6 @@
+<?php // $education = unserialize($standard['education']); ?>
 <div class="form-group">
-  <?php echo form_label('ระดับการศึกษาสูงสุด','education_degree',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('ระดับการศึกษาสูงสุด','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?php $e = array(''=>'เลือกรายการ',
       'ประถมศึกษา'=>'ประถมศึกษา',
@@ -13,33 +14,33 @@
       'ปริญญาตรี'=>'ปริญญาตรี',
       'ปริญญาโท'=>'ปริญญาโท',
       'ปริญญาเอก'=>'ปริญญาเอก');
-    echo form_dropdown(array('name'=>'education_degree','class'=>'form-control'),$e,set_value('education_degree'));?>
+    echo form_dropdown(array('name'=>'education[degree]','class'=>'form-control'),$e,set_value('education[degree]'));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('สาขาวิชา','education_department',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('สาขาวิชา','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'education_department','class'=>'form-control'),set_value('education_department'));?>
+    <?php echo form_input(array('name'=>'education[branch]','class'=>'form-control'),set_value('education[branch]'));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('สถานศึกษา','education_place',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('สถานศึกษา','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'education_place','class'=>'form-control'),set_value('education_place'));?>
+    <?php echo form_input(array('name'=>'education[place]','class'=>'form-control'),set_value('education[place]'));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('จังหวัด','education_province',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('จังหวัด','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'education_province','class'=>'form-control'),set_value('education_province'));?>
+    <?php echo form_input(array('name'=>'education[province]','class'=>'form-control'),set_value('education[province]'));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('ปีพ.ศ.ที่สำเร็จ','education_year',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('ปี พ.ศ.ที่สำเร็จ','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?php $y = array(''=>'ปี');
-    foreach (range('2520',(date('Y')+543)) as $key => $value) $y[++$key] = $value;
-    echo form_dropdown(array('name'=>'education_year','class'=>'form-control'),$y,set_value('education_year'));?>
+    foreach (range((date('Y')+543),'2520') as $value) $y[$value] = $value;
+    echo form_dropdown(array('name'=>'education[year]','class'=>'form-control'),$y,set_value('education[year]'));?>
   </div>
 </div>
 <hr>
@@ -51,58 +52,64 @@
   </div>
 </div>
 
-<div id="work_no">
-  <div class="form-group">
-    <?php echo form_label('สถานภาพ(ผู้ไม่มีงานทำ)','work_no_category',array('class'=>'control-label col-md-4'));?>
-    <div class="col-md-8">
-      <?php $wn = array(
-        'อยู่ระหว่างหางาน'=>'อยู่ระหว่างหางาน',
-        'นักเรียน/นักศึกษา'=>'นักเรียน/นักศึกษา',
-        'ทหารก่อนปลดประจำการ'=>'ทหารก่อนปลดประจำการ',
-        'ผู้อยู่ในสถานพินิจ'=>'ผู้อยู่ในสถานพินิจ',
-        'ผู้ต้องขัง'=>'ผู้ต้องขัง',
-        'ผู้ประกันตนที่ถูกเลิกจ้าง'=>'ผู้ประกันตนที่ถูกเลิกจ้าง');
-      echo form_dropdown(array('name'=>'work_no_category','class'=>'form-control','id'=>'work_no_category'),$wn,set_value('work_no_category'));?>
+<div class="form-group">
+  <?php echo form_label('สถานภาพ(ผู้ไม่มีงานทำ)','work_no',array('class'=>'control-label col-md-4'));?>
+  <div class="col-md-8">
+    <?php $wn = array(
+      'อยู่ระหว่างหางาน'=>'อยู่ระหว่างหางาน','นักเรียน/นักศึกษา'=>'นักเรียน/นักศึกษา',
+      'ทหารก่อนปลดประจำการ'=>'ทหารก่อนปลดประจำการ','ผู้อยู่ในสถานพินิจ'=>'ผู้อยู่ในสถานพินิจ',
+      'ผู้ต้องขัง'=>'ผู้ต้องขัง','ผู้ประกันตนที่ถูกเลิกจ้าง'=>'ผู้ประกันตนที่ถูกเลิกจ้าง');
+      echo form_dropdown(array('name'=>'work_no','class'=>'form-control','id'=>'work_no'),$wn,set_value('work_no'));?>
       <p class="help-block">*ให้เลือกกรณีเป็นผู้ไม่มีงานทำ</p>
     </div>
   </div>
-</div>
 
 <div id="work_yes">
   <div class="form-group">
-    <?php echo form_label('สถานภาพ(ผู้มีงานทำ)','work_category',array('class'=>'control-label col-md-4'));?>
+    <?php echo form_label('สถานภาพ(ผู้มีงานทำ)','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">
       <?php $w = array(''=>'เลือกรายการ',
-        'government'=>'ทำงานภาครัฐ',
-        'company'=>'ทำงานภาคเอกชน',
-        'state'=>'ทำงานรัฐวิสาหกิจ',
-        'private'=>'ประกอบธุรกิจส่วนตัว/ประกอบอาชีพอิสระ',
-        'family'=>'ช่วยธุรกิจครัวเรือน');
-      echo form_dropdown(array('name'=>'work_category','class'=>'form-control','id'=>'work_category'),$w,set_value('work_category'));?>
+        'ทำงานภาครัฐ'=>'ทำงานภาครัฐ',
+        'ทำงานภาคเอกชน'=>'ทำงานภาคเอกชน',
+        'ทำงานรัฐวิสาหกิจ'=>'ทำงานรัฐวิสาหกิจ',
+        'ประกอบธุรกิจส่วนตัว/ประกอบอาชีพอิสระ'=>'ประกอบธุรกิจส่วนตัว/ประกอบอาชีพอิสระ',
+        'ช่วยธุรกิจครัวเรือน'=>'ช่วยธุรกิจครัวเรือน');
+      echo form_dropdown(array('name'=>'work_yes[category]','class'=>'form-control','id'=>'work_category'),$w,set_value('work_yes[category]'));?>
     </div>
   </div>
   <div class="form-group">
-    <?php echo form_label('ประเภทงาน','work_category_type',array('class'=>'control-label col-md-4'));?>
+    <?php echo form_label('ประเภทงาน','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">
-      <?php $c = array(''=>'เลือกรายการ',
-        'ข้าราชการพลเรือน'=>'ข้าราชการพลเรือน');
-      echo form_dropdown(array('name'=>'work_category_type','class'=>'form-control','id'=>'work_category_type'),$c,set_value('work_category_type'));?>
+      <?php $c = array(''=>'เลือกรายการ');
+      echo form_dropdown(array('name'=>'work_yes[type]','class'=>'form-control','id'=>'work_type'),$c,set_value('work_yes[type]'));?>
     </div>
   </div>
   <div class="form-group">
-    <?php echo form_label('ประเภทการจ้าง','work_income',array('class'=>'control-label col-md-4'));?>
+    <?php echo form_label('ประเภทอุตสาหกรรม','',array('class'=>'control-label col-md-4'));?>
+    <div class="col-md-8">
+      <?php $g = array(
+        'ยานยนต์และชิ้นส่วน'=>'ยานยนต์และชิ้นส่วน','เหล็กและเหล็กกล้า'=>'เหล็กและเหล็กกล้า',
+        'เฟอร์นิเจอร์'=>'เฟอร์นิเจอร์','อาหาร'=>'อาหาร','ซอฟต์แวร์'=>'ซอฟต์แวร์',
+        'ปิโตรเคมี'=>'ปิโตรเคมี','ไฟฟ้าและอิเล็กทรอนิกส์'=>'ไฟฟ้าและอิเล็กทรอนิกส์',
+        'สิ่งทอและแฟชั่น'=>'สิ่งทอและแฟชั่น','เซรามิกส์'=>'เซรามิกส์','แม่พิมพ์'=>'แม่พิมพ์',
+        'ก่อสร้าง'=>'ก่อสร้าง','โลจิสติกส์'=>'โลจิสติกส์','ท่องเที่ยวและบริการ'=>'ท่องเที่ยวและบริการ',
+        'ผลิตภัณฑ์ยาง'=>'ผลิตภัณฑ์ยาง');
+        echo form_dropdown(array('name'=>'work_yes[group]','class'=>'form-control','id'=>'work_group'),$g,set_value('work_yes[group]'));?>
+        <p class="help-block">*ให้เลือกกรณีไม่ได้ทำงานภาครัฐ</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <?php echo form_label('ประเภทการจ้าง','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">
       <?php $wi = array(''=>'เลือกรายการ',
-        'รายเดือน'=>'รายเดือน',
-        'รายสัปดาห์'=>'รายสัปดาห์',
-        'รายวัน'=>'รายวัน',
-        'รายชั่วโมง'=>'รายชั่วโมง',
+        'รายเดือน'=>'รายเดือน','รายสัปดาห์'=>'รายสัปดาห์',
+        'รายวัน'=>'รายวัน','รายชั่วโมง'=>'รายชั่วโมง',
         'งานเหมา/รายชิ้น'=>'งานเหมา/รายชิ้น');
-      echo form_dropdown(array('name'=>'work_income','class'=>'form-control'),$wi,set_value('work_income'));?>
+      echo form_dropdown(array('name'=>'work_yes[income]','class'=>'form-control'),$wi,set_value('work_yes[income]'));?>
     </div>
   </div>
   <div class="form-group">
-    <?php echo form_label('รายได้เฉลี่ยต่อเดือน','work_income_amount',array('class'=>'control-label col-md-4'));?>
+    <?php echo form_label('รายได้เฉลี่ยต่อเดือน','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">
       <?php $wia = array(''=>'เลือกรายการ',
         '1-5,000 บาท'=>'1-5,000 บาท',
@@ -112,55 +119,62 @@
         '20,001-30,000 บาท'=>'20,001-30,000 บาท',
         '30,001-40,000 บาท'=>'30,001-40,000 บาท',
         '40,001 บาทขึ้นไป'=>'40,001 บาทขึ้นไป');
-      echo form_dropdown(array('name'=>'work_income_amount','class'=>'form-control'),$wia,set_value('work_income_amount'));?>
+      echo form_dropdown(array('name'=>'work_yes[income_amount]','class'=>'form-control'),$wia,set_value('work_yes[income_amount]'));?>
     </div>
   </div>
   <div class="form-group">
     <?php echo form_label('ตำแหน่ง/อาชีพ','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">
-      <?php echo form_input(array('name'=>'','class'=>'form-control'),set_value(''));?>
+      <?php echo form_input(array('name'=>'work_yes[position]','class'=>'form-control'),set_value('work_yes[position]'));?>
     </div>
   </div>
   <div class="form-group">
     <?php echo form_label('อายุงาน(ปี)','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">
-      <?php echo form_input(array('name'=>'','class'=>'form-control'),set_value(''));?>
+      <?php echo form_input(array('name'=>'work_yes[age]','class'=>'form-control'),set_value('work_yes[age]'));?>
     </div>
   </div>
   <div class="form-group">
     <?php echo form_label('ชื่อสถานที่ทำงาน','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">
-      <?php echo form_input(array('name'=>'','class'=>'form-control'),set_value(''));?>
+      <?php echo form_input(array('name'=>'work_yes[place]','class'=>'form-control'),set_value('work_yes[place]'));?>
     </div>
   </div>
   <div class="form-group">
-    <?php echo form_label('ถนน','street',array('class'=>'control-label col-md-4'));?>
+    <?php echo form_label('ถนน','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">
-      <?php echo form_input(array('name'=>'street','class'=>'form-control'),set_value('street'));?>
+      <?php echo form_input(array('name'=>'work_yes[street]','class'=>'form-control'),set_value('work_yes[street]'));?>
     </div>
   </div>
   <div class="form-group">
-    <?php echo form_label('ตำบล','district',array('class'=>'control-label col-md-4'));?>
+    <?php echo form_label('ตำบล','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">
-      <?php echo form_input(array('name'=>'district','class'=>'form-control'),set_value('district'));?>
+      <?php echo form_input(array('name'=>'work_yes[tambon]','class'=>'form-control'),set_value('work_yes[tambon]'));?>
     </div>
   </div>
   <div class="form-group">
-    <?php echo form_label('อำเภอ','city',array('class'=>'control-label col-md-4'));?>
+    <?php echo form_label('อำเภอ','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">
-      <?php echo form_input(array('name'=>'city','class'=>'form-control'),set_value('city'));?>
+      <?php echo form_input(array('name'=>'work_yes[amphur]','class'=>'form-control'),set_value('work_yes[amphur]'));?>
     </div>
   </div>
   <div class="form-group">
-    <?php echo form_label('จังหวัด','province',array('class'=>'control-label col-md-4'));?>
+    <?php echo form_label('จังหวัด','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">
-      <?php echo form_input(array('name'=>'province','class'=>'form-control'),set_value('province'));?>
+      <?php echo form_input(array('name'=>'work_yes[province]','class'=>'form-control'),set_value('work_yes[province]'));?>
     </div>
   </div>
   <div class="form-group">
-    <?php echo form_label('รหัสไปรษณีย์','zip',array('class'=>'control-label col-md-4'));?>
+    <?php echo form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">
-      <?php echo form_input(array('name'=>'zip','class'=>'form-control'),set_value('zip'));?>
+      <?php echo form_input(array('name'=>'work_yes[zip]','class'=>'form-control'),set_value('work_yes[zip]'));?>
+    </div>
+  </div>
+  <div class="form-group">
+    <?php echo form_label('จำนวนลูกจ้างทั้งหมด','',array('class'=>'control-label col-md-4'));?>
+    <div class="col-md-8">
+      <?php $e = array(''=>'เลือกรายการ','1-100 คน'=>'1-100 คน','101-200 คน'=>'101-200 คน','201-300 คน'=>'201-300 คน','301 คนขึ้นไป'=>'301 คนขึ้นไป');
+      echo form_dropdown(array('name'=>'work_yes[employee_amount]','class'=>'form-control'),$e,set_value('work_yes[employee_amount]'));?>
     </div>
   </div>
 </div>
@@ -168,35 +182,44 @@
 <script type="text/javascript">
 $(function(){
   var work_category = $('#work_category');
-  var work_category_type = $('#work_category_type');
+  var work_type = $('#work_type');
   var work_status = $('#work_status');
   var work_yes = $('#work_yes :input');
 
   work_yes.prop('disabled',true);
-  $('#work_no_category').prop('disabled',true);
+  $('#work_no').prop('disabled',true);
   work_status.on('change',function(){
     if (this.value === 'ผู้มีงานทำ') {
       work_yes.prop('disabled',false);
-      $('#work_no_category').prop('disabled',true);
+      $('#work_no').prop('disabled',true);
+      $('#work_group').prop('disabled',false);
     } else if (this.value === 'ผู้ไม่มีงานทำ') {
       work_yes.prop('disabled',true);
-      $('#work_no_category').prop('disabled',false);
+      $('#work_no').prop('disabled',false);
+      $('#work_group').prop('disabled',true);
     } else {
       work_yes.prop('disabled',true);
-      $('#work_no_category').prop('disabled',true);
+      $('#work_no').prop('disabled',true);
+      $('#work_group').prop('disabled',true);
     }
   });
 
-  $('#work_no_category').editableSelect();
-
   work_category.on('change',function(){
-    $.post('../get_work_category_type/'+this.value ,function(data) {
-      work_category_type.empty();
+    $.post('get_work_type/'+this.value,function(data) {
+      work_type.empty();
       $.each(data,function(key,value) {
-        work_category_type.append('<option value="'+key+'">'+value+'</option>');
+        work_type.append('<option value="'+key+'">'+value+'</option>');
       });
     });
+    if (this.value !== 'ทำงานภาครัฐ') {
+      $('#work_group').prop('disabled',false);
+    } else {
+      $('#work_group').prop('disabled',true);
+    }
   });
+
+  $('#work_no').editableSelect();
+  $('#work_group').editableSelect();
 
 });
 </script>

@@ -1,125 +1,114 @@
-<?php
-$address = unserialize($profile['address']);
-$address_current = unserialize($profile['address_current']);
-?>
+<?php $address_current = unserialize($profile['address_current']); ?>
 <div class="form-group">
-  <?php echo form_label('คำนำหน้าชื่อ','title',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('คำนำหน้าชื่อ','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?php $tt = array(''=>'เลือกรายการ','นาย'=>'นาย','นาง'=>'นาง','นางสาว'=>'นางสาว');
-    echo form_dropdown(array('name'=>'title','class'=>'form-control'),$tt,set_value('title',$profile['title']));?>
+    echo form_dropdown(array('name'=>'profile[title]','class'=>'form-control'),$tt,set_value('profile[title]',$profile['title']));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('ชื่อ','firstname',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('ชื่อ','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'firstname','class'=>'form-control'),set_value('firstname',$profile['firstname']));?>
+    <?php echo form_input(array('name'=>'profile[firstname]','class'=>'form-control'),set_value('profile[firstname]',$profile['firstname']));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('นามสกุล','lastname',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('นามสกุล','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'lastname','class'=>'form-control'),set_value('lastname',$profile['lastname']));?>
+    <?php echo form_input(array('name'=>'profile[lastname]','class'=>'form-control'),set_value('profile[lastname]',$profile['lastname']));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('ชื่อเต็ม(ภาษาอังกฤษ)','fullname',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('ชื่อเต็ม(ภาษาอังกฤษ)','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'fullname','class'=>'form-control'),set_value('fullname'));?>
+    <?php echo form_input(array('name'=>'profile[fullname]','class'=>'form-control'),set_value('profile[fullname]'));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('ศาสนา','religion',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('ศาสนา','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'religion','class'=>'form-control'),set_value('religion',$profile['religion']));?>
+    <?php echo form_input(array('name'=>'profile[religion]','class'=>'form-control'),set_value('profile[religion]',$profile['religion']));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('สัญชาติ','nationality',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('สัญชาติ','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'nationality','class'=>'form-control'),set_value('nationality',$profile['nationality']));?>
+    <?php echo form_input(array('name'=>'profile[nationality]','class'=>'form-control'),set_value('profile[nationality]',$profile['nationality']));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('หมายเลขบัตรประชาชน','id_card',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('หมายเลขบัตรประชาชน','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'id_card','class'=>'form-control'),set_value('id_card',$profile['id_card']));?>
+    <?php echo form_input(array('name'=>'profile[id_card]','class'=>'form-control','disabled'=>TRUE),set_value('profile[id_card]',$profile['id_card']));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('ว/ด/ป เกิด','birthdate',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('ว/ด/ป เกิด','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-2">
     <?php $d = array(''=>'วัน');
     foreach (range('1','31') as $value) $d[$value] = $value;
     echo form_dropdown(array('name'=>'d','class'=>'form-control'),$d,set_value('d',date('d',$profile['birthdate'])));?>
   </div>
   <div class="col-md-3">
-    <?php $m = array(''=>'เดือน');
-    foreach (range('1','12') as $value) $m[$value] = $value;
-    echo form_dropdown(array('name'=>'m','class'=>'form-control'),$m,set_value('m',date('m',$profile['birthdate'])));?>
+    <?php echo form_dropdown(array('name'=>'m','class'=>'form-control'),dropdown_month(),set_value('m',date('m',$profile['birthdate'])));?>
   </div>
   <div class="col-md-3">
     <?php $y = array(''=>'ปี พ.ศ.');
-    foreach (range('2520',(date('Y')+543)) as $value) $y[$value] = $value;
+    foreach (range('2500',(date('Y')+543)) as $value) $y[$value] = $value;
     echo form_dropdown(array('name'=>'y','class'=>'form-control'),$y,set_value('y',date('Y',$profile['birthdate'])+543));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('อายุ','age',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('ที่อยู่เลขที่(ปัจจุบัน)','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input('age',age_calculate($profile['birthdate']),array('class'=>'form-control','disabled'=>TRUE));?>
+    <?php echo form_input(array('name'=>'address[address]','class'=>'form-control'),set_value('address[address]',$address_current['address']));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('ที่อยู่เลขที่(ปัจจุบัน)','address',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('ถนน','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'address','class'=>'form-control'),set_value('address',$address['address']));?>
+    <?php echo form_input(array('name'=>'address[street]','class'=>'form-control'),set_value('address[street]',$address_current['street']));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('ถนน','street',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('ตำบล','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'street','class'=>'form-control'),set_value('street',$address['street']));?>
+    <?php echo form_input(array('name'=>'address[tambon]','class'=>'form-control'),set_value('address[tambon]',$address_current['tambon']));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('ตำบล','tambon',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('อำเภอ','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'tambon','class'=>'form-control'),set_value('tambon',$address['tambon']));?>
+    <?php echo form_input(array('name'=>'address[amphur]','class'=>'form-control'),set_value('address[amphur]',$address_current['amphur']));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('อำเภอ','amphur',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('จังหวัด','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'amphur','class'=>'form-control'),set_value('amphur',$address['amphur']));?>
+    <?php echo form_input(array('name'=>'address[province]','class'=>'form-control'),set_value('address[province]',$address_current['province']));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('จังหวัด','province',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'province','class'=>'form-control'),set_value('province',$address['province']));?>
-  </div>
-</div>
-<div class="form-group">
-  <?php echo form_label('รหัสไปรษณีย์','zip',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8">
-    <?php echo form_input(array('name'=>'zip','class'=>'form-control'),set_value('zip',$address['zip']));?>
+    <?php echo form_input(array('name'=>'address[zip]','class'=>'form-control'),set_value('address[zip]',$address_current['zip']));?>
   </div>
 </div>
 <div class="form-group">
   <?php echo form_label('อีเมล์','email',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'email','class'=>'form-control'),set_value('email',$user['email']));?>
+    <?php echo form_email(array('name'=>'address[email]','class'=>'form-control'),set_value('address[email]',$user['email']));?>
   </div>
 </div>
 <div class="form-group">
   <?php echo form_label('โทรศัพท์','phone',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_number(array('name'=>'phone','class'=>'form-control'),set_value('phone',$profile['phone']));?>
+    <?php echo form_number(array('name'=>'address[phone]','class'=>'form-control','max_length'=>'10'),set_value('address[phone]',$profile['phone']));?>
   </div>
 </div>
 <div class="form-group">
   <?php echo form_label('โทรสาร','fax',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_number(array('name'=>'fax','class'=>'form-control'),set_value('fax',$profile['fax']));?>
+    <?php echo form_number(array('name'=>'address[fax]','class'=>'form-control','max_length'=>'10'),set_value('address[fax]',$profile['fax']));?>
   </div>
 </div>

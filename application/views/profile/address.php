@@ -13,7 +13,7 @@ $address_current = unserialize($profile['address_current']);
     <?php echo form_hidden('id', $user['id']);?>
     <?php echo form_hidden('profile_id', $profile['id']);?>
     <div class="form-group">
-      <?php echo form_label('ที่อยู่เลขที่(ปัจจุบัน)','address',array('class'=>'control-label col-md-4'));?>
+      <?php echo form_label('ที่อยู่เลขที่(ตามทะเบียนบ้าน)','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
         <?php echo form_input(array('name'=>'address[address]','class'=>'form-control'),set_value('address[address]',$address['address']));?>
       </div>
@@ -53,13 +53,13 @@ $address_current = unserialize($profile['address_current']);
       <?php echo form_label('','exist',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
         <div class="checkbox">
-          <label> <?php echo form_checkbox(array('name'=>'exist','id'=>'exist'));?> ใช้ที่อยู่ปัจจุบัน </label>
+          <label> <?php echo form_checkbox(array('name'=>'exist','id'=>'exist'));?> ใช้ที่อยู่ตามทะเบียนบ้าน </label>
         </div>
       </div>
     </div>
     <div id="exist_ctn">
       <div class="form-group">
-      <?php echo form_label('ที่อยู่เลขที่(ตามทะเบียนบ้าน)','address_current',array('class'=>'control-label col-md-4'));?>
+      <?php echo form_label('ที่อยู่เลขที่(ปัจจุบัน)','address_current',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
         <?php echo form_input(array('name'=>'address_current[address]','class'=>'form-control'),set_value('address_current[address]',$address_current['address']));?>
       </div>

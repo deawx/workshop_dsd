@@ -42,24 +42,22 @@
     <div class="form-group">
       <?php echo form_label('หมายเลขบัตรประชาชน','id_card',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
-        <?php echo form_input(array('name'=>'id_card','class'=>'form-control','maxlength'=>'13'),set_value('id_card',$profile['id_card']));?>
+        <?php echo form_number(array('name'=>'id_card','class'=>'form-control','maxlength'=>'13'),set_value('id_card',$profile['id_card']));?>
       </div>
     </div>
     <div class="form-group">
-      <?php echo form_label('ว/ด/ป เกิด','birthdate',array('class'=>'control-label col-md-4'));?>
+      <?php echo form_label('ว/ด/ป เกิด','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-2">
         <?php $d = array(''=>'วัน');
         foreach (range('1','31') as $value) $d[$value] = $value;
         echo form_dropdown(array('name'=>'d','class'=>'form-control'),$d,set_value('d',date('d',$profile['birthdate'])));?>
       </div>
       <div class="col-md-3">
-        <?php $m = array(''=>'เดือน');
-        foreach (range('1','12') as $value) $m[$value] = $value;
-        echo form_dropdown(array('name'=>'m','class'=>'form-control'),$m,set_value('m',date('d',$profile['birthdate'])));?>
+        <?php echo form_dropdown(array('name'=>'m','class'=>'form-control'),dropdown_month(),set_value('m',date('m',$profile['birthdate'])));?>
       </div>
       <div class="col-md-3">
         <?php $y = array(''=>'ปี พ.ศ.');
-        foreach (range('2520',(date('Y')+543)) as $value) $y[$value] = $value;
+        foreach (range('2500',(date('Y')+543)) as $value) $y[$value] = $value;
         echo form_dropdown(array('name'=>'y','class'=>'form-control'),$y,set_value('y',date('Y',$profile['birthdate'])+543));?>
       </div>
     </div>

@@ -22,8 +22,8 @@
   <div class="panel-heading">
     <h3 class="panel-title"> </h3>
   </div>
-  <?php echo form_open(uri_string(),array('name'=>'standard','class'=>'form-horizontal'));?>
-  <?php echo form_hidden('id', $user['id']);?>
+  <?=form_open(uri_string(),array('name'=>'standard','class'=>'form-horizontal','autocomplete'=>'off'));?>
+  <?=form_hidden('user_id',$this->session->user_id);?>
   <div class="panel-body">
     <div class="tab-content">
       <div id="1" class="tab-pane fade in active">
@@ -51,7 +51,7 @@
       </ul>
     </nav>
   </div>
-  <?php echo form_close();?>
+  <?=form_close();?>
 </div>
 
 <script type="text/javascript">

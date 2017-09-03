@@ -39,12 +39,14 @@ if ( ! function_exists('clear_null_array'))
    *
    * Example : clear_null_array(array('1'=>'','2'=>'true','3'=>false,'4'=>null)));
    */
-  function clear_null_array($array)
+  function clear_null_array($array,$reindex=FALSE)
   {
     $array = is_array($array) ? $array : array($array);
     $array = array_map('trim', $array);
 		$array = array_filter($array);
-    return $array;
+    return ($reindex)
+      ? array_values($array)
+      : $array;
   }
 }
 
