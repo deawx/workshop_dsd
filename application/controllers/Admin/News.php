@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends Admin_Controller {
+class News extends Admin_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->data['parent'] = 'dashboard';
+		$this->data['parent'] = 'news';
 		$this->data['navbar'] = $this->load->view('_partials/menubar',$this->data,TRUE);
 	}
 

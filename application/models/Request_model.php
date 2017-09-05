@@ -16,8 +16,9 @@ class Request_model extends MY_Model {
   function get_standard_all()
   {
     return $this->db
-      ->order_by('id','ASC')
+      ->select('id,date_create,date_update,category,assets_id')
       ->where('user_id',$this->session->user_id)
+      ->order_by('id','ASC')
       ->get('standards')
       ->result_array();
   }
@@ -29,8 +30,9 @@ class Request_model extends MY_Model {
   function get_skill_all()
   {
     return $this->db
-      ->order_by('id','ASC')
+      ->select('id,date_create,date_update,assets_id')
       ->where('user_id',$this->session->user_id)
+      ->order_by('id','ASC')
       ->get('skills')
       ->result_array();
   }

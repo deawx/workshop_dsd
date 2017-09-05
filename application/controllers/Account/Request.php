@@ -14,6 +14,7 @@ class Request extends Private_Controller {
 		parent::__construct();
     $this->load->model('Profile_model','profile');
     $this->load->model('Request_model','request');
+    $this->load->model('Assets_model','assets');
 		$this->id = $this->session->user_id;
     $this->data['parent'] = 'request';
     $this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
@@ -23,7 +24,26 @@ class Request extends Private_Controller {
 
 	public function index()
 	{
+		$this->form_validation->set_rules('assets_id[]','ไอดีเอกสารแนบคำร้อง','required');
+		if ($this->form_validation->run() == FALSE) :
+			$this->session->set_flashdata('warning',validation_errors());
+		else:
+			$type = $this->input->post('type');
+			$data = $this->input->post();
+			$data['assets_id'] = $this->input->post('assets_id') ? serialize($this->input->post('assets_id')) : NULL;
+
+			// print_data($data); die();
+
+			if ($this->request->save($data,$type)) :
+				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+			else:
+				$this->session->set_flashdata('danger','บันทึกข้อมูลล้มเหลว');
+			endif;
+			redirect('account/request/index');
+		endif;
+
 		$this->data['requests'] = $this->request->get_all();
+		$this->data['assets'] = $this->assets->get_all();
 		$this->data['menu'] = 'index';
 		$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 		$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
@@ -198,41 +218,17 @@ class Request extends Private_Controller {
 		$this->load->view('_layouts/rightside',$this->data);
 	}
 
-	function attachment($id=NULL)
+	function edit($code='')
 	{
-		if ( ! intval($id) > 0)
-			show_error('ไม่พบหน้าที่ต้องการค้นหา','404');
+		$code = $this->input->get('code');
+		if ( ! is_numeric($code))
+			show_404();
 
-		if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) :
-			$upload = array(
-				'allowed_types'	=> 'jpg|jpeg|png|pdf',
-				'upload_path'	=> FCPATH.'uploads/attachments',
-				'file_ext_tolower' => TRUE,
-			);
-			if ($this->upload->initialize($upload)) :
-				if ($this->assets->save($data)) :
-					$asset_id = $this->db->insert_id();
-					$assets = array(
-						'asset_id' => $asset_id,
-						'user_id' => $this->id,
-						'upload_date' => time()
-					);
-					if ($this->assets->save($assets,'assets_by')) :
-						$this->session->set_flashdata('success','อัพโหลดไฟล์เสร็จสิ้น');
-					else:
-						$this->session->set_flashdata('danger',$this->db->error());
-					endif;
-				else:
-					$this->session->set_flashdata('danger',$this->db->error());
-				endif;
-			else:
-				$this->session->set_flashdata('danger',$this->upload->display_errors());
-			endif;
-		endif;
+		echo $code;
 
-		$this->data['menu'] = 'attachments';
+		$this->data['menu'] = 'edit';
 		$this->data['navbar'] = NULL;
-		$this->data['body'] = $this->load->view('request/_standard_file',NULL,TRUE);
+		$this->data['body'] = $this->load->view('request/edit',$this->data,TRUE);
 		$this->load->view('_layouts/boxed',$this->data);
 	}
 

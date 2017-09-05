@@ -31,12 +31,39 @@ $order_by = $this->input->get('order_by');
     <tbody>
       <?php foreach ($requests as $key => $value) : ?>
         <tr class="rows" style="display:none;">
-          <td><?=isset($value['category']) ? 'ใบสมัครทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ' : 'คำขอหนังสือรับรองความรู้ความสามารถ';?></td>
+          <td><?=isset($value['category']) ? $value['category'] : 'หนังสือรับรองความรู้ความสามารถ';?></td>
           <td><?=($value['date_create']) ? date('d-m-Y',$value['date_create']) : 'N/A';?></td>
           <td><?=($value['date_update']) ? date('d-m-Y',$value['date_update']) : 'N/A';?></td>
           <td>
-            <?=anchor('','แก้ไข',array('class'=>'label label-info'));?>
-            <?=anchor('','แนบไฟล์',array('class'=>'label label-primary'));?>
+            <?=anchor('account/request/edit?code='.$value['date_create'],'แก้ไข',array('class'=>'label label-info','target'=>'_blank'));?>
+            <?=anchor('#','แนบไฟล์',array('class'=>'label label-primary','data-toggle'=>'modal','data-target'=>'#attachment'.$value['date_create']));?>
+            <?=form_open().form_hidden('id',$value['id']).form_hidden('type',isset($value['category']) ? 'standards' : 'skills');?>
+            <div class="modal fade" id="attachment<?=$value['date_create'];?>" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">รายการแนบไฟล์เอกสาร</h4>
+                  </div>
+                  <div class="modal-body" style="padding:0px;">
+                    <table class="table table-hover">
+                      <tbody>
+                        <?php $assets_id = unserialize($value['assets_id']);
+                        foreach ($assets as $asset) : ?>
+                        <tr>
+                          <td><?=form_checkbox(array('name'=>'assets_id[]'),$asset['id'],set_checkbox('assets_id',$asset['id'],(any_in_array($asset['id'],$assets_id))));?></td>
+                          <td><?=img('uploads/attachments/'.$asset['file_name'],'',array('style'=>'height:75px;width:75px;'));?></td>
+                          <td><?=$asset['image_size_str'];?></td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="modal-footer"> <button type="submit" class="btn btn-primary btn-block">ยืนยัน</button> </div>
+              </div>
+            </div>
+          </div>
+          <?=form_close();?>
           </td>
         </tr>
       <?php endforeach; ?>

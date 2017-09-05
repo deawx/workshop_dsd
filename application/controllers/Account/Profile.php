@@ -186,12 +186,66 @@ class Profile extends Private_Controller {
 			else:
 				$this->session->set_flashdata('danger',$this->upload->display_errors());
 			endif;
+			redirect('account/profile/change_picture');
 		endif;
+
 		$this->data['menu'] = 'change_picture';
 		$this->data['picture'] = $this->assets->get_id();
 		$this->data['leftbar'] = $this->load->view('_partials/leftbar',$this->data,TRUE);
-		$this->data['body'] = $this->load->view('profile/change_picture',NULL,TRUE);
+		$this->data['body'] = $this->load->view('profile/change_picture',$this->data,TRUE);
 		$this->load->view('_layouts/leftside',$this->data);
+	}
+
+	function attachment()
+	{
+		$type = $this->input->get('type');
+		$id = $this->input->get('id');
+		if ($type === 'delete' && intval($id) > 0) :
+			$deleted = $this->assets->delete_attachment($id);
+			if ($deleted === TRUE) :
+				$this->session->set_flashdata('success','การลบไฟล์เสร็จสิ้น');
+			else:
+				$this->session->set_flashdata('danger','การลบไฟล์ขัดข้อง');
+			endif;
+			redirect('account/profile/attachment');
+		endif;
+
+		if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) :
+			$upload = array(
+				'allowed_types'	=> 'jpg|jpeg|png',
+				'upload_path'	=> FCPATH.'uploads/attachments',
+				'file_ext_tolower' => TRUE,
+				'encrypt_name' => TRUE
+			);
+			$this->upload->initialize($upload);
+			if ($this->upload->do_upload('file')) :
+				$data = $this->upload->data();
+				if ($this->assets->save($data)) :
+					if ($this->assets->save(array(
+						'asset_id' => $this->db->insert_id(),
+						'user_id' => $this->id,
+						'upload_date' => time()
+					),'assets_by')) :
+						$this->session->set_flashdata('success','อัพโหลดไฟล์เสร็จสิ้น');
+					else:
+						$this->session->set_flashdata('danger',$this->db->error());
+					endif;
+				else:
+					$this->session->set_flashdata('danger',$this->db->error());
+				endif;
+			else:
+				$this->session->set_flashdata('danger',$this->upload->display_errors());
+			endif;
+			redirect('account/profile/attachment');
+		endif;
+
+		$this->data['menu'] = 'attachment';
+		$this->data['css'] = array(link_tag('assets/css/basic.min.css'),link_tag('assets/css/dropzone.min.css'));
+		$this->data['js'] = array(script_tag('assets/js/dropzone.min.js'));
+		$this->data['assets'] = $this->assets->get_all();
+		$this->data['leftbar'] = $this->load->view('_partials/leftbar',$this->data,TRUE);
+		$this->data['body'] = $this->load->view('profile/attachment',$this->data,TRUE);
+		$this->load->view('_layouts/boxed',$this->data);
 	}
 
   function change_password()
