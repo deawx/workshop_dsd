@@ -11,43 +11,93 @@ class Request_model extends MY_Model {
 
   function get_standard_id($id='')
   {
+    return $this->db
+      ->select('sd.id,sd.date_create,sd.date_update,sd.category,sd.assets_id,us.email')
+      ->like('us.email',$q)
+      ->where('sd.user_id',$id)
+      ->order_by('sd.id','ASC')
+      ->join('users AS us','sd.user_id=us.id')
+      ->get('standards AS sd')
+      ->result_array();
   }
 
-  function get_standard_all()
+  function get_standard_all($q='',$status='')
   {
-    return $this->db
-      ->select('id,date_create,date_update,category,assets_id')
-      ->where('user_id',$this->session->user_id)
-      ->order_by('id','ASC')
-      ->get('standards')
-      ->result_array();
+    $this->db
+      ->select('sd.id,sd.user_id,sd.admin_id,sd.approve_status,sd.date_create,sd.date_update,sd.category,sd.assets_id,us.email')
+      ->order_by('sd.id','ASC')
+      ->join('users AS us','sd.user_id=us.id');
+
+    if ($q)
+      $this->db->like('us.email',$q);
+
+    if ($status)
+      $this->db->where('sd.approve_status',$status);
+
+    return $this->db->get('standards AS sd')->result_array();
   }
 
   function get_skill_id($id='')
   {
-  }
-
-  function get_skill_all()
-  {
     return $this->db
-      ->select('id,date_create,date_update,assets_id')
-      ->where('user_id',$this->session->user_id)
-      ->order_by('id','ASC')
-      ->get('skills')
+      ->select('sk.id,sk.date_create,sk.date_update,sk.assets_id,us.email')
+      ->like('us.email',$q)
+      ->where('sk.user_id',$id)
+      ->order_by('sk.id','ASC')
+      ->join('users AS us','sk.user_id=us.id')
+      ->get('skills AS sk')
       ->result_array();
   }
 
-  function get_all()
+  function get_skill_all($q='',$status='')
   {
-    $standards = $this->get_standard_all();
-    $skills = $this->get_skill_all();
+    $this->db
+      ->select('sk.id,sk.user_id,sk.admin_id,sk.approve_status,sk.date_create,sk.date_update,sk.assets_id,us.email')
+      ->order_by('sk.id','ASC')
+      ->join('users AS us','sk.user_id=us.id');
+
+    if ($q)
+      $this->db->like('us.email',$q);
+
+    if ($status)
+      $this->db->where('sk.approve_status',$status);
+
+    return $this->db->get('skills AS sk')->result_array();
+  }
+
+  function get_all($q='',$status='')
+  {
+    $standards = $this->get_standard_all($q,$status);
+    $skills = $this->get_skill_all($q,$status);
 
     $array = array_merge($standards,$skills);
     usort($array, function($a, $b) {
-      return $a['date_create'] < $b['date_create'];
+      return ($a['admin_id'] !== '') ? $a['admin_id'] : $a['date_create'] < $b['date_create'];
     });
 
     return $array;
+  }
+
+  function get_code($code='')
+  {
+    $standard = $this->db
+      ->where('date_create',$code)
+      ->get('standards');
+
+    if ($standard->num_rows() < 0) :
+      $skill = $this->db
+        ->where('date_create',$code)
+        ->get('skills');
+      if ($skill->num_rows() < 0) :
+        return array();
+      else:
+        return $skill->row_array();
+      endif;
+    else:
+      return $standard->row_array();
+    endif;
+
+    return array();
   }
 
 }

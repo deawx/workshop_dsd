@@ -7,7 +7,6 @@
   <div class="panel-body">
     <?php echo form_open(uri_string(),array('class'=>'form-horizontal'));?>
     <?php echo form_hidden('id', $user['id']);?>
-    <?php echo form_hidden('profile_id', $profile['id']);?>
     <div class="form-group">
       <?php echo form_label('ชื่อผู้ใช้','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
@@ -35,13 +34,13 @@
     <div class="form-group">
       <?php echo form_label('โทรศัพท์','phone',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
-        <?php echo form_number(array('name'=>'phone','class'=>'form-control','max_length'=>'10'),set_value('phone',$profile['phone']));?>
+        <?php echo form_input(array('name'=>'phone','class'=>'form-control','maxlength'=>'10'),set_value('phone',$user['phone']));?>
       </div>
     </div>
     <div class="form-group">
       <?php echo form_label('โทรสาร','fax',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
-        <?php echo form_number(array('name'=>'fax','class'=>'form-control','max_length'=>'10'),set_value('fax',$profile['fax']));?>
+        <?php echo form_input(array('name'=>'fax','class'=>'form-control','maxlength'=>'10'),set_value('fax',$user['fax']));?>
       </div>
     </div>
     <div class="form-group">

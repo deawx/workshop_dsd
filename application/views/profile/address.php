@@ -1,6 +1,6 @@
 <?php
-$address = unserialize($profile['address']);
-$address_current = unserialize($profile['address_current']);
+$address = unserialize($user['address']);
+$address_current = unserialize($user['address_current']);
 ?>
 <div class="panel panel-success">
   <div class="panel-heading">
@@ -11,7 +11,7 @@ $address_current = unserialize($profile['address_current']);
   <div class="panel-body">
     <?php echo form_open(uri_string(),array('class'=>'form-horizontal'));?>
     <?php echo form_hidden('id', $user['id']);?>
-    <?php echo form_hidden('profile_id', $profile['id']);?>
+    <?php echo form_hidden('profile_id', $user['id']);?>
     <div class="form-group">
       <?php echo form_label('ที่อยู่เลขที่(ตามทะเบียนบ้าน)','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
@@ -45,7 +45,7 @@ $address_current = unserialize($profile['address_current']);
     <div class="form-group">
       <?php echo form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
-        <?php echo form_number(array('name'=>'address[zip]','class'=>'form-control','maxlength'=>'5'),set_value('address[zip]',$address['zip']));?>
+        <?php echo form_input(array('name'=>'address[zip]','class'=>'form-control','maxlength'=>'5'),set_value('address[zip]',$address['zip']));?>
       </div>
     </div>
     <hr>
@@ -53,7 +53,7 @@ $address_current = unserialize($profile['address_current']);
       <?php echo form_label('','exist',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
         <div class="checkbox">
-          <label> <?php echo form_checkbox(array('name'=>'exist','id'=>'exist'));?> ใช้ที่อยู่ตามทะเบียนบ้าน </label>
+          <label> <?php echo form_checkbox(array('name'=>'exist','id'=>'exist'),'1',set_checkbox('exist','1',($user['address_current'])));?> ใช้ที่อยู่ตามทะเบียนบ้าน </label>
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@ $address_current = unserialize($profile['address_current']);
       <div class="form-group">
         <?php echo form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
         <div class="col-md-8">
-          <?php echo form_number(array('name'=>'address_current[zip]','class'=>'form-control','maxlength'=>'5'),set_value('address_current[zip]',$address_current['zip']));?>
+          <?php echo form_input(array('name'=>'address_current[zip]','class'=>'form-control','maxlength'=>'5'),set_value('address_current[zip]',$address_current['zip']));?>
         </div>
       </div>
     </div>
@@ -113,7 +113,7 @@ $address_current = unserialize($profile['address_current']);
 $(function(){
   var exist = $('#exist');
   var exist_ctn = $('div#exist_ctn :input');
-  <?php if ( ! $profile['address_current']) : ?>
+  <?php if ( ! $user['address_current']) : ?>
     exist.prop('checked',true);
     exist_ctn.prop('disabled',true);
   <?php endif; ?>

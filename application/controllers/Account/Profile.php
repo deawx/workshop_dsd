@@ -15,7 +15,6 @@ class Profile extends Private_Controller {
     $this->data['parent'] = 'account';
     $this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 		$this->data['user'] = $this->auth->user($this->id)->row_array();
-		$this->data['profile'] = $this->profile->get_id($this->id);
 	}
 
   public function index()
@@ -38,8 +37,7 @@ class Profile extends Private_Controller {
 			$y = $this->input->post('y')-543;
 			$birthdate = strtotime($y.'-'.$m.'-'.$d);
 			$data = array(
-				'id' => $this->input->post('profile_id'),
-				'user_id' => $this->id,
+				'id' => $this->id,
 				'title' => $this->input->post('title'),
 				'firstname' => $this->input->post('firstname'),
 				'lastname' => $this->input->post('lastname'),
@@ -48,7 +46,7 @@ class Profile extends Private_Controller {
 				'id_card' => $this->input->post('id_card'),
 				'birthdate' => $birthdate
 			);
-			if ($this->profile->save($data)) :
+			if ($this->profile->save($data,'users')) :
 				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
 			else:
 				$this->session->set_flashdata('warning',validation_errors());
@@ -70,18 +68,20 @@ class Profile extends Private_Controller {
 		if ($this->form_validation->run() == FALSE) :
 			$this->session->set_flashdata('warning',validation_errors());
 		else:
+			$address = $this->input->post('address');
+			$address_current = $this->input->post('address_current');
 			$data = array(
-				'id' => $this->input->post('profile_id'),
-				'user_id' => $this->id,
-				'address' => serialize($this->input->post('address')),
+				'id' => $this->id,
+				'address' => serialize($address),
+				'address_current' => ($this->input->post('exist')) ? serialize($address) : serialize($address_current),
 				'email' => $this->input->post('email'),
 				'phone' => $this->input->post('phone'),
 				'fax' => $this->input->post('fax')
 			);
-			if ($this->input->post('exist')) :
-				$data['address_current'] = serialize($this->input->post('address_current[]'));
-			endif;
-			if ($this->profile->save($data)) :
+
+			if ($this->profile->save($data,'users')) :
+				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+			else:
 				$this->session->set_flashdata('warning',validation_errors());
 				redirect('account/profile/address');
 			endif;
@@ -95,20 +95,20 @@ class Profile extends Private_Controller {
 
   function edit()
   {
-		$this->form_validation->set_rules('email','','valid_email|max_length[100]');
-		$this->form_validation->set_rules('phone','','max_length[20]');
-		$this->form_validation->set_rules('fax','','max_length[20]');
+		$this->form_validation->set_rules('phone','','is_numeric|max_length[10]');
+		$this->form_validation->set_rules('fax','','is_numeric|max_length[10]');
 
 		if ($this->form_validation->run() == FALSE) :
 			$this->session->set_flashdata('warning',validation_errors());
 		else:
 			$data = array(
-				'id' => $this->input->post('profile_id'),
-				'user_id' => $this->id,
+				'id' => $this->id,
 				'phone' => $this->input->post('phone'),
 				'fax' => $this->input->post('fax')
 			);
-			if ($this->profile->save($data)) :
+			if ($this->profile->save($data,'users')) :
+				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+			else:
 				$this->session->set_flashdata('warning',validation_errors());
 				redirect('account/profile/edit');
 			endif;
@@ -117,22 +117,6 @@ class Profile extends Private_Controller {
     $this->data['menu'] = 'edit';
     $this->data['leftbar'] = $this->load->view('_partials/leftbar',$this->data,TRUE);
     $this->data['body'] = $this->load->view('profile/edit',NULL,TRUE);
-    $this->load->view('_layouts/leftside',$this->data);
-  }
-
-  function education()
-  {
-    $this->data['menu'] = 'education';
-    $this->data['leftbar'] = $this->load->view('_partials/leftbar',$this->data,TRUE);
-    $this->data['body'] = $this->load->view('profile/education',NULL,TRUE);
-    $this->load->view('_layouts/leftside',$this->data);
-  }
-
-  function work()
-  {
-    $this->data['menu'] = 'work';
-    $this->data['leftbar'] = $this->load->view('_partials/leftbar',$this->data,TRUE);
-    $this->data['body'] = $this->load->view('profile/work',NULL,TRUE);
     $this->load->view('_layouts/leftside',$this->data);
   }
 

@@ -7,7 +7,7 @@ $autoload['libraries'] = array('ion_auth','form_validation','upload','image_lib'
 
 $autoload['drivers'] = array();
 
-$autoload['helper'] = array('url','html','array','date');
+$autoload['helper'] = array('url','html','array','date','text');
 
 $autoload['config'] = array();
 

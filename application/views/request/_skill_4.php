@@ -13,6 +13,15 @@
   </div>
 </div>
 <div class="form-group">
+  <?php echo form_label('เอกสารสำคัญ','needed',array('class'=>'control-label col-md-4'));?>
+  <div class="col-md-8">
+    <div class="checkbox">
+      <label><?=form_checkbox(array('name'=>'needed','required'=>TRUE),'1');?>สำเนาใบผ่านการสอบมาตรฐานฝีมือแรงงานแห่งชาติ</label>
+    </div>
+    <p class="help-block">*ข้าพเจ้าได้ผ่านการสอบมาตรฐานฝีมือแรงงานแล้วและพร้อมแนบสำเนาเอกสารดังกล่าวมาเพื่อขอรับการอนุมัติ</p>
+  </div>
+</div>
+<div class="form-group">
   <?php echo form_label('','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?=form_submit('','ยืนยัน',array('class'=>'btn btn-primary btn-block'));?>

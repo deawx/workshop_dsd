@@ -16,7 +16,7 @@ $parent = isset($parent) ? $parent : '';
       <ul class="nav navbar-nav navbar-right">
         <li class="<?=($parent === 'about') ? 'active' : '';?>"> <a href="<?=site_url('welcome/about');?>">เกี่ยวกับเรา</a> </li>
         <li class="<?=($parent === 'contact') ? 'active' : '';?>"> <a href="<?=site_url('welcome/contact');?>">ติดต่อเรา</a> </li>
-        <li class="<?=($parent === 'news') ? 'active' : '';?>"> <a href="<?=site_url('news');?>">ข่าวสาร</a> </li>
+        <li class="<?=($parent === 'news') ? 'active' : '';?>"> <a href="<?=site_url('welcome/news');?>">ข่าวสาร</a> </li>
         <?php if ( ! $this->ion_auth->logged_in()) : ?>
           <li> <a href="<?=site_url('auth/login');?>">เข้าสู่ระบบ/สมัครสมาชิก</a> </li>
         <?php else: ?>

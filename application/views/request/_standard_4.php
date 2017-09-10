@@ -101,7 +101,7 @@
 <div class="form-group">
   <?php echo form_label('ระยะเวลาจ้าง','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_number(array('name'=>'work_abroad[duration]','class'=>'form-control','maxlength'=>'2'),set_value('work_abroad[duration]'));?>
+    <?php echo form_input(array('name'=>'work_abroad[duration]','class'=>'form-control','maxlength'=>'2'),set_value('work_abroad[duration]'));?>
   </div>
 </div>
 

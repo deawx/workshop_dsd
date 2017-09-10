@@ -21,6 +21,8 @@
             <li> <a href="<?=site_url('account/profile');?>">ข้อมูลส่วนตัว</a> </li>
             <li> <a href="<?=site_url('account/profile/attachment');?>">ข้อมูลไฟล์เอกสาร</a> </li>
             <li class="divider"></li>
+            <li> <a href="<?=site_url('admin/news');?>">เข้าระบบผู้ดูแล</a> </li>
+            <li class="divider"></li>
             <li> <a href="<?=site_url('auth/logout');?>">ออกจากระบบ</a> </li>
           </ul>
         </li>

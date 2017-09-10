@@ -12,7 +12,6 @@ class User extends Admin_Controller {
 		$this->data['parent'] = 'user';
 		$this->data['navbar'] = $this->load->view('_partials/menubar',$this->data,TRUE);
 		$this->data['user'] = $this->ion_auth->user($this->session->user_id)->row_array();
-		$this->data['profile'] = $this->profile->get_id($this->session->user_id);
 	}
 
 	function index()
@@ -38,7 +37,6 @@ class User extends Admin_Controller {
 			show_404();
 
 		$this->auth->delete_user($user_id);
-		$this->profile->delete_user($user_id);
 
 		redirect('admin/user');
 	}

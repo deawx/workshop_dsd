@@ -19,31 +19,13 @@ class Request extends Private_Controller {
     $this->data['parent'] = 'request';
     $this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 		$this->data['user'] = $this->ion_auth->user($this->id)->row_array();
-		$this->data['profile'] = $this->profile->get_id($this->id);
 	}
 
 	public function index()
 	{
-		$this->form_validation->set_rules('assets_id[]','ไอดีเอกสารแนบคำร้อง','required');
-		if ($this->form_validation->run() == FALSE) :
-			$this->session->set_flashdata('warning',validation_errors());
-		else:
-			$type = $this->input->post('type');
-			$data = $this->input->post();
-			$data['assets_id'] = $this->input->post('assets_id') ? serialize($this->input->post('assets_id')) : NULL;
-
-			// print_data($data); die();
-
-			if ($this->request->save($data,$type)) :
-				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
-			else:
-				$this->session->set_flashdata('danger','บันทึกข้อมูลล้มเหลว');
-			endif;
-			redirect('account/request/index');
-		endif;
-
 		$this->data['requests'] = $this->request->get_all();
 		$this->data['assets'] = $this->assets->get_all();
+
 		$this->data['menu'] = 'index';
 		$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 		$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
@@ -90,6 +72,7 @@ class Request extends Private_Controller {
 			$this->session->set_flashdata('warning',validation_errors());
 		else:
 			$data = $this->input->post();
+			unset($data['type']);
 			if ($this->input->post('id')) :
 				$data['date_update'] = time();
 			else:
@@ -148,11 +131,13 @@ class Request extends Private_Controller {
 		$this->form_validation->set_rules('career[3]','สาขาอาชีพที่ 3','max_length[150]|differs[career[1]]|differs[career[2]]|differs[career[4]]|differs[career[5]]');
 		$this->form_validation->set_rules('career[4]','สาขาอาชีพที่ 4','max_length[150]|differs[career[1]]|differs[career[2]]|differs[career[3]]|differs[career[5]]');
 		$this->form_validation->set_rules('career[5]','สาขาอาชีพที่ 5','max_length[150]|differs[career[1]]|differs[career[2]]|differs[career[3]]|differs[career[4]]');
+		$this->form_validation->set_rules('needed','เอกสารสำคัญ','required|is_numeric');
 
 		if ($this->form_validation->run() == FALSE) :
 			$this->session->set_flashdata('warning',validation_errors());
 		else:
 			$data = $this->input->post();
+			unset($data['type']);
 			if ($this->input->post('id')) :
 				$data['date_update'] = time();
 			else:
@@ -199,8 +184,24 @@ class Request extends Private_Controller {
 
 	function result()
 	{
+		$this->form_validation->set_rules('assets_id[]','ไอดีเอกสารแนบคำร้อง','required');
+		if ($this->form_validation->run() == FALSE) :
+			$this->session->set_flashdata('warning',validation_errors());
+		else:
+			$type = $this->input->post('type');
+			$data = $this->input->post();
+			$data['assets_id'] = $this->input->post('assets_id') ? serialize($this->input->post('assets_id')) : NULL;
 
-		// $this->data['results'] = $this->approve->get_all();
+			if ($this->request->save($data,$type)) :
+				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+			else:
+				$this->session->set_flashdata('danger','บันทึกข้อมูลล้มเหลว');
+			endif;
+			redirect('account/request/result');
+		endif;
+
+		$this->data['requests'] = $this->request->get_all('','accept');
+		$this->data['assets'] = $this->assets->get_all();
 
 		$this->data['menu'] = 'result';
 		$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
@@ -214,7 +215,7 @@ class Request extends Private_Controller {
 		$this->data['menu'] = 'calendar';
 		$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 		$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
-		$this->data['body'] = $this->load->view('request/register',$this->data,TRUE);
+		$this->data['body'] = $this->load->view('request/calendar',$this->data,TRUE);
 		$this->load->view('_layouts/rightside',$this->data);
 	}
 

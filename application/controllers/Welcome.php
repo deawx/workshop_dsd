@@ -47,4 +47,18 @@ class Welcome extends Public_Controller {
 		$this->data['body'] = $this->load->view('welcome/contact',NULL,TRUE);
 		$this->load->view('_layouts/boxed',$this->data);
 	}
+
+	function news($id='')
+	{
+		$this->data['page_header'] = 'News';
+		$this->data['page_header_small'] = 'Subheading';
+		$this->data['header'] = array(
+			$this->load->view('_partials/header',$this->data,TRUE)
+		);
+		$this->data['parent'] = 'news';
+		$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
+		$this->data['body'] = $this->load->view('welcome/news',$this->data,TRUE);
+		$this->load->view('_layouts/boxed',$this->data);
+	}
+
 }
