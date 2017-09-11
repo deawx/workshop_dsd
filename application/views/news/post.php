@@ -6,7 +6,7 @@
     <div class="form-group">
       <?=form_label('หัวข้อข่าวสาร','',array('class'=>'control-label col-md-3'));?>
       <div class="col-md-9">
-        <?=form_input(array('name'=>'title','class'=>'form-control'),set_value('title',$news['title']));?>
+        <?=form_input(array('name'=>'title','class'=>'form-control','maxlength'=>'100'),set_value('title',$news['title']));?>
       </div>
     </div>
     <div class="form-group">
@@ -18,13 +18,13 @@
     <div class="form-group">
       <?=form_label('วันที่โพสต์','',array('class'=>'control-label col-md-3'));?>
       <div class="col-md-9">
-        <?=form_input(array('name'=>'date_create','class'=>'form-control','disabled'=>TRUE));?>
+        <?=form_input(array('name'=>'date_create','class'=>'form-control','disabled'=>TRUE,'value'=>($news['date_create']) ? date('d-m-Y',$news['date_create']) : ''));?>
       </div>
     </div>
     <div class="form-group">
       <?=form_label('วันที่แก้ไข','',array('class'=>'control-label col-md-3'));?>
       <div class="col-md-9">
-        <?=form_input(array('name'=>'date_update','class'=>'form-control','disabled'=>TRUE));?>
+        <?=form_input(array('name'=>'date_update','class'=>'form-control','disabled'=>TRUE,'value'=>($news['date_update']) ? date('d-m-Y',$news['date_update']) : ''));?>
       </div>
     </div>
     <div class="form-group">

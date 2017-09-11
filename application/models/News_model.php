@@ -9,10 +9,12 @@ class News_model extends MY_Model {
     parent::__construct();
   }
 
-  function get_all($q='')
+  function get_all($q='',$limit='',$offset='')
   {
     $news = $this->db
       ->like('title',$q)
+      ->limit($limit)
+      ->offset($offset)
       ->order_by('id','ASC')
       ->get($this->table_name);
 
@@ -43,6 +45,16 @@ class News_model extends MY_Model {
 
     $this->db
       ->set('pinned',$pinned)
+      ->where('id',$id)
+      ->update($this->table_name);
+
+    return $this->db->affected_rows();
+  }
+
+  function views($id)
+  {
+    $this->db
+      ->set('views','views+1',FALSE)
       ->where('id',$id)
       ->update($this->table_name);
 

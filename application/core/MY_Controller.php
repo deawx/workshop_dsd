@@ -19,7 +19,6 @@ class MY_Controller extends CI_Controller {
       'header' => '',
       'footer' => '',
       'navbar' => '',
-      'breadcrumb' => array(),
       'body' => '',
       'leftbar' => '',
       'rightbar' => ''
