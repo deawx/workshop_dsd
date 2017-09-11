@@ -45,7 +45,7 @@ $address_current = unserialize($user['address_current']);
     <div class="form-group">
       <?php echo form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
-        <?php echo form_input(array('name'=>'address[zip]','class'=>'form-control','maxlength'=>'5'),set_value('address[zip]',$address['zip']));?>
+        <?php echo form_input(array('name'=>'address[zip]','class'=>'form-control zip','maxlength'=>'5'),set_value('address[zip]',$address['zip']));?>
       </div>
     </div>
     <hr>
@@ -91,7 +91,7 @@ $address_current = unserialize($user['address_current']);
       <div class="form-group">
         <?php echo form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
         <div class="col-md-8">
-          <?php echo form_input(array('name'=>'address_current[zip]','class'=>'form-control','maxlength'=>'5'),set_value('address_current[zip]',$address_current['zip']));?>
+          <?php echo form_input(array('name'=>'address_current[zip]','class'=>'form-control zip','maxlength'=>'5'),set_value('address_current[zip]',$address_current['zip']));?>
         </div>
       </div>
     </div>
@@ -113,6 +113,8 @@ $address_current = unserialize($user['address_current']);
 $(function(){
   var exist = $('#exist');
   var exist_ctn = $('div#exist_ctn :input');
+  var zip = $('.zip');
+
   <?php if ( ! $user['address_current']) : ?>
     exist.prop('checked',true);
     exist_ctn.prop('disabled',true);
@@ -124,5 +126,7 @@ $(function(){
       exist_ctn.prop('disabled',false);
     }
   });
+
+  zip.inputmask('99999');
 });
 </script>

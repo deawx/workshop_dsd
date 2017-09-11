@@ -82,13 +82,13 @@
 <div class="form-group">
   <?php echo form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'work_abroad[zip]','class'=>'form-control'),set_value('work_abroad[zip]'));?>
+    <?php echo form_input(array('name'=>'work_abroad[zip]','class'=>'form-control zip'),set_value('work_abroad[zip]'));?>
   </div>
 </div>
 <div class="form-group">
   <?php echo form_label('เบอร์โทรศัพท์','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'work_abroad[phone]','class'=>'form-control'),set_value('work_abroad[phone]'));?>
+    <?php echo form_input(array('name'=>'work_abroad[phone]','class'=>'form-control tel'),set_value('work_abroad[phone]'));?>
   </div>
 </div>
 
@@ -101,7 +101,7 @@
 <div class="form-group">
   <?php echo form_label('ระยะเวลาจ้าง','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'work_abroad[duration]','class'=>'form-control','maxlength'=>'2'),set_value('work_abroad[duration]'));?>
+    <?php echo form_input(array('name'=>'work_abroad[duration]','class'=>'form-control','id'=>'duration','maxlength'=>'2'),set_value('work_abroad[duration]'));?>
   </div>
 </div>
 
@@ -127,5 +127,9 @@ $(function(){
       abroad.prop('disabled',true);
     }
   });
+
+  $('.zip').inputmask('99999');
+  $('.tel').inputmask('9999999999');
+  $('#duration').inputmask('99');
 });
 </script>

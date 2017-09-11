@@ -105,7 +105,7 @@ class Request extends Private_Controller {
 
 		$this->data['menu'] = 'standard';
 		$this->data['css'] = array(link_tag('assets/css/editable-select.min.css'));
-		$this->data['js'] = array(script_tag('assets/js/editable-select.min.js'));
+		$this->data['js'] = array(script_tag('assets/js/editable-select.min.js'),script_tag('assets/js/jquery.inputmask.bundle.js'));
 		$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 		$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
 		$this->data['body'] = $this->load->view('request/standard',$this->data,TRUE);
@@ -175,6 +175,7 @@ class Request extends Private_Controller {
 			redirect('account/request/index');
 		endif;
 
+		$this->data['js'] = array(script_tag('assets/js/jquery.inputmask.bundle.js'));
 		$this->data['menu'] = 'skill';
 		$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 		$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);

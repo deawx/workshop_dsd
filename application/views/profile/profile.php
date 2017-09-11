@@ -41,7 +41,7 @@
     <div class="form-group">
       <?php echo form_label('หมายเลขบัตรประชาชน','id_card',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
-        <?php echo form_input(array('name'=>'id_card','class'=>'form-control','maxlength'=>'13'),set_value('id_card',$user['id_card']));?>
+        <?php echo form_input(array('name'=>'id_card','class'=>'form-control','id'=>'id_card','maxlength'=>'13'),set_value('id_card',$user['id_card']));?>
       </div>
     </div>
     <div class="form-group">
@@ -73,3 +73,9 @@
     <?php $this->load->view('_partials/messages'); ?>
   </div>
 </div>
+
+<script type="text/javascript">
+$(function(){
+  $('#id_card').inputmask('9999999999999');
+});
+</script>

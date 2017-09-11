@@ -34,13 +34,13 @@
     <div class="form-group">
       <?php echo form_label('โทรศัพท์','phone',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
-        <?php echo form_input(array('name'=>'phone','class'=>'form-control','maxlength'=>'10'),set_value('phone',$user['phone']));?>
+        <?php echo form_input(array('name'=>'phone','class'=>'form-control tel','maxlength'=>'10'),set_value('phone',$user['phone']));?>
       </div>
     </div>
     <div class="form-group">
       <?php echo form_label('โทรสาร','fax',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
-        <?php echo form_input(array('name'=>'fax','class'=>'form-control','maxlength'=>'10'),set_value('fax',$user['fax']));?>
+        <?php echo form_input(array('name'=>'fax','class'=>'form-control tel','maxlength'=>'10'),set_value('fax',$user['fax']));?>
       </div>
     </div>
     <div class="form-group">
@@ -56,3 +56,9 @@
     <?php $this->load->view('_partials/messages'); ?>
   </div>
 </div>
+
+<script type="text/javascript">
+$(function(){
+  $('.tel').inputmask('9999999999');
+});
+</script>

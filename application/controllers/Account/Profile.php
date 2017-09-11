@@ -15,6 +15,8 @@ class Profile extends Private_Controller {
     $this->data['parent'] = 'account';
     $this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 		$this->data['user'] = $this->auth->user($this->id)->row_array();
+
+		$this->data['js'] = array(script_tag('assets/js/jquery.inputmask.bundle.js'));
 	}
 
   public function index()

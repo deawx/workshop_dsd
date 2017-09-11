@@ -39,7 +39,7 @@
 <div class="form-group">
   <?php echo form_label('หมายเลขบัตรประชาชน','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'profile[id_card]','class'=>'form-control','disabled'=>TRUE),set_value('profile[id_card]',$user['id_card']));?>
+    <?php echo form_input(array('name'=>'profile[id_card]','class'=>'form-control','id'=>'id_card','disabled'=>TRUE),set_value('profile[id_card]',$user['id_card']));?>
   </div>
 </div>
 <div class="form-group">
@@ -91,7 +91,7 @@
 <div class="form-group">
   <?php echo form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'address[zip]','class'=>'form-control'),set_value('address[zip]',$address_current['zip']));?>
+    <?php echo form_input(array('name'=>'address[zip]','class'=>'form-control zip'),set_value('address[zip]',$address_current['zip']));?>
   </div>
 </div>
 <div class="form-group">
@@ -103,12 +103,20 @@
 <div class="form-group">
   <?php echo form_label('โทรศัพท์','phone',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'address[phone]','class'=>'form-control','max_length'=>'10'),set_value('address[phone]',$user['phone']));?>
+    <?php echo form_input(array('name'=>'address[phone]','class'=>'form-control tel','max_length'=>'10'),set_value('address[phone]',$user['phone']));?>
   </div>
 </div>
 <div class="form-group">
   <?php echo form_label('โทรสาร','fax',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'address[fax]','class'=>'form-control','max_length'=>'10'),set_value('address[fax]',$user['fax']));?>
+    <?php echo form_input(array('name'=>'address[fax]','class'=>'form-control tel','max_length'=>'10'),set_value('address[fax]',$user['fax']));?>
   </div>
 </div>
+
+<script type="text/javascript">
+$(function(){
+  $('#id_card').inputmask('9999999999999');
+  $('.zip').inputmask('99999');
+  $('.tel').inputmask('9999999999');
+})
+</script>

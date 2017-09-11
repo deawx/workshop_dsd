@@ -35,7 +35,7 @@ $address_current = unserialize($user['address_current']);
 <div class="form-group">
   <?php echo form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'address[zip]','class'=>'form-control','maxlength'=>'5'),set_value('address[zip]',$address['zip']));?>
+    <?php echo form_input(array('name'=>'address[zip]','class'=>'form-control zip','maxlength'=>'5'),set_value('address[zip]',$address['zip']));?>
   </div>
 </div>
 <hr>
@@ -81,7 +81,7 @@ $address_current = unserialize($user['address_current']);
   <div class="form-group">
     <?php echo form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">
-      <?php echo form_input(array('name'=>'address_current[zip]','class'=>'form-control','maxlength'=>'5'),set_value('address_current[zip]',$address_current['zip']));?>
+      <?php echo form_input(array('name'=>'address_current[zip]','class'=>'form-control zip','maxlength'=>'5'),set_value('address_current[zip]',$address_current['zip']));?>
     </div>
   </div>
 </div>
@@ -89,13 +89,13 @@ $address_current = unserialize($user['address_current']);
 <div class="form-group">
   <?php echo form_label('โทรศัพท์','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'address[phone]','class'=>'form-control'),set_value('address[phone]',$user['phone']));?>
+    <?php echo form_input(array('name'=>'address[phone]','class'=>'form-control tel'),set_value('address[phone]',$user['phone']));?>
   </div>
 </div>
 <div class="form-group">
   <?php echo form_label('โทรสาร','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'address[fax]','class'=>'form-control'),set_value('address[fax]',$user['fax']));?>
+    <?php echo form_input(array('name'=>'address[fax]','class'=>'form-control tel'),set_value('address[fax]',$user['fax']));?>
   </div>
 </div>
 <div class="form-group">
@@ -118,5 +118,8 @@ $(function(){
       exist_ctn.prop('disabled',false);
     }
   });
+
+  $('.zip').inputmask('99999');
+  $('.tel').inputmask('9999999999');
 });
 </script>
