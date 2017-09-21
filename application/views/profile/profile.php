@@ -7,6 +7,7 @@
   <div class="panel-body">
     <?php echo form_open(uri_string(),array('class'=>'form-horizontal'));?>
     <?php echo form_hidden('id', $user['id']);?>
+    <?php echo form_hidden('id_card_old', $user['id_card']);?>
     <div class="form-group">
       <?php echo form_label('คำนำหน้าชื่อ','title',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
@@ -57,7 +58,7 @@
       <div class="col-md-3">
         <?php $y = array(''=>'ปี พ.ศ.');
         foreach (range('2500',(date('Y')+543)) as $value) $y[$value] = $value;
-        echo form_dropdown(array('name'=>'y','class'=>'form-control'),$y,set_value('y',($user['birthdate']) ? date('Y',$user['birthdate']+543) : NULL));?>
+        echo form_dropdown(array('name'=>'y','class'=>'form-control'),$y,set_value('y',($user['birthdate']) ? date('Y',$user['birthdate'])+543 : NULL));?>
       </div>
     </div>
     <div class="form-group">

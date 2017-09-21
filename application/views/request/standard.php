@@ -71,6 +71,93 @@ $(function() {
     var $active = $('.nav-pills li.active');
     prevTab($active);
   });
+
+  var work_category = $('#work_category');
+  var ctg = $('#ctg');
+  var ctg_ctn = $('#ctg_ctn :input');
+  var work_type = $('#work_type');
+  var work_status = $('#work_status');
+  var work_yes = $('#work_yes :input');
+  var need_work_status = $('#need_work_status');
+  var local = $('div#local :input');
+  var abroad = $('div#abroad :input');
+  var health = $('#health');
+
+  work_yes.prop('disabled',true);
+  $('#work_no').prop('disabled',true);
+  work_status.on('change',function(){
+    if (this.value === 'ผู้มีงานทำ') {
+      work_yes.prop('disabled',false);
+      $('#work_no').prop('disabled',true);
+      $('#work_group').prop('disabled',false);
+    } else if (this.value === 'ผู้ไม่มีงานทำ') {
+      work_yes.prop('disabled',true);
+      $('#work_no').prop('disabled',false);
+      $('#work_group').prop('disabled',true);
+    } else {
+      work_yes.prop('disabled',true);
+      $('#work_no').prop('disabled',true);
+      $('#work_group').prop('disabled',true);
+    }
+  });
+
+  work_category.on('change',function(){
+    $.post('get_work_type/'+this.value,function(data) {
+      work_type.empty();
+      $.each(data,function(key,value) {
+        work_type.append('<option value="'+key+'">'+value+'</option>');
+      });
+    });
+    if (this.value !== 'ทำงานภาครัฐ') {
+      $('#work_group').prop('disabled',false);
+    } else {
+      $('#work_group').prop('disabled',true);
+    }
+  });
+
+  local.prop('disabled',true);
+  abroad.prop('disabled',true);
+  need_work_status.on('change',function(){
+    if (this.value === 'ไม่ต้องการ') {
+      local.prop('disabled',true);
+      abroad.prop('disabled',true);
+    } else if(this.value === 'ต้องการจัดหางานในประเทศ') {
+      local.prop('disabled',false);
+      abroad.prop('disabled',true);
+    } else if(this.value === 'ต้องการจัดหางานในต่างประเทศ') {
+      local.prop('disabled',true);
+      abroad.prop('disabled',false);
+    } else {
+      local.prop('disabled',true);
+      abroad.prop('disabled',true);
+    }
+  });
+
+  ctg_ctn.prop('disabled',true);
+  ctg.on('change',function(){
+    if (this.value === 'ทดสอบฝีมือคนหางานเพื่อไปทำงานในต่างประเทศ') {
+      ctg_ctn.prop('disabled',false);
+    } else {
+      ctg_ctn.prop('disabled',true);
+    }
+  });
+
+  $('#health_status').prop('disabled',true);
+  health.on('change',function(){
+    if (this.value == 'พิการ') {
+      $('#health_status').prop('disabled',false);
+    } else {
+      $('#health_status').prop('disabled',true);
+    }
+  });
+
+  $('#work_no').editableSelect();
+  $('#work_group').editableSelect();
+  $('#health_status').editableSelect();
+
+  $('#id_card').inputmask('9999999999999');
+  $('.zip').inputmask('99999');
+  $('.tel').inputmask('9999999999');
 });
 
 function nextTab(elem) {

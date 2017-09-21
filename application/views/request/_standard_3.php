@@ -1,4 +1,3 @@
-<?php // $education = unserialize($standard['education']); ?>
 <div class="form-group">
   <?php echo form_label('ระดับการศึกษาสูงสุด','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
@@ -19,21 +18,15 @@
 </div>
 <div class="form-group">
   <?php echo form_label('สาขาวิชา','',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8">
-    <?php echo form_input(array('name'=>'education[branch]','class'=>'form-control'),set_value('education[branch]'));?>
-  </div>
+  <div class="col-md-8"> <?php echo form_input(array('name'=>'education[branch]','class'=>'form-control'),set_value('education[branch]'));?> </div>
 </div>
 <div class="form-group">
   <?php echo form_label('สถานศึกษา','',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8">
-    <?php echo form_input(array('name'=>'education[place]','class'=>'form-control'),set_value('education[place]'));?>
-  </div>
+  <div class="col-md-8"> <?php echo form_input(array('name'=>'education[place]','class'=>'form-control'),set_value('education[place]'));?> </div>
 </div>
 <div class="form-group">
   <?php echo form_label('จังหวัด','',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8">
-    <?php echo form_input(array('name'=>'education[province]','class'=>'form-control'),set_value('education[province]'));?>
-  </div>
+  <div class="col-md-8"> <?php echo form_input(array('name'=>'education[province]','class'=>'form-control'),set_value('education[province]'));?> </div>
 </div>
 <div class="form-group">
   <?php echo form_label('ปี พ.ศ.ที่สำเร็จ','',array('class'=>'control-label col-md-4'));?>
@@ -124,51 +117,35 @@
   </div>
   <div class="form-group">
     <?php echo form_label('ตำแหน่ง/อาชีพ','',array('class'=>'control-label col-md-4'));?>
-    <div class="col-md-8">
-      <?php echo form_input(array('name'=>'work_yes[position]','class'=>'form-control'),set_value('work_yes[position]'));?>
-    </div>
+    <div class="col-md-8"> <?php echo form_input(array('name'=>'work_yes[position]','class'=>'form-control'),set_value('work_yes[position]'));?> </div>
   </div>
   <div class="form-group">
     <?php echo form_label('อายุงาน(ปี)','',array('class'=>'control-label col-md-4'));?>
-    <div class="col-md-8">
-      <?php echo form_input(array('name'=>'work_yes[age]','class'=>'form-control'),set_value('work_yes[age]'));?>
-    </div>
+    <div class="col-md-8"> <?php echo form_input(array('name'=>'work_yes[age]','class'=>'form-control'),set_value('work_yes[age]'));?> </div>
   </div>
   <div class="form-group">
     <?php echo form_label('ชื่อสถานที่ทำงาน','',array('class'=>'control-label col-md-4'));?>
-    <div class="col-md-8">
-      <?php echo form_input(array('name'=>'work_yes[place]','class'=>'form-control'),set_value('work_yes[place]'));?>
-    </div>
+    <div class="col-md-8"> <?php echo form_input(array('name'=>'work_yes[place]','class'=>'form-control'),set_value('work_yes[place]'));?> </div>
   </div>
   <div class="form-group">
     <?php echo form_label('ถนน','',array('class'=>'control-label col-md-4'));?>
-    <div class="col-md-8">
-      <?php echo form_input(array('name'=>'work_yes[street]','class'=>'form-control'),set_value('work_yes[street]'));?>
-    </div>
+    <div class="col-md-8"> <?php echo form_input(array('name'=>'work_yes[street]','class'=>'form-control'),set_value('work_yes[street]'));?> </div>
   </div>
   <div class="form-group">
     <?php echo form_label('ตำบล','',array('class'=>'control-label col-md-4'));?>
-    <div class="col-md-8">
-      <?php echo form_input(array('name'=>'work_yes[tambon]','class'=>'form-control'),set_value('work_yes[tambon]'));?>
-    </div>
+    <div class="col-md-8"> <?php echo form_input(array('name'=>'work_yes[tambon]','class'=>'form-control'),set_value('work_yes[tambon]'));?> </div>
   </div>
   <div class="form-group">
     <?php echo form_label('อำเภอ','',array('class'=>'control-label col-md-4'));?>
-    <div class="col-md-8">
-      <?php echo form_input(array('name'=>'work_yes[amphur]','class'=>'form-control'),set_value('work_yes[amphur]'));?>
-    </div>
+    <div class="col-md-8"> <?php echo form_input(array('name'=>'work_yes[amphur]','class'=>'form-control'),set_value('work_yes[amphur]'));?> </div>
   </div>
   <div class="form-group">
     <?php echo form_label('จังหวัด','',array('class'=>'control-label col-md-4'));?>
-    <div class="col-md-8">
-      <?php echo form_input(array('name'=>'work_yes[province]','class'=>'form-control'),set_value('work_yes[province]'));?>
-    </div>
+    <div class="col-md-8"> <?php echo form_input(array('name'=>'work_yes[province]','class'=>'form-control'),set_value('work_yes[province]'));?> </div>
   </div>
   <div class="form-group">
     <?php echo form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
-    <div class="col-md-8">
-      <?php echo form_input(array('name'=>'work_yes[zip]','class'=>'form-control zip'),set_value('work_yes[zip]'));?>
-    </div>
+    <div class="col-md-8"> <?php echo form_input(array('name'=>'work_yes[zip]','class'=>'form-control zip'),set_value('work_yes[zip]'));?> </div>
   </div>
   <div class="form-group">
     <?php echo form_label('จำนวนลูกจ้างทั้งหมด','',array('class'=>'control-label col-md-4'));?>
@@ -178,49 +155,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-$(function(){
-  var work_category = $('#work_category');
-  var work_type = $('#work_type');
-  var work_status = $('#work_status');
-  var work_yes = $('#work_yes :input');
-
-  work_yes.prop('disabled',true);
-  $('#work_no').prop('disabled',true);
-  work_status.on('change',function(){
-    if (this.value === 'ผู้มีงานทำ') {
-      work_yes.prop('disabled',false);
-      $('#work_no').prop('disabled',true);
-      $('#work_group').prop('disabled',false);
-    } else if (this.value === 'ผู้ไม่มีงานทำ') {
-      work_yes.prop('disabled',true);
-      $('#work_no').prop('disabled',false);
-      $('#work_group').prop('disabled',true);
-    } else {
-      work_yes.prop('disabled',true);
-      $('#work_no').prop('disabled',true);
-      $('#work_group').prop('disabled',true);
-    }
-  });
-
-  work_category.on('change',function(){
-    $.post('get_work_type/'+this.value,function(data) {
-      work_type.empty();
-      $.each(data,function(key,value) {
-        work_type.append('<option value="'+key+'">'+value+'</option>');
-      });
-    });
-    if (this.value !== 'ทำงานภาครัฐ') {
-      $('#work_group').prop('disabled',false);
-    } else {
-      $('#work_group').prop('disabled',true);
-    }
-  });
-
-  $('#work_no').editableSelect();
-  $('#work_group').editableSelect();
-
-  $('.zip').inputmask('99999');
-});
-</script>

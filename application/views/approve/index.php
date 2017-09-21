@@ -12,7 +12,7 @@
       <?php foreach ($requests as $value) : ?>
         <tr class="rows" style="display:none;">
           <td>
-            <?php echo isset($value['category']) ? $value['category'] : 'หนังสือรับรองความรู้ความสามารถ';
+            <?=isset($value['category']) ? $value['category'] : 'หนังสือรับรองความรู้ความสามารถ';
               if ($value['approve_status'] === '') : ?>
                 <span class="label label-primary">ใหม่</span>
               <?php elseif ($value['approve_status'] === 'reject'): ?>
@@ -29,7 +29,7 @@
           <td>
             <?php if (time() < $expired) : ?>
 
-              <?=anchor('admin/approve/view/'.$value['date_create'],'ดู',array('class'=>'label label-default'));?>
+              <?=anchor('admin/approve/view/'.$value['date_create'],'ดู',array('class'=>'label label-default','target'=>'_blank'));?>
 
               <?=anchor('#','เอกสาร',array('class'=>'label label-default','data-toggle'=>'modal','data-target'=>'#attachment'.$value['date_create']));?>
                 <div class="modal fade" id="attachment<?=$value['date_create'];?>" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
@@ -64,7 +64,9 @@
                 <?=anchor('#','ตอบรับ',array('class'=>'label label-success','data-toggle'=>'modal','data-target'=>'#accept'.$value['date_create']));?>
                   <div class="modal fade" id="accept<?=$value['date_create'];?>" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
                     <div class="modal-dialog">
-                      <?=form_open(uri_string(),array('class'=>'form-horizontal')).form_hidden('id',$value['id']);?>
+                      <?=form_open(uri_string(),array('class'=>'form-horizontal'));?>
+                      <?=form_hidden('id',$value['id']);?>
+                      <?=form_hidden('type',(isset($value['category'])?'standards':'skills'));?>
                       <div class="modal-content">
                         <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title">เงื่อนไขการตอบรับคำร้อง</h4> </div>
                         <div class="modal-body">
@@ -121,9 +123,7 @@
       <?php endforeach; ?>
     </tbody>
   </table>
-  <div class="panel-footer">
-    <?=anchor('#','ก่อนหน้า',array('class'=>'label label-default','id'=>'more'));?>
-  </div>
+  <div class="panel-footer"> <?=anchor('#','ก่อนหน้า',array('class'=>'label label-default','id'=>'more'));?> </div>
 </div>
 
 <script type="text/javascript">

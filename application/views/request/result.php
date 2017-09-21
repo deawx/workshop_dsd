@@ -7,7 +7,7 @@
       <?php foreach ($requests as $key => $value) : ?>
         <tr class="rows" style="display:none;">
           <td><?=isset($value['category']) ? $value['category'] : 'หนังสือรับรองความรู้ความสามารถ';?></td>
-          <td></td>
+          <td><?=($value['approve_schedule'] !== '') ? date('d-m-Y',$value['approve_schedule']) : 'N/A';?></td>
           <td></td>
         </tr>
       <?php endforeach; ?>

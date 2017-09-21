@@ -33,10 +33,13 @@ class Request extends Private_Controller {
 		$this->load->view('_layouts/rightside',$this->data);
 	}
 
-	function standard()
+	function standard($id='')
 	{
 		$this->session->set_flashdata('warning','');
 
+		/*
+		ฟังก์ชั่นตรวจสอบความถูกต้องของการกรอกแบบฟอร์มก่อนการบันทึกเข้าสู่ฐานข้อมูล
+		*/
 		// $this->form_validation->set_rules('department','หน่วยงาน','required');
 		// $this->form_validation->set_rules('branch','สาขาอาชีพ','required');
 		// $this->form_validation->set_rules('level','ระดับ','required');
@@ -88,6 +91,7 @@ class Request extends Private_Controller {
 				$data['profile'] = serialize($data['profile']);
 			endif;
 			$data['address'] = $this->input->post('address') ? serialize($this->input->post('address')) : NULL;
+			$data['address_current'] = $this->input->post('address_current') ? serialize($this->input->post('address_current')) : serialize($this->input->post('address'));
 			$data['education'] = $this->input->post('education') ? serialize($this->input->post('education')) : NULL;
 			$data['work_yes'] = $this->input->post('work_yes') ? serialize($this->input->post('work_yes')) : NULL;
 			$data['work_abroad'] = $this->input->post('work_abroad') ? serialize($this->input->post('work_abroad')) : NULL;
@@ -103,16 +107,23 @@ class Request extends Private_Controller {
 			redirect('account/request/index');
 		endif;
 
-		$this->data['menu'] = 'standard';
 		$this->data['css'] = array(link_tag('assets/css/editable-select.min.css'));
 		$this->data['js'] = array(script_tag('assets/js/editable-select.min.js'),script_tag('assets/js/jquery.inputmask.bundle.js'));
-		$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
-		$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
-		$this->data['body'] = $this->load->view('request/standard',$this->data,TRUE);
-		$this->load->view('_layouts/rightside',$this->data);
+		if (intval($id) > 0) :
+			$this->data['navbar'] = NULL;
+			$this->data['standard'] = $this->request->search_id($id,'standards');
+			$this->data['body'] = $this->load->view('request/standard_edit',$this->data,TRUE);
+			$this->load->view('_layouts/boxed',$this->data);
+		else:
+			$this->data['menu'] = 'standard';
+			$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
+			$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
+			$this->data['body'] = $this->load->view('request/standard',$this->data,TRUE);
+			$this->load->view('_layouts/rightside',$this->data);
+		endif;
 	}
 
-	function skill()
+	function skill($id='')
 	{
 		$this->session->set_flashdata('warning','');
 
@@ -153,6 +164,7 @@ class Request extends Private_Controller {
 				$data['profile'] = serialize($data['profile']);
 			endif;
 			$data['address'] = $this->input->post('address') ? serialize($this->input->post('address')) : NULL;
+			$data['address_current'] = $this->input->post('address_current') ? serialize($this->input->post('address_current')) : serialize($this->input->post('address'));
 			$data['education'] = $this->input->post('education') ? serialize($this->input->post('education')) : NULL;
 			$data['work'] = $this->input->post('work') ? serialize($this->input->post('work')) : NULL;
 			$careers = $this->input->post('career') ? clear_null_array($this->input->post('career'),TRUE) : array();
@@ -176,11 +188,18 @@ class Request extends Private_Controller {
 		endif;
 
 		$this->data['js'] = array(script_tag('assets/js/jquery.inputmask.bundle.js'));
-		$this->data['menu'] = 'skill';
-		$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
-		$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
-		$this->data['body'] = $this->load->view('request/skill',$this->data,TRUE);
-		$this->load->view('_layouts/rightside',$this->data);
+		if (intval($id) > 0) :
+			$this->data['navbar'] = NULL;
+			$this->data['skill'] = $this->request->search_id($id,'skills');
+			$this->data['body'] = $this->load->view('request/skill_edit',$this->data,TRUE);
+			$this->load->view('_layouts/boxed',$this->data);
+		else:
+			$this->data['menu'] = 'skill';
+			$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
+			$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
+			$this->data['body'] = $this->load->view('request/skill',$this->data,TRUE);
+			$this->load->view('_layouts/rightside',$this->data);
+		endif;
 	}
 
 	function result()
@@ -213,24 +232,64 @@ class Request extends Private_Controller {
 
 	function calendar()
 	{
+		$this->form_validation->set_rules('code','ประเภทการสอบ','required');
+		if ($this->form_validation->run() == FALSE) :
+			$this->session->set_flashdata('warning',validation_errors());
+		else:
+			$code = $this->input->post('code');
+			$approve_schedule = $this->input->post('approve_schedule');
+			$record = $this->request->get_code($code);
+			$type = (isset($record['category'])) ? 'standards' : 'skills';
+			if ($this->request->save(array(
+				'id'=>$record['id'],
+				'approve_schedule'=>strtotime($approve_schedule),
+			),$type)) :
+				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+			else:
+				$this->session->set_flashdata('danger','บันทึกข้อมูลล้มเหลว');
+			endif;
+			redirect('account/request/result');
+		endif;
+
 		$this->data['menu'] = 'calendar';
 		$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 		$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
+		$schedules = $this->request->get_future('','accept');
+		$schedule = array();
+		foreach ($schedules as $key => $value) :
+			// $title = (isset($value['category'])) ? $value['category'] : 'ใบรับรองความรู้ความสามารถ';
+			$title = $this->db->select('title,firstname,lastname')->where('id',$value['user_id'])->get('users')->row_array();
+			$schedule[$key]['title'] = $title['title'].' '.$title['firstname'].' '.$title['lastname'];
+			$schedule[$key]['start'] = date('Y-m-d',$value['approve_schedule']);
+		endforeach;
+		$this->data['schedule'] = $schedule;
+		$request = $this->request->get_all($this->session->email,'accept');
+		foreach ($request as $key => $value) :
+			if ($value['approve_schedule'] !== '') :
+				unset($request[$key]);
+			endif;
+		endforeach;
+		$this->data['request'] = $request;
+		$this->data['css'] = array(link_tag('assets/css/fullcalendar.css'),link_tag('assets/css/fullcalendar.print.css','stylesheet','text/css','fullcalendar','print'));
+		$this->data['js'] = array(script_tag('assets/js/moment.min.js'),script_tag('assets/js/moment.th.js'),script_tag('assets/js/fullcalendar.js'));
 		$this->data['body'] = $this->load->view('request/calendar',$this->data,TRUE);
 		$this->load->view('_layouts/rightside',$this->data);
 	}
 
 	function edit($code='')
 	{
-		$code = $this->input->get('code');
+		$code = $this->input->get('code') ? $this->input->get('code') : $code;
 		if ( ! is_numeric($code))
 			show_404();
 
-		echo $code;
-
 		$this->data['menu'] = 'edit';
 		$this->data['navbar'] = NULL;
-		$this->data['body'] = $this->load->view('request/edit',$this->data,TRUE);
+		$this->data['request'] = $this->request->get_code($code);
+		if (isset($this->data['request']['category'])) :
+			$this->data['body'] = $this->load->view('request/standard_edit',$this->data,TRUE);
+		else:
+			$this->data['body'] = $this->load->view('request/skill_edit',$this->data,TRUE);
+		endif;
 		$this->load->view('_layouts/boxed',$this->data);
 	}
 
@@ -283,6 +342,27 @@ class Request extends Private_Controller {
 		$this->output
 			->set_content_type('application/json','utf-8')
 			->set_output(json_encode($type));
+	}
+
+	function get_event($date='')
+	{
+		$events = $this->request->get_date($date);
+
+		$standard = count(array_column($events,'category'));
+		$skill = count($events)-$standard;
+
+		$events['standard'] = $standard;
+		if ($standard >= 15) :
+			$events['standard'] = 'full';
+		endif;
+		$events['skill'] = $skill;
+		if ($skill >= 26) :
+			$events['skill'] = 'full';
+		endif;
+
+		$this->output
+			->set_content_type('application/json','utf-8')
+			->set_output(json_encode($events));
 	}
 
 }

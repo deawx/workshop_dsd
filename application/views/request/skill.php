@@ -64,6 +64,23 @@ $(function() {
     var $active = $('.nav-pills li.active');
     prevTab($active);
   });
+
+  var exist = $('#exist');
+  var exist_ctn = $('div#exist_ctn :input');
+  exist.prop('checked',true);
+  exist_ctn.prop('disabled',true);
+  exist.on('change',function(){
+    if (this.checked) {
+      exist_ctn.prop('disabled',true);
+    } else {
+      exist_ctn.prop('disabled',false);
+    }
+  });
+
+  $('#id_card').inputmask('9999999999999');
+  $('.zip').inputmask('99999');
+  $('.tel').inputmask('9999999999');
+
 });
 
 function nextTab(elem) {

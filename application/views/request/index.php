@@ -2,7 +2,7 @@
   <div class="panel-heading"> <h3 class="panel-title">ประวัติการลงทะเบียนคำร้องของคุณทั้งหมด <?=count($requests);?> รายการ</h3> </div>
   <div class="panel-body"> </div>
   <table class="table table-hover">
-    <thead> <tr> <th>ประเภทรายการ</th> <th>วันที่บันทึก</th> <th>วันที่แก้ไข</th> <th>วันที่หมดอายุ</th> <th></th> </tr> </thead>
+    <thead> <tr> <th>ประเภทรายการ</th> <th>วันที่หมดอายุ</th> <th></th> </tr> </thead>
     <tbody>
       <?php foreach ($requests as $key => $value) : ?>
         <tr class="rows" style="display:none;">
@@ -16,8 +16,8 @@
               <span class="label label-info">ปฏิเสธ</span>
             <?php endif; ?>
           </td>
-          <td><?=($value['date_create']) ? date('d-m-Y',$value['date_create']) : 'N/A';?></td>
-          <td><?=($value['date_update']) ? date('d-m-Y',$value['date_update']) : 'N/A';?></td>
+          <!-- <td><?//=($value['date_create']) ? date('d-m-Y',$value['date_create']) : 'N/A';?></td>
+          <td><?//=($value['date_update']) ? date('d-m-Y',$value['date_update']) : 'N/A';?></td> -->
           <td>
             <?php $expired = strtotime('+30 days',$value['date_create']);
             echo ($value['date_create']) ? date('d-m-Y',$expired) : 'N/A'; ?>
@@ -25,7 +25,8 @@
           <td class="text-right">
             <?php if ($value['approve_status'] !== 'accept') : ?>
 
-              <?=anchor('account/request/edit?code='.$value['date_create'],'แก้ไข',array('class'=>'label label-info','target'=>'_blank'));?>
+              <?php $req = isset($value['category']) ? 'standard' : 'skill'; ?>
+              <?=anchor('account/request/'.$req.'/'.$value['id'],'แก้ไข',array('class'=>'label label-info','target'=>'_blank'));?>
               <?=anchor('#','แนบไฟล์',array('class'=>'label label-primary','data-toggle'=>'modal','data-target'=>'#attachment'.$value['date_create']));?>
 
               <div class="modal fade" id="attachment<?=$value['date_create'];?>" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">

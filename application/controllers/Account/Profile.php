@@ -27,7 +27,11 @@ class Profile extends Private_Controller {
     $this->form_validation->set_rules('lastname','นามสกุล','required|max_length[100]');
 		$this->form_validation->set_rules('nationality','สัญชาติ','required|max_length[100]');
     $this->form_validation->set_rules('religion','ศาสนา','required|max_length[100]');
-    $this->form_validation->set_rules('id_card','หมายเลขบัตรประชาชน','required|is_numeric|exact_length[13]|is_unique[profile.id_card]');
+		if ($this->input->post('id_card') !== $this->input->post('id_card_old')) :
+	    $this->form_validation->set_rules('id_card','หมายเลขบัตรประชาชน','required|is_numeric|exact_length[13]|is_unique[users.id_card]');
+		else:
+			$this->form_validation->set_rules('id_card','หมายเลขบัตรประชาชน','required|is_numeric|exact_length[13]');
+		endif;
     $this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
     $this->form_validation->set_rules('m','เดือนเกิด','required|is_numeric');
     $this->form_validation->set_rules('y','ปีเกิด','required|is_numeric');

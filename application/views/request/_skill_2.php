@@ -104,22 +104,3 @@ $address_current = unserialize($user['address_current']);
     <?php echo form_input(array('name'=>'address[email]','class'=>'form-control'),set_value('address[email]',$user['email']));?>
   </div>
 </div>
-
-<script type="text/javascript">
-$(function(){
-  var exist = $('#exist');
-  var exist_ctn = $('div#exist_ctn :input');
-  exist.prop('checked',true);
-  exist_ctn.prop('disabled',true);
-  exist.on('change',function(){
-    if (this.checked) {
-      exist_ctn.prop('disabled',true);
-    } else {
-      exist_ctn.prop('disabled',false);
-    }
-  });
-
-  $('.zip').inputmask('99999');
-  $('.tel').inputmask('9999999999');
-});
-</script>

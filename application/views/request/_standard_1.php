@@ -1,20 +1,14 @@
 <div class="form-group">
   <?php echo form_label('หน่วยงาน','department',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8">
-    <?php echo form_input(array('name'=>'department','class'=>'form-control'),set_value('department'));?>
-  </div>
+  <div class="col-md-8"> <?php echo form_input(array('name'=>'department','class'=>'form-control'),set_value('department'));?> </div>
 </div>
 <div class="form-group">
   <?php echo form_label('สาขาอาชีพ','branch',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8">
-    <?php echo form_input(array('name'=>'branch','class'=>'form-control'),set_value('branch'));?>
-  </div>
+  <div class="col-md-8"> <?php echo form_input(array('name'=>'branch','class'=>'form-control'),set_value('branch'));?> </div>
 </div>
 <div class="form-group">
   <?php echo form_label('ระดับ','level',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8">
-    <?php echo form_input(array('name'=>'level','class'=>'form-control'),set_value('level'));?>
-  </div>
+  <div class="col-md-8"> <?php echo form_input(array('name'=>'level','class'=>'form-control'),set_value('level'));?> </div>
 </div>
 <div class="form-group">
   <?php echo form_label('ประเภทการสอบ','category',array('class'=>'control-label col-md-4'));?>
@@ -24,13 +18,12 @@
       'ทดสอบฝีมือคนหางานเพื่อไปทำงานในต่างประเทศ'=>'ทดสอบฝีมือคนหางานเพื่อไปทำงานในต่างประเทศ',
       'ทดสอบฝีมือแรงงานตามความต้องการของสถานประกอบกิจการ'=>'ทดสอบฝีมือแรงงานตามความต้องการของสถานประกอบกิจการ',
       'ทดสอบ/รับรองฝีมือแรงงานนานาชาติ(ช่างเชื่อมมาตรฐานสากล)'=>'ทดสอบ/รับรองฝีมือแรงงานนานาชาติ(ช่างเชื่อมมาตรฐานสากล)');
-    echo form_dropdown(array('name'=>'category','class'=>'form-control'),$c,set_value('category'));?>
+    echo form_dropdown(array('name'=>'category','class'=>'form-control','id'=>'ctg'),$c,set_value('category'));?>
   </div>
 </div>
 <div class="form-group">
   <?php echo form_label('ประวัติการเข้าทดสอบ','used',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8">
-    <?php $tf = array(''=>'เลือกรายการ','เคย'=>'เคย','ไม่เคย'=>'ไม่เคย');
+  <div class="col-md-8"> <?php $tf = array(''=>'เลือกรายการ','เคย'=>'เคย','ไม่เคย'=>'ไม่เคย');
     echo form_dropdown(array('name'=>'used','class'=>'form-control','id'=>'tf'),$tf,set_value('used'));?>
   </div>
 </div>
@@ -69,25 +62,3 @@
     echo form_dropdown(array('name'=>'source','class'=>'form-control tf_f','multiple'=>TRUE),$s,set_value('source'));?>
   </div>
 </div>
-
-<script type="text/javascript">
-$(function(){
-  var tf = $('#tf');
-  var tf_t = $('.tf_t');
-  var tf_f = $('.tf_f');
-  tf_t.prop('disabled',true);
-  tf_f.prop('disabled',true);
-  tf.on('change',function(){
-    if (this.value === 'เคย') {
-      tf_t.prop('disabled',false);
-      tf_f.prop('disabled',true);
-    } else if(this.value === 'ไม่เคย') {
-      tf_t.prop('disabled',true);
-      tf_f.prop('disabled',false);
-    } else {
-      tf_t.prop('disabled',true);
-      tf_f.prop('disabled',true);
-    }
-  });
-});
-</script>

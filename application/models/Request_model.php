@@ -24,7 +24,7 @@ class Request_model extends MY_Model {
   function get_standard_all($q='',$status='')
   {
     $this->db
-      ->select('sd.id,sd.user_id,sd.admin_id,sd.approve_status,sd.date_create,sd.date_update,sd.category,sd.assets_id,us.email')
+      // ->select('sd.id,sd.user_id,sd.admin_id,sd.approve_status,sd.date_create,sd.date_update,sd.category,sd.assets_id,us.email')
       ->order_by('sd.id','ASC')
       ->join('users AS us','sd.user_id=us.id');
 
@@ -52,7 +52,7 @@ class Request_model extends MY_Model {
   function get_skill_all($q='',$status='')
   {
     $this->db
-      ->select('sk.id,sk.user_id,sk.admin_id,sk.approve_status,sk.date_create,sk.date_update,sk.assets_id,us.email')
+      // ->select('sk.id,sk.user_id,sk.admin_id,sk.approve_status,sk.date_create,sk.date_update,sk.assets_id,us.email')
       ->order_by('sk.id','ASC')
       ->join('users AS us','sk.user_id=us.id');
 
@@ -80,24 +80,58 @@ class Request_model extends MY_Model {
 
   function get_code($code='')
   {
+    $code = (int) $code;
+
     $standard = $this->db
       ->where('date_create',$code)
       ->get('standards');
 
-    if ($standard->num_rows() < 0) :
+    if ($standard->num_rows() < 1) :
       $skill = $this->db
         ->where('date_create',$code)
         ->get('skills');
-      if ($skill->num_rows() < 0) :
-        return array();
-      else:
+      if ($skill->num_rows() > 0) :
         return $skill->row_array();
       endif;
-    else:
-      return $standard->row_array();
     endif;
 
-    return array();
+    return $standard->row_array();
+  }
+
+  function get_date($date)
+  {
+    $standards = $this->get_standard_all();
+    $skills = $this->get_skill_all();
+
+    $events = array_merge($standards,$skills);
+
+    $array = array();
+    foreach ($events as $key => $value) :
+      if ($value['approve_schedule'] !== '') :
+        $approve_schedule = date('Y-m-d',$value['approve_schedule']);
+        if ($approve_schedule === $date) :
+          $array[] = $value;
+        endif;
+      endif;
+    endforeach;
+
+    return $array;
+  }
+
+  function get_future($q='',$status='')
+  {
+    $standards = $this->get_standard_all($q,$status);
+    $skills = $this->get_skill_all($q,$status);
+
+    $events = array_merge($standards,$skills);
+
+    foreach ($events as $key => $value) :
+      if ($value['approve_schedule'] === '') :
+        unset($events[$key]);
+      endif;
+    endforeach;
+
+    return $events;
   }
 
 }

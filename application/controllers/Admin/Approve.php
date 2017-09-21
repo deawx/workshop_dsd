@@ -25,7 +25,7 @@ class Approve extends Admin_Controller {
 
 			// print_data($data); die();
 
-			if ($this->request->save($data)) :
+			if ($this->request->save($data,$data['type'])) :
 				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
 			else:
 				$this->session->set_flashdata('danger','บันทึกข้อมูลล้มเหลว');
@@ -53,16 +53,21 @@ class Approve extends Admin_Controller {
 		if ( ! intval($code) && ! strlen($code) === '11')
 			show_404();
 
-		$this->load->library('Pdf');
-
 		$record = $this->request->get_code($code);
 		$type = isset($record['department']) ? 'standard' : 'skill';
 
 		$this->data['record'] = $record;
-		$fileview = $this->load->view('_pdf/'.$type,$this->data,TRUE);
-		$filename = $code;
+		$this->load->view('_pdf/'.$type,$this->data);
 
-		$this->pdf->create($fileview,$filename);
+
+		// $this->load->library('Pdf');
+		//
+		//
+		// $this->data['record'] = $record;
+		// $fileview = $this->load->view('_pdf/'.$type,$this->data,TRUE);
+		// $filename = $code;
+		//
+		// $this->pdf->create($fileview,$filename);
 	}
 
 }

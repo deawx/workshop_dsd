@@ -30,7 +30,7 @@
   <div class="col-md-3">
     <?php $y = array(''=>'ปี พ.ศ.');
     foreach (range('2500',(date('Y')+543)) as $value) $y[$value] = $value;
-    echo form_dropdown(array('name'=>'y','class'=>'form-control'),$y,set_value('y',($user['birthdate']) ? date('Y',$user['birthdate']+543) : NULL));?>
+    echo form_dropdown(array('name'=>'y','class'=>'form-control'),$y,set_value('y',($user['birthdate']) ? date('Y',$user['birthdate'])+543 : NULL));?>
   </div>
 </div>
 <div class="form-group">
@@ -48,12 +48,6 @@
 <div class="form-group">
   <?php echo form_label('หมายเลขบัตรประชาชน','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'profile[id_card]','class'=>'form-control','id'=>'id_card','disabled'=>TRUE),set_value('id_card',$user['id_card']));?>
+    <?php echo form_input(array('name'=>'profile[id_card]','class'=>'form-control','id'=>'id_card','readonly'=>TRUE),set_value('id_card',$user['id_card']));?>
   </div>
 </div>
-
-<script type="text/javascript">
-$(function(){
-  $('#id_card').inputmask('9999999999999');
-})
-</script>

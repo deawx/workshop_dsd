@@ -55,18 +55,3 @@
     <?=form_submit('','ยืนยัน',array('class'=>'btn btn-primary btn-block'));?>
   </div>
 </div>
-
-<script type="text/javascript">
-$(function(){
-  var health = $('#health');
-  $('#health_status').prop('disabled',true);
-  health.on('change',function(){
-    if (this.value == 'พิการ') {
-      $('#health_status').prop('disabled',false);
-    } else {
-      $('#health_status').prop('disabled',true);
-    }
-  });
-  $('#health_status').editableSelect();
-});
-</script>
