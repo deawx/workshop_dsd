@@ -19,10 +19,8 @@
 </div>
 
 <div class="panel panel-success">
-  <div class="panel-heading">
-    <h3 class="panel-title"> </h3>
-  </div>
-  <?=form_open(uri_string(),array('name'=>'standard','class'=>'form-horizontal','autocomplete'=>'off'));?>
+  <div class="panel-heading"> <h3 class="panel-title"> </h3> </div>
+  <?=form_open(uri_string(),array('class'=>'form-horizontal','autocomplete'=>'off'));?>
   <?=form_hidden('user_id',$this->session->user_id);?>
   <div class="panel-body">
     <div class="tab-content">

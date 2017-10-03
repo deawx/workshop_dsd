@@ -147,6 +147,12 @@
     <?php echo form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8"> <?php echo form_input(array('name'=>'work_yes[zip]','class'=>'form-control zip'),set_value('work_yes[zip]'));?> </div>
   </div>
+  <div class="form-group"> <?=form_label('โทรศัพท์','phone',array('class'=>'control-label col-md-4'));?>
+    <div class="col-md-8"> <?=form_input(array('name'=>'work_yes[phone]','class'=>'form-control tel','max_length'=>'10'),set_value('work_yes[phone]'));?> </div>
+  </div>
+  <div class="form-group"> <?=form_label('โทรสาร','fax',array('class'=>'control-label col-md-4'));?>
+    <div class="col-md-8"> <?=form_input(array('name'=>'work_yes[fax]','class'=>'form-control tel','max_length'=>'10'),set_value('work_yes[fax]'));?> </div>
+  </div>
   <div class="form-group">
     <?php echo form_label('จำนวนลูกจ้างทั้งหมด','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8">

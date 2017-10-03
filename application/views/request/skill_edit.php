@@ -6,6 +6,7 @@ $education = unserialize($skill['education']);
 $work = unserialize($skill['work']);
 $reference = unserialize($skill['reference']);
 ?>
+<?php $this->load->view('_partials/messages'); ?>
 *หมายเหตุจากผู้อนุมัติ : <p class="text-warning"> <?=$skill['approve_remark'];?></p>
 <div class="panel panel-warning">
   <div class="panel-heading"> <h3 class="panel-title"> แก้ไขข้อมูลรายการขอสอบรับรองความรู้ความสามารถ </h3> </div>
@@ -50,7 +51,7 @@ $reference = unserialize($skill['reference']);
     </div>
     <div class="form-group">
       <?=form_label('หมายเลขบัตรประชาชน','',array('class'=>'control-label col-md-4'));?>
-      <div class="col-md-8"> <?=form_input(array('name'=>'profile[id_card]','class'=>'form-control','id'=>'id_card','disabled'=>TRUE),set_value('id_card',$profile['id_card']));?> </div>
+      <div class="col-md-8"> <?=form_input(array('name'=>'profile[id_card]','class'=>'form-control','id'=>'id_card','readonly'=>TRUE),set_value('id_card',$profile['id_card']));?> </div>
     </div>
 
     <div class="form-group">
@@ -66,6 +67,14 @@ $reference = unserialize($skill['reference']);
       <div class="col-md-8"> <?=form_input(array('name'=>'address[tambon]','class'=>'form-control'),set_value('address[tambon]',$address['tambon']));?> </div>
     </div>
     <div class="form-group">
+      <?=form_label('หมู่','',array('class'=>'control-label col-md-4'));?>
+      <div class="col-md-8"> <?=form_input(array('name'=>'address[moo]','class'=>'form-control'),set_value('address[moo]',$address['moo']));?> </div>
+    </div>
+    <div class="form-group">
+      <?=form_label('ซอย','',array('class'=>'control-label col-md-4'));?>
+      <div class="col-md-8"> <?=form_input(array('name'=>'address[soi]','class'=>'form-control'),set_value('address[soi]',$address['soi']));?> </div>
+    </div>
+    <div class="form-group">
       <?=form_label('อำเภอ','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8"> <?=form_input(array('name'=>'address[amphur]','class'=>'form-control'),set_value('address[amphur]',$address['amphur']));?> </div>
     </div>
@@ -76,6 +85,18 @@ $reference = unserialize($skill['reference']);
     <div class="form-group">
       <?=form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8"> <?=form_input(array('name'=>'address[zip]','class'=>'form-control zip','maxlength'=>'5'),set_value('address[zip]',$address['zip']));?> </div>
+    </div>
+    <div class="form-group">
+      <?=form_label('โทรศัพท์','',array('class'=>'control-label col-md-4'));?>
+      <div class="col-md-8"> <?=form_input(array('name'=>'address[phone]','class'=>'form-control tel'),set_value('address[phone]',$address['phone']));?> </div>
+    </div>
+    <div class="form-group">
+      <?=form_label('โทรสาร','',array('class'=>'control-label col-md-4'));?>
+      <div class="col-md-8"> <?=form_input(array('name'=>'address[fax]','class'=>'form-control tel'),set_value('address[fax]',$address['fax']));?> </div>
+    </div>
+    <div class="form-group">
+      <?=form_label('อีเมล์','',array('class'=>'control-label col-md-4'));?>
+      <div class="col-md-8"> <?=form_input(array('name'=>'address[email]','class'=>'form-control'),set_value('address[email]',$address['email']));?> </div>
     </div>
     <hr>
     <div class="form-group">
@@ -89,6 +110,14 @@ $reference = unserialize($skill['reference']);
     <div class="form-group">
       <?=form_label('ตำบล','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8"> <?=form_input(array('name'=>'address_current[tambon]','class'=>'form-control'),set_value('address_current[tambon]',$address_current['tambon']));?> </div>
+    </div>
+    <div class="form-group">
+      <?=form_label('หมู่','',array('class'=>'control-label col-md-4'));?>
+      <div class="col-md-8"> <?=form_input(array('name'=>'address_current[moo]','class'=>'form-control'),set_value('address_current[moo]',$address_current['moo']));?> </div>
+    </div>
+    <div class="form-group">
+      <?=form_label('ซอย','',array('class'=>'control-label col-md-4'));?>
+      <div class="col-md-8"> <?=form_input(array('name'=>'address_current[soi]','class'=>'form-control'),set_value('address_current[soi]',$address_current['soi']));?> </div>
     </div>
     <div class="form-group">
       <?=form_label('อำเภอ','',array('class'=>'control-label col-md-4'));?>
@@ -105,15 +134,15 @@ $reference = unserialize($skill['reference']);
     <hr>
     <div class="form-group">
       <?=form_label('โทรศัพท์','',array('class'=>'control-label col-md-4'));?>
-      <div class="col-md-8"> <?=form_input(array('name'=>'address[phone]','class'=>'form-control tel'),set_value('address[phone]',$address['phone']));?> </div>
+      <div class="col-md-8"> <?=form_input(array('name'=>'address_current[phone]','class'=>'form-control tel'),set_value('address_current[phone]',$address_current['phone']));?> </div>
     </div>
     <div class="form-group">
       <?=form_label('โทรสาร','',array('class'=>'control-label col-md-4'));?>
-      <div class="col-md-8"> <?=form_input(array('name'=>'address[fax]','class'=>'form-control tel'),set_value('address[fax]',$address['fax']));?> </div>
+      <div class="col-md-8"> <?=form_input(array('name'=>'address_current[fax]','class'=>'form-control tel'),set_value('address_current[fax]',$address_current['fax']));?> </div>
     </div>
     <div class="form-group">
       <?=form_label('อีเมล์','',array('class'=>'control-label col-md-4'));?>
-      <div class="col-md-8"> <?=form_input(array('name'=>'address[email]','class'=>'form-control'),set_value('address[email]',$address['email']));?> </div>
+      <div class="col-md-8"> <?=form_input(array('name'=>'address_current[email]','class'=>'form-control'),set_value('address_current[email]',$address_current['email']));?> </div>
     </div>
 
     <div class="form-group">
@@ -160,13 +189,6 @@ $reference = unserialize($skill['reference']);
         <p class="help-block"></p>
         <?=form_input(array('name'=>'reference[etc]','class'=>'form-control','placeholder'=>'(๓)เอกสารอื่นๆ โปรดระบุ'),set_value('reference[copy]',$reference['etc']));?>
         <p class="help-block">*ข้าพเจ้าขอรับรองว่าข้อความดังกล่าวข้างต้นและเอกสารหลักฐานที่แนบคำขอถูกต้องและเป็นความจริงทุกประการ</p>
-      </div>
-    </div>
-    <div class="form-group">
-      <?=form_label('เอกสารสำคัญ','needed',array('class'=>'control-label col-md-4'));?>
-      <div class="col-md-8">
-        <div class="checkbox"> <label><?=form_checkbox(array('name'=>'needed','required'=>TRUE),'1');?>สำเนาใบผ่านการสอบมาตรฐานฝีมือแรงงานแห่งชาติ</label> </div>
-        <p class="help-block">*ข้าพเจ้าได้ผ่านการสอบมาตรฐานฝีมือแรงงานแล้วและพร้อมแนบสำเนาเอกสารดังกล่าวมาเพื่อขอรับการอนุมัติ</p>
       </div>
     </div>
     <div class="form-group">

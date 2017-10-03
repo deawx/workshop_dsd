@@ -16,8 +16,6 @@
               <span class="label label-info">ปฏิเสธ</span>
             <?php endif; ?>
           </td>
-          <!-- <td><?//=($value['date_create']) ? date('d-m-Y',$value['date_create']) : 'N/A';?></td>
-          <td><?//=($value['date_update']) ? date('d-m-Y',$value['date_update']) : 'N/A';?></td> -->
           <td>
             <?php $expired = strtotime('+30 days',$value['date_create']);
             echo ($value['date_create']) ? date('d-m-Y',$expired) : 'N/A'; ?>
@@ -26,7 +24,7 @@
             <?php if ($value['approve_status'] !== 'accept') : ?>
 
               <?php $req = isset($value['category']) ? 'standard' : 'skill'; ?>
-              <?=anchor('account/request/'.$req.'/'.$value['id'],'แก้ไข',array('class'=>'label label-info','target'=>'_blank'));?>
+              <?=anchor('account/request/'.$req.'/'.$value[$req.'_id'],'แก้ไข',array('class'=>'label label-info','target'=>'_blank'));?>
               <?=anchor('#','แนบไฟล์',array('class'=>'label label-primary','data-toggle'=>'modal','data-target'=>'#attachment'.$value['date_create']));?>
 
               <div class="modal fade" id="attachment<?=$value['date_create'];?>" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">

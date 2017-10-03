@@ -40,21 +40,21 @@ class Request extends Private_Controller {
 		/*
 		ฟังก์ชั่นตรวจสอบความถูกต้องของการกรอกแบบฟอร์มก่อนการบันทึกเข้าสู่ฐานข้อมูล
 		*/
-		// $this->form_validation->set_rules('department','หน่วยงาน','required');
-		// $this->form_validation->set_rules('branch','สาขาอาชีพ','required');
-		// $this->form_validation->set_rules('level','ระดับ','required');
+		$this->form_validation->set_rules('department','หน่วยงาน','required');
+		$this->form_validation->set_rules('branch','สาขาอาชีพ','required');
+		$this->form_validation->set_rules('level','ระดับ','required');
 		$this->form_validation->set_rules('category','ประเภทการสอบ','required');
-		$this->form_validation->set_rules('type','ประเภทผู้สมัคร','required');
-		$this->form_validation->set_rules('health','สภาพร่างกาย','required');
+		// $this->form_validation->set_rules('type','ประเภทผู้สมัคร','required');
+		// $this->form_validation->set_rules('health','สภาพร่างกาย','required');
 		// $this->form_validation->set_rules('used','ประวัติการเข้าทดสอบ','required');
 		// $this->form_validation->set_rules('used_place','สถานที่เข้ารับการทดสอบ','');
 		// $this->form_validation->set_rules('reason','เหตุผลที่สมัครสอบ','');
 		// $this->form_validation->set_rules('source','แหล่งที่ทราบข่าว','');
 
-		// $this->form_validation->set_rules('title','','required');
-		// $this->form_validation->set_rules('firstname','','required');
-		// $this->form_validation->set_rules('lastname','','required');
-		// $this->form_validation->set_rules('fullname','','required');
+		// $this->form_validation->set_rules('profile[title]','คำนำหน้าชื่อ','required');
+		// $this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
+		// $this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
+		// $this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required');
 		// $this->form_validation->set_rules('religion','','required');
 		// $this->form_validation->set_rules('nationality','','required');
 		// $this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
@@ -94,6 +94,7 @@ class Request extends Private_Controller {
 			$data['address_current'] = $this->input->post('address_current') ? serialize($this->input->post('address_current')) : serialize($this->input->post('address'));
 			$data['education'] = $this->input->post('education') ? serialize($this->input->post('education')) : NULL;
 			$data['work_yes'] = $this->input->post('work_yes') ? serialize($this->input->post('work_yes')) : NULL;
+			$data['work_no'] = $this->input->post('work_no') ? $this->input->post('work_no') : NULL;
 			$data['work_abroad'] = $this->input->post('work_abroad') ? serialize($this->input->post('work_abroad')) : NULL;
 			$data['reference'] = $this->input->post('reference') ? serialize($this->input->post('reference')) : NULL;
 
@@ -127,10 +128,10 @@ class Request extends Private_Controller {
 	{
 		$this->session->set_flashdata('warning','');
 
-		$this->form_validation->set_rules('profile[title]','คำนำหน้าชื่อ','required');
-		// $this->form_validation->set_rules('profile[firstname]','','required');
-		// $this->form_validation->set_rules('profile[lastname]','','required');
-		// $this->form_validation->set_rules('profile[fullname]','','required');
+		// $this->form_validation->set_rules('profile[title]','คำนำหน้าชื่อ','required');
+		// $this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
+		// $this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
+		// $this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required');
 		// $this->form_validation->set_rules('profile[religion]','','required');
 		// $this->form_validation->set_rules('profile[blood]','','required');
 		// $this->form_validation->set_rules('profile[nationality]','','required');
@@ -142,7 +143,8 @@ class Request extends Private_Controller {
 		$this->form_validation->set_rules('career[3]','สาขาอาชีพที่ 3','max_length[150]|differs[career[1]]|differs[career[2]]|differs[career[4]]|differs[career[5]]');
 		$this->form_validation->set_rules('career[4]','สาขาอาชีพที่ 4','max_length[150]|differs[career[1]]|differs[career[2]]|differs[career[3]]|differs[career[5]]');
 		$this->form_validation->set_rules('career[5]','สาขาอาชีพที่ 5','max_length[150]|differs[career[1]]|differs[career[2]]|differs[career[3]]|differs[career[4]]');
-		$this->form_validation->set_rules('needed','เอกสารสำคัญ','required|is_numeric');
+		if ( ! intval($id) > 0)
+			$this->form_validation->set_rules('needed','เอกสารสำคัญ','required|is_numeric');
 
 		if ($this->form_validation->run() == FALSE) :
 			$this->session->set_flashdata('warning',validation_errors());
@@ -274,23 +276,6 @@ class Request extends Private_Controller {
 		$this->data['js'] = array(script_tag('assets/js/moment.min.js'),script_tag('assets/js/moment.th.js'),script_tag('assets/js/fullcalendar.js'));
 		$this->data['body'] = $this->load->view('request/calendar',$this->data,TRUE);
 		$this->load->view('_layouts/rightside',$this->data);
-	}
-
-	function edit($code='')
-	{
-		$code = $this->input->get('code') ? $this->input->get('code') : $code;
-		if ( ! is_numeric($code))
-			show_404();
-
-		$this->data['menu'] = 'edit';
-		$this->data['navbar'] = NULL;
-		$this->data['request'] = $this->request->get_code($code);
-		if (isset($this->data['request']['category'])) :
-			$this->data['body'] = $this->load->view('request/standard_edit',$this->data,TRUE);
-		else:
-			$this->data['body'] = $this->load->view('request/skill_edit',$this->data,TRUE);
-		endif;
-		$this->load->view('_layouts/boxed',$this->data);
 	}
 
 	function get_work_type($category='')
