@@ -14,14 +14,16 @@ $parent = isset($parent) ? $parent : '';
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li class="<?=($parent === 'about') ? 'active' : '';?>"> <a href="<?=site_url('welcome/about');?>">เกี่ยวกับเรา</a> </li>
-        <li class="<?=($parent === 'contact') ? 'active' : '';?>"> <a href="<?=site_url('welcome/contact');?>">ติดต่อเรา</a> </li>
-        <li class="<?=($parent === 'news') ? 'active' : '';?>"> <a href="<?=site_url('welcome/news');?>">ข่าวสาร</a> </li>
+        <?php if ( ! in_array('account',$this->uri->segment_array())) : ?>
+          <li class="<?=($parent === 'about') ? 'active' : '';?>"> <a href="<?=site_url('welcome/about');?>">เกี่ยวกับเรา</a> </li>
+          <li class="<?=($parent === 'contact') ? 'active' : '';?>"> <a href="<?=site_url('welcome/contact');?>">ติดต่อเรา</a> </li>
+          <li class="<?=($parent === 'news') ? 'active' : '';?>"> <a href="<?=site_url('welcome/news');?>">ข่าวสาร</a> </li>
+        <?php endif; ?>
         <?php if ( ! $this->ion_auth->logged_in()) : ?>
           <li> <a href="<?=site_url('auth/login');?>">เข้าสู่ระบบ/สมัครสมาชิก</a> </li>
         <?php else: ?>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle <?=($parent === 'account') ? 'active' : '';?>" data-toggle="dropdown">บัญชีของคุณ <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">บัญชีของคุณ <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li> <a href="<?=site_url('account/profile');?>">ข้อมูลส่วนตัว</a> </li>
               <li> <a href="<?=site_url('account/profile/attachment');?>">ข้อมูลไฟล์เอกสาร</a> </li>

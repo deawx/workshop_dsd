@@ -12,6 +12,7 @@
         <?php echo form_submit('','อัพโหลด',array('class'=>'btn btn-primary btn-block','id'=>'dropzone-submit'));?>
         <p class="help-block">*รองรับไฟล์นามสกุล jpg, jpeg, png</p>
         <p class="help-block">*รองรับไฟล์ขนาดไม่เกิน 2 MB</p>
+        <p class="help-block">*สามารถอัพโหลดได้ครั้งละไม่เกิน 10 ไฟล์</p>
       </div>
       <?php echo form_close(); ?>
     </div>
@@ -20,12 +21,10 @@
     <div class="row">
       <div class="container">
         <?php foreach ($assets as $key => $value) : ?>
-          <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class="col-lg-3 col-md-3 col-xs-4">
             <div class="thumbnail">
               <img class="img-responsive" src="<?=base_url('uploads/attachments/'.$value['file_name']);?>" style="height:200px;width:100%;">
-              <div class="caption">
-                <?=anchor('account/profile/attachment?type=delete&id='.$value['id'],'ลบไฟล์',array('class'=>'btn btn-warning btn-block','onclick'=>"return confirm('ลบไฟล์และข้อมูลการแนบเอกสารคำร้องที่ใช้ไฟล์นี้?');"));?>
-              </div>
+              <div class="caption"> <?=anchor('account/profile/attachment?type=delete&id='.$value['id'],'ลบไฟล์',array('class'=>'btn btn-warning btn-block','onclick'=>"return confirm('ลบไฟล์และข้อมูลการแนบเอกสารคำร้องที่ใช้ไฟล์นี้?');"));?> </div>
             </div>
           </div>
         <?php endforeach; ?>
@@ -34,23 +33,23 @@
   </div>
 </div>
 
+<?=result_in_array(array(link_tag('assets/css/dropzone.min.css'),link_tag('assets/css/basic.min.css')));?>
+<?=result_in_array(array(script_tag('assets/js/dropzone.min.js')));?>
 <script type="text/javascript">
-$(function(){
-  Dropzone.options.dropzoneUpload = {
-    parallelUploads: '10',
-    maxFilesize: '1',
-    maxFiles: '10',
-    acceptedFiles: 'image/*',
-    autoProcessQueue: false,
-    addRemoveLinks: true,
-    dictDefaultMessage: 'คลิกหรือลากไฟล์วางที่นี่เพื่ออัพโหลด',
-    init: function() {
-      var submitButton = document.querySelector("#dropzone-submit")
-      myDropzone = this;
-      submitButton.addEventListener("click", function() {
-        myDropzone.processQueue();
-      });
-    }
-  };
-});
+Dropzone.options.dropzoneUpload = {
+  parallelUploads: '10',
+  maxFilesize: '1',
+  maxFiles: '10',
+  acceptedFiles: 'image/*',
+  autoProcessQueue: false,
+  addRemoveLinks: true,
+  dictDefaultMessage: 'คลิกหรือลากไฟล์วางที่นี่เพื่ออัพโหลด',
+  init: function() {
+    var submitButton = document.querySelector("#dropzone-submit")
+    myDropzone = this;
+    submitButton.addEventListener("click", function() {
+      myDropzone.processQueue();
+    });
+  }
+};
 </script>

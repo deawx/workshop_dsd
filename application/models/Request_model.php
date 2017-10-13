@@ -25,7 +25,6 @@ class Request_model extends MY_Model {
   {
     $this->db
       ->select('sd.id AS standard_id,sd.*,us.*')
-      // ->select('sd.id,sd.user_id,sd.admin_id,sd.approve_status,sd.date_create,sd.date_update,sd.category,sd.assets_id,us.email')
       ->order_by('sd.id','ASC')
       ->join('users AS us','sd.user_id=us.id');
 
@@ -54,7 +53,6 @@ class Request_model extends MY_Model {
   {
     $this->db
       ->select('sk.id AS skill_id,sk.*,us.*')
-      // ->select('sk.id,sk.user_id,sk.admin_id,sk.approve_status,sk.date_create,sk.date_update,sk.assets_id,us.email')
       ->order_by('sk.id','ASC')
       ->join('users AS us','sk.user_id=us.id');
 
@@ -71,6 +69,31 @@ class Request_model extends MY_Model {
   {
     $standards = $this->get_standard_all($q,$status);
     $skills = $this->get_skill_all($q,$status);
+
+    $array = array_merge($standards,$skills);
+    usort($array, function($a, $b) {
+      return ($a['admin_id'] !== '') ? $a['admin_id'] : $a['date_create'] < $b['date_create'];
+    });
+
+    return $array;
+  }
+
+  function get_all_id($id='',$status='')
+  {
+    $standards = $this->db
+      ->select('*,id AS standard_id')
+      ->where('user_id',$id)
+      ->where('approve_status',$status)
+      ->order_by('id','ASC')
+      ->get('standards')
+      ->result_array();
+    $skills = $this->db
+      ->select('*,id AS skill_id')
+      ->where('user_id',$id)
+      ->where('approve_status',$status)
+      ->order_by('id','ASC')
+      ->get('skills')
+      ->result_array();
 
     $array = array_merge($standards,$skills);
     usort($array, function($a, $b) {

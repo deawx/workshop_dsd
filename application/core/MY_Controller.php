@@ -24,7 +24,6 @@ class MY_Controller extends CI_Controller {
       'rightbar' => ''
     );
   }
-
 }
 
 class Public_Controller extends MY_Controller {

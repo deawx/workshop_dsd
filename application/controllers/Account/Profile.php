@@ -101,6 +101,7 @@ class Profile extends Private_Controller {
 
   function edit()
   {
+		$this->form_validation->set_rules('email','','valid_email|max_length[100]|is_unique[users.email]');
 		$this->form_validation->set_rules('phone','','is_numeric|max_length[10]');
 		$this->form_validation->set_rules('fax','','is_numeric|max_length[10]');
 
@@ -109,6 +110,7 @@ class Profile extends Private_Controller {
 		else:
 			$data = array(
 				'id' => $this->id,
+				'email' => $this->input->post('email'),
 				'phone' => $this->input->post('phone'),
 				'fax' => $this->input->post('fax')
 			);
@@ -230,8 +232,6 @@ class Profile extends Private_Controller {
 		endif;
 
 		$this->data['menu'] = 'attachment';
-		$this->data['css'] = array(link_tag('assets/css/basic.min.css'),link_tag('assets/css/dropzone.min.css'));
-		$this->data['js'] = array(script_tag('assets/js/dropzone.min.js'));
 		$this->data['assets'] = $this->assets->get_all();
 		$this->data['leftbar'] = $this->load->view('_partials/leftbar',$this->data,TRUE);
 		$this->data['body'] = $this->load->view('profile/attachment',$this->data,TRUE);
@@ -249,10 +249,10 @@ class Profile extends Private_Controller {
 			$identity = $this->session->userdata('identity');
 			$success = $this->ion_auth->change_password($identity,$this->input->post('old_password'),$this->input->post('password'));
 			if ($success) :
-				$this->session->set_flashdata('message',$this->ion_auth->messages());
-				$this->logout();
+				$this->session->set_flashdata('success',$this->ion_auth->messages());
+				redirect('auth/logout');
 			else:
-				$this->session->set_flashdata('message',$this->ion_auth->errors());
+				$this->session->set_flashdata('warning',$this->ion_auth->errors());
 				redirect('account/profile/change_password','refresh');
 			endif;
 		endif;

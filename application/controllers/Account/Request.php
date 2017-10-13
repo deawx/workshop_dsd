@@ -23,7 +23,20 @@ class Request extends Private_Controller {
 
 	public function index()
 	{
-		$this->data['requests'] = $this->request->get_all();
+		if ($this->input->post()) :
+			$type = $this->input->post('type');
+			$data = $this->input->post();
+			$data['assets_id'] = $this->input->post('assets_id') ? serialize($this->input->post('assets_id')) : NULL;
+			// print_data($data); die();
+			if ($this->request->save($data,$type)) :
+				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+			else:
+				$this->session->set_flashdata('danger','บันทึกข้อมูลล้มเหลว');
+			endif;
+			redirect('account/request/index');
+		endif;
+
+		$this->data['requests'] = $this->request->get_all_id($this->id);
 		$this->data['assets'] = $this->assets->get_all();
 
 		$this->data['menu'] = 'index';
@@ -44,8 +57,8 @@ class Request extends Private_Controller {
 		$this->form_validation->set_rules('branch','สาขาอาชีพ','required');
 		$this->form_validation->set_rules('level','ระดับ','required');
 		$this->form_validation->set_rules('category','ประเภทการสอบ','required');
-		// $this->form_validation->set_rules('type','ประเภทผู้สมัคร','required');
-		// $this->form_validation->set_rules('health','สภาพร่างกาย','required');
+		$this->form_validation->set_rules('type','ประเภทผู้สมัคร','required');
+		$this->form_validation->set_rules('health','สภาพร่างกาย','required');
 		// $this->form_validation->set_rules('used','ประวัติการเข้าทดสอบ','required');
 		// $this->form_validation->set_rules('used_place','สถานที่เข้ารับการทดสอบ','');
 		// $this->form_validation->set_rules('reason','เหตุผลที่สมัครสอบ','');
@@ -75,7 +88,6 @@ class Request extends Private_Controller {
 			$this->session->set_flashdata('warning',validation_errors());
 		else:
 			$data = $this->input->post();
-			unset($data['type']);
 			if ($this->input->post('id')) :
 				$data['date_update'] = time();
 			else:
@@ -93,8 +105,28 @@ class Request extends Private_Controller {
 			$data['address'] = $this->input->post('address') ? serialize($this->input->post('address')) : NULL;
 			$data['address_current'] = $this->input->post('address_current') ? serialize($this->input->post('address_current')) : serialize($this->input->post('address'));
 			$data['education'] = $this->input->post('education') ? serialize($this->input->post('education')) : NULL;
-			$data['work_yes'] = $this->input->post('work_yes') ? serialize($this->input->post('work_yes')) : NULL;
-			$data['work_no'] = $this->input->post('work_no') ? $this->input->post('work_no') : NULL;
+			if ($this->input->post('work_status') === 'ผู้มีงานทำ') :
+				$work_yes = $this->input->post('work_yes');
+				$work_yes['group'] = isset($work_yes['group']) ? $work_yes['group'] : NULL;
+				$data['work_yes'] = serialize($work_yes);
+				$data['work_no'] = NULL;
+			elseif ($this->input->post('work_status') === 'ผู้ไม่มีงานทำ'):
+				$data['work_no'] = $this->input->post('work_no');
+				$data['work_yes'] = NULL;
+			else:
+				$data['work_yes'] = NULL;
+				$data['work_no'] = NULL;
+			endif;
+			if ($this->input->post('need_work_status') === 'ต้องการจัดหางานในประเทศ') :
+				$data['need_work_country'] = NULL;
+			elseif ($this->input->post('need_work_status') === 'ต้องการจัดหางานในต่างประเทศ') :
+				$data['need_work_position'] = NULL;
+				$data['need_work_group'] = NULL;
+			else:
+				$data['need_work_position'] = NULL;
+				$data['need_work_group'] = NULL;
+				$data['need_work_country'] = NULL;
+			endif;
 			$data['work_abroad'] = $this->input->post('work_abroad') ? serialize($this->input->post('work_abroad')) : NULL;
 			$data['reference'] = $this->input->post('reference') ? serialize($this->input->post('reference')) : NULL;
 
@@ -150,7 +182,6 @@ class Request extends Private_Controller {
 			$this->session->set_flashdata('warning',validation_errors());
 		else:
 			$data = $this->input->post();
-			unset($data['type']);
 			if ($this->input->post('id')) :
 				$data['date_update'] = time();
 			else:
@@ -206,23 +237,7 @@ class Request extends Private_Controller {
 
 	function result()
 	{
-		$this->form_validation->set_rules('assets_id[]','ไอดีเอกสารแนบคำร้อง','required');
-		if ($this->form_validation->run() == FALSE) :
-			$this->session->set_flashdata('warning',validation_errors());
-		else:
-			$type = $this->input->post('type');
-			$data = $this->input->post();
-			$data['assets_id'] = $this->input->post('assets_id') ? serialize($this->input->post('assets_id')) : NULL;
-
-			if ($this->request->save($data,$type)) :
-				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
-			else:
-				$this->session->set_flashdata('danger','บันทึกข้อมูลล้มเหลว');
-			endif;
-			redirect('account/request/result');
-		endif;
-
-		$this->data['requests'] = $this->request->get_all('','accept');
+		$this->data['requests'] = $this->request->get_all_id($this->id,'accept');
 		$this->data['assets'] = $this->assets->get_all();
 
 		$this->data['menu'] = 'result';

@@ -9,9 +9,7 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <p class="">รูปภาพปัจจุบัน</p>
-        <div class="thumbnail">
-          <img src="<?=base_url('uploads/'.$picture['file_name']);?>" class="img-responsive" alt="">
-        </div>
+        <div class="thumbnail"> <img src="<?=base_url('uploads/profiles/'.$picture['file_name']);?>" class="img-responsive" alt=""> </div>
       </div>
     </div>
     <hr>

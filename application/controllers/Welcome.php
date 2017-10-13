@@ -11,12 +11,12 @@ class Welcome extends Public_Controller {
 
 	public function index()
 	{
-		$this->data['page_header'] = 'Page Header';
-		$this->data['page_header_small'] = 'by Page Header Small';
-		$this->data['header'] = array(
-			$this->load->view('_partials/header',$this->data,TRUE),
-			$this->load->view('_partials/jumbotron',NULL,TRUE)
-		);
+		// $this->data['page_header'] = 'Page Header';
+		// $this->data['page_header_small'] = 'by Page Header Small';
+		// $this->data['header'] = array(
+		// 	$this->load->view('_partials/header',$this->data,TRUE),
+		// 	$this->load->view('_partials/jumbotron',NULL,TRUE)
+		// );
 		$this->data['parent'] = 'home';
 		$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 		$this->data['body'] = $this->load->view('welcome/index',NULL,TRUE);
@@ -25,8 +25,8 @@ class Welcome extends Public_Controller {
 
 	function about()
 	{
-		$this->data['page_header'] = 'About Us';
-		$this->data['page_header_small'] = 'It\'s Nice to Meet You!';
+		$this->data['page_header'] = 'เกี่ยวกับเรา';
+		$this->data['page_header_small'] = 'ข้อมูลทั่วไปและประวัติความเป็นมาของเรา';
 		$this->data['header'] = array(
 			$this->load->view('_partials/header',$this->data,TRUE)
 		);
@@ -38,8 +38,8 @@ class Welcome extends Public_Controller {
 
 	function contact()
 	{
-		$this->data['page_header'] = 'Contact';
-		$this->data['page_header_small'] = 'Subheading';
+		$this->data['page_header'] = 'ติดต่อเรา';
+		$this->data['page_header_small'] = 'ข้อมูลที่อยู่สถานที่ตั้งและช่องทางการติดต่อเรา';
 		$this->data['header'] = array(
 			$this->load->view('_partials/header',$this->data,TRUE)
 		);
@@ -51,14 +51,15 @@ class Welcome extends Public_Controller {
 
 	function news($id='')
 	{
+		$category = $this->input->get();
 		$config	= array(
 			'base_url' => site_url('welcome/news'),
-			'total_rows' => count($this->news->get_all()),
+			'total_rows' => count($this->news->get_all($category)),
 			'per_page' => 10
 		);
 		$offset = ($this->input->get('p')) ? $this->input->get('p') : '0';
 		$this->pagination->initialize($config);
-		$this->data['news'] = $this->news->get_all('',$config['per_page'],$offset);
+		$this->data['news'] = $this->news->get_all($category,$config['per_page'],$offset);
 
 		$this->data['page_header'] = 'ข่าวสาร';
 		$this->data['page_header_small'] = 'ประชาสัมพันธ์ข้อมูลข่าวสารและประกาศต่างๆ';

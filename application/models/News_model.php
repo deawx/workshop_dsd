@@ -11,8 +11,13 @@ class News_model extends MY_Model {
 
   function get_all($q='',$limit='',$offset='')
   {
+    if ($q) :
+      foreach ($q as $key => $value) :
+        $this->db->like($key,$value);
+      endforeach;
+    endif;
+
     $news = $this->db
-      ->like('title',$q)
       ->limit($limit)
       ->offset($offset)
       ->order_by('id','ASC')

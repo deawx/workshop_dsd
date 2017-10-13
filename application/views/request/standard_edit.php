@@ -126,7 +126,7 @@ $reference = unserialize($standard['reference']);
     </div>
 
     <div class="form-group"> <?=form_label('สถานภาพ(ผู้ไม่มีงานทำ)','work_no',array('class'=>'control-label col-md-4'));?>
-      <div class="col-md-8"> <?php $wn = array(''=>'เลือกรายการ','อยู่ระหว่างหางาน'=>'อยู่ระหว่างหางาน','นักเรียน/นักศึกษา'=>'นักเรียน/นักศึกษา',
+      <div class="col-md-8"> <?php $wn = array('อยู่ระหว่างหางาน'=>'อยู่ระหว่างหางาน','นักเรียน/นักศึกษา'=>'นักเรียน/นักศึกษา',
           'ทหารก่อนปลดประจำการ'=>'ทหารก่อนปลดประจำการ','ผู้อยู่ในสถานพินิจ'=>'ผู้อยู่ในสถานพินิจ','ผู้ต้องขัง'=>'ผู้ต้องขัง','ผู้ประกันตนที่ถูกเลิกจ้าง'=>'ผู้ประกันตนที่ถูกเลิกจ้าง');
           echo form_dropdown(array('name'=>'work_no','class'=>'form-control','id'=>'work_no'),$wn,set_value('work_no',$standard['work_no']));?>
         <p class="help-block">*ให้เลือกกรณีเป็นผู้ไม่มีงานทำ</p>
@@ -141,7 +141,12 @@ $reference = unserialize($standard['reference']);
         </div>
       </div>
       <div class="form-group"> <?=form_label('ประเภทงาน','',array('class'=>'control-label col-md-4'));?>
-        <div class="col-md-8"> <?php $c = array(''=>'เลือกรายการ');
+        <div class="col-md-8"> <?php $c = array(''=>'เลือกรายการ',
+          'ข้าราชการพลเรือน'=>'ข้าราชการพลเรือน','ข้าราชการตำรวจ'=>'ข้าราชการตำรวจ','ข้าราชการทหาร'=>'ข้าราชการทหาร',
+          'ข้าราชการครู'=>'ข้าราชการครู','ข้าราชการอัยการ'=>'ข้าราชการอัยการ','ลูกจ้างประจำ'=>'ลูกจ้างประจำ',
+          'พนักงานราชการ'=>'พนักงานราชการ','พนักงานจ้างเหมา'=>'พนักงานจ้างเหมา','พนักงาน/ลูกจ้างภาคเอกชน'=>'พนักงาน/ลูกจ้างภาคเอกชน',
+          'พนักงาน/ลูกจ้างรัฐวิสาหกิจ'=>'พนักงาน/ลูกจ้างรัฐวิสาหกิจ','ผู้รวมกลุ่มอาชีพ/วิสาหกิจชุมชน'=>'ผู้รวมกลุ่มอาชีพ/วิสาหกิจชุมชน','ผู้รับจ้างทั่วไปโดยไม่มีนายจ้าง'=>'ผู้รับจ้างทั่วไปโดยไม่มีนายจ้าง',
+          'เกษตรกร(ทำไร่/ทำนา/ทำสวน/เลี้ยงสัตว์)'=>'เกษตรกร(ทำไร่/ทำนา/ทำสวน/เลี้ยงสัตว์)','ลูกจ้างธุรกิจในครัวเรือน'=>'ลูกจ้างธุรกิจในครัวเรือน');
           echo form_dropdown(array('name'=>'work_yes[type]','class'=>'form-control','id'=>'work_type'),$c,set_value('work_yes[type]',$work_yes['type']));?>
         </div>
       </div>
@@ -288,7 +293,10 @@ $reference = unserialize($standard['reference']);
     </div>
     <hr>
     <div class="form-group"> <?=form_label('','',array('class'=>'control-label col-md-4'));?>
-      <div class="col-md-8"> <?=form_submit('','ยืนยัน',array('class'=>'btn btn-primary btn-block'));?> </div>
+      <div class="col-md-8">
+        <?=form_submit('','ยืนยัน',array('class'=>'btn btn-primary'));?>
+        <?=form_button('','ปิดหน้านี้',array('class'=>'btn btn-default','onclick'=>'window.close()'));?>
+      </div>
     </div>
 
   </div>
@@ -309,10 +317,21 @@ $(function(){
   var abroad = $('div#abroad :input');
   var health = $('#health');
 
-  <?php if ($standard['work_status'] != 'ผู้มีงานทำ') : ?>
-  work_yes.prop('disabled',true);
-  <?php endif; ?>
+  <?php if ($standard['work_status'] == 'ผู้มีงานทำ') : ?>
+  work_yes.prop('disabled',false);
   $('#work_no').prop('disabled',true);
+  <?php if ($work_yes['category'] == 'ทำงานภาครัฐ') : ?>
+  $('#work_group').prop('disabled',true);
+  <?php else: ?>
+  $('#work_group').prop('disabled',false);
+  <?php endif; ?>
+  <?php elseif ($standard['work_status'] == 'ผู้ไม่มีงานทำ') : ?>
+  work_yes.prop('disabled',true);
+  $('#work_no').prop('disabled',false);
+  <?php else: ?>
+  work_yes.prop('disabled',true);
+  $('#work_no').prop('disabled',true);
+  <?php endif; ?>
   work_status.on('change',function(){
     if (this.value === 'ผู้มีงานทำ') {
       work_yes.prop('disabled',false);

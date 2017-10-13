@@ -28,9 +28,9 @@ if ( ! function_exists('form_email'))
 
 if ( ! function_exists('dropdown_month'))
 {
-	function dropdown_month()
+	function dropdown_month($key='')
 	{
-		return array('' => 'เดือน',
+		$months = array('' => 'เดือน',
 			'1' => 'มกราคม','2' => 'กุมภาพันธ์',
 			'3' => 'มีนาคม','4' => 'เมษายน',
 			'5' => 'พฤษภาคม','6' => 'มิถุนายน',
@@ -38,5 +38,12 @@ if ( ! function_exists('dropdown_month'))
 			'9' => 'กันยายน','10' => 'ตุลาคม',
 			'11' => 'พฤศจิกายน','12' => 'ธันวาคม'
 		);
+
+		$key = ltrim($key,'0');
+
+		if (intval($key) > 0)
+			return $months[$key];
+
+		return $months;
 	}
 }
