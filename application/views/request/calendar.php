@@ -1,43 +1,33 @@
-<div class="" id="calendar"> </div>
-<br>
+<div class="" id="calendar"> </div> <br>
 <p>*การสอบมาตรฐานฝีมือแรงงานแห่งชาติ 15คน/วัน</p>
 <p>*การสอบรับรองความรู้ความสามารถ 26คน/วัน</p>
 
 <div class="modal fade" id="dayClick" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">กำหนดตารางวันสอบของท่าน</h4>
-      </div>
+      <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title">กำหนดตารางวันสอบของท่าน</h4> </div>
       <?=form_open(uri_string(),array('class'=>'form-horizontal'));?>
       <div class="modal-body">
         <h4 class="text-center" id="full">รายการลงทะเบียนเต็มแล้ว</h4>
         <div id="form">
-          <div class="form-group">
-            <?=form_label('รายการคำร้อง','',array('class'=>'control-label col-md-3'));?>
-            <div class="col-md-9">
-              <?php foreach ($request as $key => $value) : ?>
-                <?php $category = isset($value['category']) ? $value['category'] : 'ใบรับรองความรู้ความสามารถ';
-                $type = isset($value['category']) ? 'standard' : 'skill'; ?>
-                <label><?=form_radio('code',$value['date_create'],set_radio('code',$value['date_create']),array('data-type'=>$type));?><?=$category;?></label>
+          <div class="form-group"> <?=form_label('รายการคำร้อง','',array('class'=>'control-label col-md-3'));?>
+            <div class="col-md-9"> <?php foreach ($request as $key => $value) :
+              $category = isset($value['category']) ? $value['category'] : 'ใบรับรองความรู้ความสามารถ';
+              $type = isset($value['category']) ? 'standard' : 'skill'; ?>
+              <label><?=form_radio('code',$value['date_create'],set_radio('code',$value['date_create']),array('data-type'=>$type));?><?=$category;?></label>
               <?php endforeach; ?>
             </div>
           </div>
-          <div class="form-group">
-            <?=form_label('วันที่เลือกสอบ','',array('class'=>'control-label col-md-3'));?>
+          <div class="form-group"> <?=form_label('วันที่เลือกสอบ','',array('class'=>'control-label col-md-3'));?>
             <div class="col-md-9"> <?=form_input(array('name'=>'approve_schedule','class'=>'form-control','id'=>'dayTime','readonly'=>TRUE));?> </div>
           </div>
-          <div class="form-group">
-            <?=form_label('','',array('class'=>'control-label col-md-3'));?>
-            <div class="col-md-9"> <?=form_submit('','บันทึกข้อมูล',array('class'=>'btn btn-primary'));?> </div>
+          <div class="form-group"> <?=form_label('','',array('class'=>'control-label col-md-3'));?>
+            <div class="col-md-9"> <?=form_submit('','บันทึกข้อมูล',array('class'=>'btn btn-primary btn-block'));?> </div>
           </div>
         </div>
       </div>
       <?=form_close();?>
-      <div class="modal-footer" style="padding:0;">
-        <table class="table table-bordered"> <thead> <tr> <th>ประเภทการสอบ</th> <th>ผู้เข้าสอบ</th> </tr> </thead> <tbody> </tbody></table>
-      </div>
+      <div class="modal-footer" style="padding:0;"> <table class="table table-bordered"> <thead> <tr> <th>ประเภทการสอบ</th> <th>ผู้เข้าสอบ</th> </tr> </thead> <tbody> </tbody></table> </div>
     </div>
   </div>
 </div>
@@ -107,7 +97,7 @@ $(function(){
     //   console.log('Event: ' + calEvent.title);
     // },
     dayClick: function(date,jsEvent,view) {
-      $("#dayTime").val(date.format());
+      $("#dayTime").val(date.format('DD-MM-YYYY'));
       modal.modal('show');
     }
   });

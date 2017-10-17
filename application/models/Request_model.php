@@ -78,22 +78,30 @@ class Request_model extends MY_Model {
     return $array;
   }
 
-  function get_all_id($id='',$status='')
+  function get_all_id($id='',$status=NULL)
   {
-    $standards = $this->db
+    $this->db
       ->select('*,id AS standard_id')
       ->where('user_id',$id)
-      ->where('approve_status',$status)
-      ->order_by('id','ASC')
-      ->get('standards')
-      ->result_array();
-    $skills = $this->db
+      ->order_by('id','ASC');
+
+    if ($status != NULL)
+      $this->db->where('approve_status',$status);
+
+    $standards = $this->db->get('standards')->result_array();
+
+    $this->db
       ->select('*,id AS skill_id')
       ->where('user_id',$id)
-      ->where('approve_status',$status)
-      ->order_by('id','ASC')
-      ->get('skills')
-      ->result_array();
+      ->order_by('id','ASC');
+
+    if ($status != NULL)
+      $this->db->where('approve_status',$status);
+
+    $skills = $this->db->get('skills')->result_array();
+
+    // $standards = $standards->get('standards')->result_array();
+    // $skills = $skills->get('skills')->result_array();
 
     $array = array_merge($standards,$skills);
     usort($array, function($a, $b) {

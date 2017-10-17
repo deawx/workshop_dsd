@@ -22,7 +22,8 @@ $order_by = $this->input->get('order_by');
           <td><?=$value['username'];?></td>
           <td><?=date('d-m-Y',$value['created_on']);?></td>
           <td><?=($value['last_login']) ? date('d-m-Y',$value['last_login']) : '';?></td>
-          <td style="width:10%">
+          <td style="width:15%">
+            <?=anchor('admin/user/edit/'.$value['user_id'],'แก้ไข',array('class'=>'label label-info'));?>
             <?php if ($value['active'] === '1') : ?>
               <?=anchor('admin/user/deactivate/'.$value['user_id'],'ปิดใช้งาน',array('class'=>'label label-warning','onclick'=>"return confirm('ยืนยันการปิดใช้งาน?');"));?>
             <?php else: ?>
@@ -34,5 +35,5 @@ $order_by = $this->input->get('order_by');
       <?php endforeach; ?>
     </tbody>
   </table>
-  <div class="panel-footer"> <?=$this->pagination->create_links();?> </div>
+  <div class="panel-footer"> <?=$this->pagination->create_links();?> <?php $this->load->view('_partials/messages'); ?> </div>
 </div>

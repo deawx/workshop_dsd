@@ -80,6 +80,24 @@ $(function() {
   var local = $('div#local :input');
   var abroad = $('div#abroad :input');
   var health = $('#health');
+  var tf = $('#tf');
+  var tf_t = $('.tf_t');
+  var tf_f = $('.tf_f');
+
+  tf_t.prop('disabled',true);
+  tf_f.prop('disabled',true);
+  tf.on('change',function(){
+    if (this.value === 'เคย') {
+      tf_t.prop('disabled',false);
+      tf_f.prop('disabled',true);
+    } else if(this.value === 'ไม่เคย') {
+      tf_t.prop('disabled',true);
+      tf_f.prop('disabled',false);
+    } else {
+      tf_t.prop('disabled',true);
+      tf_f.prop('disabled',true);
+    }
+  });
 
   work_yes.prop('disabled',true);
   $('#work_no').prop('disabled',true);

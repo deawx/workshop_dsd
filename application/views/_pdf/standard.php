@@ -35,7 +35,7 @@ $reference = unserialize($record['reference']);
           <tr>
             <td style="width:70%;">
               <h4 class="text-center">ใบสมัครเข้ารับการทดสอบฝีมือแรงงาน</h4>
-              <p><img src="https://placehold.it/50x50">กรมพัฒนาฝีมือแรงงาน กระทรวงแรงงาน</p>
+              <p><img src="<?=base_url('assets/images/logo.jpg');?>" class="" style="width:55px;height:55px"> กรมพัฒนาฝีมือแรงงาน กระทรวงแรงงาน</p>
               <span class="col-md-8">
                 <?=form_checkbox('category','ทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ',set_checkbox('category','ทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ',($record['category']==='ทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ')));?>ทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ<br>
                 <?=form_checkbox('category','ทดสอบฝีมือคนหางานเพื่อไปทำงานในต่างประเทศ',set_checkbox('category','ทดสอบฝีมือคนหางานเพื่อไปทำงานในต่างประเทศ',($record['category']==='ทดสอบฝีมือคนหางานเพื่อไปทำงานในต่างประเทศ')));?>ทดสอบฝีมือคนหางานเพื่อไปทำงานในต่างประเทศ<br>
@@ -264,7 +264,7 @@ $reference = unserialize($record['reference']);
                   <p>ข้าพเจ้าขอรับรองว่าข้อความข้างต้นเป็นจริงทุกประการ และได้แนบหลักฐานประกอบการสมัครมาด้วย</p>
                   <p><?=form_checkbox('reference[copy]','สำเนาวุฒิการศึกษาหรือหนังสือรับรองประสบการณ์ทำงาน',(isset($reference['copy'])));?> สำเนาวุฒิการศึกษาหรือหนังสือรับรองประสบการณ์ทำงาน </p>
                   <p><?=form_checkbox('reference[refer]','สำเนาบัตรประจำตัวประชาชนหรือสำเนาทะเบียนบ้าน',(isset($reference['refer'])));?> สำเนาบัตรประจำตัวประชาชนหรือสำเนาทะเบียนบ้าน </p>
-                  <p><?=form_checkbox('reference[etc]','อื่นๆ',($reference['etc']!=''));?> อื่นๆ <?=(($reference['etc']!='')?$reference['etc']:'');?></p>
+                  <p><?=form_checkbox('reference[etc]','อื่นๆ',(isset($reference['etc'])&&$reference['etc']!=''));?> อื่นๆ <?=((isset($reference['etc'])&&$reference['etc']!='')?$reference['etc']:'');?></p>
                   <br>
                   <p style="text-indent:4em;">ลงชื่อ ........................................ ผู้สมัคร</p>
                   <p style="text-indent:4em;">วันที่ ........................................</p>

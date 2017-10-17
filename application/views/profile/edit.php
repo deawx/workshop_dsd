@@ -3,6 +3,7 @@
   <div class="panel-body">
     <?php echo form_open(uri_string(),array('class'=>'form-horizontal'));?>
     <?php echo form_hidden('id', $user['id']);?>
+    <?php echo form_hidden('email_old', $user['email']);?>
     <div class="form-group"> <?php echo form_label('ชื่อผู้ใช้','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8"> <?php echo form_input(array('name'=>'','class'=>'form-control','disabled'=>TRUE),set_value('',$user['username']));?> </div>
     </div>

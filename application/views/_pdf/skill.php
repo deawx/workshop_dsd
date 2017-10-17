@@ -32,15 +32,12 @@ $reference = unserialize($record['reference']);
       <div class="row">
         <div class="col-md-12"> <p class="text-right">แบบ คร.10</p> </div>
         <div class="col-xs-10 text-center">
-          <p><img src="https://placehold.it/200x200"></p>
+          <p><img src="<?=base_url('assets/images/krut.jpg');?>" style="width:200px;height:200px;"></p>
           <h3>คำขอหนังสือรับรองความรู้ความสามารถ</h3>
         </div>
         <div class="col-xs-2" style="margin:0 auto;">
           <div class="thumbnail" style="height:200px;width:100%;">
-            <div class="caption">
-              รูปถ่าย <br>
-              1 นิ้ว <br>
-            </div>
+            <div class="caption"> รูปถ่าย <br> 1 นิ้ว <br> </div>
           </div>
         </div>
         <div class="col-md-12">
@@ -67,17 +64,17 @@ $reference = unserialize($record['reference']);
           <p>๓.อาชีพ ..........<?=$work['career'];?> สถานที่ทำงาน ..........<?=$work['place'];?></p>
           <p>๔.มีความประสงค์จะขอรับหนังสือรับรองความรู้ความสามารถ ในสาขาอาชีพ</p>
           <span class="col-md-12">
-            <p>(๑) สาขา <?=$record['career1'];?></p>
-            <p>(๒) สาขา <?=$record['career2'];?></p>
-            <p>(๓) สาขา <?=$record['career3'];?></p>
-            <p>(๔) สาขา <?=$record['career4'];?></p>
-            <p>(๕) สาขา <?=$record['career5'];?></p>
+            <p>(๑) สาขา ..........<?=$record['career1'];?></p>
+            <p>(๒) สาขา ..........<?=$record['career2'];?></p>
+            <p>(๓) สาขา ..........<?=$record['career3'];?></p>
+            <p>(๔) สาขา ..........<?=$record['career4'];?></p>
+            <p>(๕) สาขา ..........<?=$record['career5'];?></p>
           </span>
           <p>๕.เอกสารหลักฐานประกอบการยื่นคำขอ</p>
           <span class="col-md-12">
             <p> <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[picture]'),'picture',set_checkbox('reference[picture]','picture',isset($reference['picture'])));?>(๑)รูปถ่ายหน้าตรง ขนาด ๑ X ๑.๕ นิ้ว พื้นหลังสีขาว ซึ่งถ่ายมาแล้วไม่เกินหกเดือน จำนวน ๒ รูป</label> </div> </p>
             <p> <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[copy]'),'copy',set_checkbox('reference[copy]','copy',isset($reference['copy'])));?>(๒)สำเนาบัตรประจำตัวประชาชน</label> </div> </p>
-            <p> <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[etc]'),'etc',set_checkbox('reference[etc]','etc',isset($reference['etc'])));?>(๓)เอกสารอื่นๆ (โปรดระบุ)</label> <?=$reference['etc'];?></div> </p>
+            <p> <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[etc]'),'etc',set_checkbox('reference[etc]','etc',isset($reference['etc'])));?>(๓)เอกสารอื่นๆ (โปรดระบุ)</label> ..........<?=(isset($reference['etc'])&&$reference['etc']!='')?$reference['etc']:NULL;?></div> </p>
             <p style="text-indent:1em;">*ข้าพเจ้าขอรับรองว่าข้อความดังกล่าวข้างต้นและเอกสารหลักฐานที่แนบคำขอถูกต้องและเป็นความจริงทุกประการ</p>
           </span>
         </div>
@@ -87,7 +84,7 @@ $reference = unserialize($record['reference']);
         </div>
       </div>
     </div>
-    <div class="clearfix"> </div> <hr> 
+    <div class="clearfix"> </div> <hr>
     <div class="container">
       <div class="row">
         <table class="table table-bordered">

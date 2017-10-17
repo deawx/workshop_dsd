@@ -101,9 +101,13 @@ class Profile extends Private_Controller {
 
   function edit()
   {
-		$this->form_validation->set_rules('email','','valid_email|max_length[100]|is_unique[users.email]');
-		$this->form_validation->set_rules('phone','','is_numeric|max_length[10]');
-		$this->form_validation->set_rules('fax','','is_numeric|max_length[10]');
+		if ($this->input->post('email') != $this->input->post('email_old')) :
+			$this->form_validation->set_rules('email','อีเมล์','valid_email|max_length[100]|is_unique[users.email]');
+		else:
+			$this->form_validation->set_rules('email','อีเมล์','valid_email|max_length[100]');
+		endif;
+		$this->form_validation->set_rules('phone','เบอร์โทรศัพท์','is_numeric|max_length[10]');
+		$this->form_validation->set_rules('fax','แฟกซ์','is_numeric|max_length[10]');
 
 		if ($this->form_validation->run() == FALSE) :
 			$this->session->set_flashdata('warning',validation_errors());
