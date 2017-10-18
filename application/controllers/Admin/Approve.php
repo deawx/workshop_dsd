@@ -14,11 +14,8 @@ class Approve extends Admin_Controller {
 
 	function index()
 	{
-		$this->form_validation->set_rules('approve_remark','หมายเหตุการปฎิเสธ','max_length[100]');
-		if ($this->form_validation->run() == FALSE) :
-			$this->session->set_flashdata('warning',validation_errors());
-		else:
-			$data = $this->input->post();
+		$data = $this->input->post();
+		if ($data) :
 			$data['admin_id'] = $this->session->user_id;
 			$data['approve_date'] = time();
 
@@ -32,7 +29,7 @@ class Approve extends Admin_Controller {
 			redirect('admin/approve');
 		endif;
 
-		$q = $this->input->get('email');
+		$q = $this->input->get();
 		$this->data['requests'] = $this->request->get_all($q);
 		$this->data['body'] = $this->load->view('approve/index',$this->data,TRUE);
 		$this->load->view('_layouts/boxed',$this->data);
@@ -52,11 +49,8 @@ class Approve extends Admin_Controller {
 
 	function status()
 	{
-		$this->form_validation->set_rules('status','ผลการสอบ','in_list[ผ่าน,ไม่ผ่าน]');
-		if ($this->form_validation->run() == FALSE) :
-			$this->session->set_flashdata('warning',validation_errors());
-		else:
-			$data = $this->input->post();
+		$data = $this->input->post();
+		if ($data) :
 
 			// print_data($data); die();
 

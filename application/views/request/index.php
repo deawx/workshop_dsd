@@ -11,10 +11,8 @@
               <?php echo isset($value['category']) ? $value['category'] : 'หนังสือรับรองความรู้ความสามารถ';
                 if ($value['approve_status'] == NULL) : ?>
                 <span class="label label-primary">ใหม่</span>
-              <?php elseif ($value['approve_status'] === 'accept'): ?>
-                <span class="label label-success">ตอบรับ</span>
               <?php elseif ($value['approve_status'] === 'reject'): ?>
-                <span class="label label-info">ปฏิเสธ</span>
+                <span class="label label-info">รอ</span>
               <?php endif; ?>
             </td>
             <td><?=date('d-m-Y',$value['date_create']);?></td>
@@ -22,7 +20,7 @@
               <?php $expired = strtotime('+30 days',$value['date_create']);
               echo ($value['date_create']) ? date('d-m-Y',$expired) : 'N/A'; ?>
             </td>
-            <td class="text-right">
+            <td>
                 <?php $req = isset($value['category']) ? 'standard' : 'skill'; ?>
                 <?=anchor('account/request/'.$req.'/'.$value[$req.'_id'],'แก้ไข',array('class'=>'label label-info','target'=>'_blank'));?>
                 <?=anchor('#','แนบไฟล์',array('class'=>'label label-primary','data-toggle'=>'modal','data-target'=>'#attachment'.$value['date_create']));?>
@@ -34,13 +32,15 @@
                       <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title">รายการแนบไฟล์เอกสาร</h4> </div>
                       <div class="modal-body" style="padding:0px;">
                         <table class="table table-hover">
+                          <thead> <tr> <th>#</th> <th>ชื่อไฟล์</th> <th>ขนาดไฟล์</th> <th></th> </tr> </thead>
                           <tbody>
                             <?php $assets_id = unserialize($value['assets_id']);
                             foreach ($assets as $asset) : ?>
                             <tr>
                               <td><?=form_checkbox(array('name'=>'assets_id[]'),$asset['id'],set_checkbox('assets_id',$asset['id'],(any_in_array($asset['id'],$assets_id))));?></td>
-                              <td><?=img('uploads/attachments/'.$asset['file_name'],'',array('style'=>'height:75px;width:75px;'));?></td>
-                              <td><?=$asset['image_size_str'];?></td>
+                              <td><?=$asset['client_name'];?></td>
+                              <td><?=byte_format($asset['file_size']);?></td>
+                              <td><?=anchor('uploads/attachments/'.$asset['file_name'],'ดู',array('class'=>'label label-info','target'=>'_blank'));?></td>
                             </tr>
                           <?php endforeach; ?>
                         </tbody>

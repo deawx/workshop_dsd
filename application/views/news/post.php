@@ -33,18 +33,23 @@
 <div class="modal fade" id="attachment" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <?=form_open().form_hidden('id',$news['id']);?>
+      <?=form_open('admin/news/attachment/').form_hidden('id',$news['id']);?>
       <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title">รายการแนบไฟล์เอกสาร</h4> </div>
-      <div class="modal-body" style="padding:0px;">
-        <?php $assets_id = unserialize($news['assets_id']);
-          foreach ($assets as $asset) : ?>
-          <div class="col-sm-1 col-md-2 col-lg-3">
-            <label class="thumbnail img-responsive img-thumbnail">
-              <?=img('uploads/attachments/'.$asset['file_name'],'',array('style'=>'min-height:100px;height:100px;width:100%;'));?>
-              <?=form_checkbox(array('name'=>'assets_id[]'),$asset['id'],set_checkbox('assets_id',$asset['id'],(any_in_array($asset['id'],$assets_id))));?>
-            </label>
-          </div>
-        <?php endforeach; ?>
+      <div class="modal-body" style="padding:0px;">.
+        <table class="table table-hover">
+          <thead> <tr> <th>#</th> <th>ชื่อไฟล์</th> <th>ขนาดไฟล์</th> <th></th> </tr> </thead>
+          <tbody>
+            <?php $assets_id = unserialize($news['assets_id']);
+              foreach ($assets as $asset) : ?>
+              <tr>
+                <td><?=form_checkbox(array('name'=>'assets_id[]'),$asset['id'],set_checkbox('assets_id',$asset['id'],(any_in_array($asset['id'],$assets_id))));?></td>
+                <td><?=$asset['client_name'];?></td>
+                <td><?=byte_format($asset['file_size']);?></td>
+                <td><?=anchor('uploads/attachments/'.$asset['file_name'],'ดู',array('class'=>'label label-info','target'=>'_blank'));?></td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
       </div>
       <div class="modal-footer"> <button type="submit" class="btn btn-primary btn-block">ยืนยัน</button> </div>
       <?=form_close();?>

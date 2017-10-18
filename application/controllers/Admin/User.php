@@ -43,6 +43,10 @@ class User extends Admin_Controller {
 		else:
 			$this->form_validation->set_rules('email','อีเมล์','valid_email|max_length[100]');
 		endif;
+		if ($this->input->post('password')) :
+			$this->form_validation->set_rules('password','รหัสผ่าน','exact_length[8]');
+			$this->form_validation->set_rules('password_confirm','รหัสผ่าน(ยืนยัน)','matches[password]');
+		endif;
 		$this->form_validation->set_rules('phone','เบอร์โทรศัพท์','is_numeric|max_length[10]');
 		$this->form_validation->set_rules('fax','แฟกซ์','is_numeric|max_length[10]');
 		if ($this->form_validation->run() == FALSE) :

@@ -42,16 +42,13 @@
 <div class="form-group">
   <?php echo form_label('ยอมรับการเปิดเผยข้อมูล','allow',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <div class="checkbox">
-      <label><?=form_checkbox(array('name'=>'allow'),TRUE);?></label>
-    </div>
-    <p class="help-block">*ข้าพเจ้ายินยอมเปิดเผยข้อมูลส่วนบุคคลให้กับหน่วยงานของรัฐและเอกชนทราบเพื่อประโยชน์ในการจัดหางานและบริหารแรงงานต่อไป</p>
+    <div class="checkbox"> <label><?=form_checkbox(array('name'=>'allow'),TRUE);?>ยอมรับ</label> </div>
+    <br>
+    <p>*ข้าพเจ้ายินยอมเปิดเผยข้อมูลส่วนบุคคลให้กับหน่วยงานของรัฐและเอกชนทราบเพื่อประโยชน์ในการจัดหางานและบริหารแรงงานต่อไป</p>
+    <p>*มีค่าธรรมเนียมในการประเมิน ๑,๐๐ บาทถ้วน</p>
   </div>
 </div>
 <hr>
-<div class="form-group">
-  <?php echo form_label('','',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8">
-    <?=form_submit('','ยืนยัน',array('class'=>'btn btn-primary btn-block'));?>
-  </div>
+<div class="form-group"> <?php echo form_label('','',array('class'=>'control-label col-md-4'));?>
+  <div class="col-md-8"> <?=form_submit('','ยืนยัน',array('class'=>'btn btn-primary btn-block'));?> </div>
 </div>

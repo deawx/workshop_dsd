@@ -293,6 +293,17 @@ class Request extends Private_Controller {
 		$this->load->view('_layouts/rightside',$this->data);
 	}
 
+	function queue($code='')
+	{
+		if ( ! intval($code) && ! strlen($code) === '11')
+			show_404();
+
+		$record = $this->request->get_code($code);
+
+		$this->data['record'] = $record;
+		$this->load->view('_pdf/queue',$this->data);
+	}
+
 	function get_work_type($category='')
 	{
 		$type = array();

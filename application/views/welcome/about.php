@@ -1,35 +1,30 @@
 <div class="row">
   <div class="col-md-8">
-    <img class="img-responsive img-rounded" src="http://placehold.it/900x350" alt="">
+    <img class="img-responsive img-rounded" src="<?=base_url('assets/images/about.jpg');?>" alt="">
   </div>
   <div class="col-md-4">
-    <h1>Business Name or Tagline</h1>
-    <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-    <a class="btn btn-primary btn-lg" href="#">Call to Action!</a>
+    <h2>Heading</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
   </div>
 </div>
 <hr>
 <div class="row">
-  <div class="col-lg-12">
-    <div class="well text-center">
-      This is a well that is a great spot for a business tagline or phone number for easy access!
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <h2>Heading 1</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-    <a class="btn btn-default" href="#">More Info</a>
-  </div>
-  <div class="col-md-4">
-    <h2>Heading 2</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-    <a class="btn btn-default" href="#">More Info</a>
-  </div>
-  <div class="col-md-4">
-    <h2>Heading 3</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-    <a class="btn btn-default" href="#">More Info</a>
+  <div class="col-md-12">
+    กระทรวงแรงงานประกาศกฎหมาย อาชีพช่างไฟ ต้องมีบัตรประจำตัว หลังยกเป็นอาชีพที่อาจก่อให้เกิดอันตรายในที่สาะารณะ ฝ่าฝืนมีโทษปรับ 5,000 บาท ให้มีผล 26 ตุลาคม 2559
+เว็บไซต์ราชกิจจานุเบกษา ได้ออกประกาศกระทรวงแรงงาน เรื่อง กำหนดสาขาอาชีพ ที่อาจเป็นอันตรายต่อสาธารณะ ซึ่งต้องดำเนินการโดยผู้ได้รับหนังสือรับรองความรู้ความสามารถ โดยกำหนดให้ สาขาอาชีพช่างไฟฟ้าอิเล็กทรอนิกส์และคอมพิวเตอร์ สาขาช่างไฟฟ้าภายในอาคาร เป็นสาขาอาชีพที่อาจเป็นอันตรายต่อสาธารณะ
+ซึ่งต้องดำเนินการโดยผู้ได้รับหนังสือรับรองความรู้ความสามารถ ตามพระราชบัญญัติส่งเสริมการพัฒนาฝีมือแรงงาน พ.ศ. 2545 และที่แก้ไขเพิ่มเติม ประกาศกระทรวงแรงงานฉบับดังกล่าว กำหนดให้มีผลใช้บังคับ เมื่อพ้นกำหนด 365 วันนับแต่วันประกาศในราชกิจจานุเบกษาเป็นต้นไป จึงมีผลใช้บังคับตั้งแต่วันที่ 26 ตุลาคม 2559 เป็นต้นไป
+ทั้งนี้หากช่างไฟฟ้าฝ่าฝืนไม่มีบัตรประจำตัว จะมีความผิด ปรับไม่เกิน 5,000 บาท นายจ้างที่จ้างแรงงานที่ไม่มีบัตรประจำตัวช่างไฟฟ้า มีความผิดปรับไม่เกิน 30,000 บาท ซึ่งกฏหมายฉบับนี้ดังกล่าว ควบคุมผู้ประกอบอาชีพช่างไฟฟ้าทุกคน (ยกเว้นผู้ที่จบวิศวะฯ และมีใบ กว. ช่างไฟฟ้ากำลัง)
+นักศึกษาที่จบ ปวช. ปวส. ปริญญาตรี ช่างไฟฟ้า จะมีแค่คุณวุฒิทางการศึกษา รับรองว่าจบการศึกษาระดับนั้นๆ เท่านั้น ไม่ได้มีเอกสารหลักฐานที่ยืนยันว่าบุคคลนั้นๆ สามารถปฏิบัติหน้าที่ช่างไฟฟ้าได้ถูกต้อง ดังนั้นเพื่อความปลอดภัยจึงได้ออกมากฎหมายมาบังคับใช้ดังกล่าว
+สำหรับการประกาศอาชีพช่างไฟฟ้าเป็นสาขาอาชีพควบคุม ต้องปฏิบัติโดยช่างที่มีหนังสือรับรองความรู้ความสามารถ โดยมีขั้นตอนมีดังนี้
+1 ต้องผ่านการทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ สาขาช่างไฟฟ้าภายในอาคาร
+ถ้ายังไม่ผ่านการสอบ ให้ติดต่อขอสอบได้ที่ ศูนย์พัฒนาฝีมือแรงงานจังหวัด หรือสถาบันพัฒนาฝีมือแรงงานภาค
+2 ประเมินจากคุณวุฒิทางการศึกษา/ประสบการณ์การทำงาน/การอบรมสัมมนา
+3 ประเมินจากการสอบสัมภาษณ์
+เกณฑ์การประเมิน ต้องได้คะแนนรวมไม่น้อยกว่า 85 คะแนนถึงจะได้หนังสือรับรองความรู้ความสามารถ คะแนนได้มาจาก
+1 ผ่านการทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ สาขาช่างไฟฟ้าภายในอาคาร จะได้คะแนนทันที 50 คะแนน
+2 คุณวุฒิทางการศึกษา/ประสบการณ์การทำงาน/การอบรมสัมมนา มีคะแนนประเมินรวมกันไม่เกิน 25 คะแนน
+3 การสัมภาษณ์ มีคะแนนประเมินไม่เกิน 25 คะแนน
+โดยหนังสือรับรองความรู้ความสามารถ มีอายุ 3 ปี (เสียค่าธรรมเนียมในการประเมิน 1,000 บาท)
+
   </div>
 </div>

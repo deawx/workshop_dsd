@@ -3,13 +3,20 @@
     <div class="panel-heading"> <h3 class="panel-title">แก้ไขข้อมูลสมาชิก</h3> </div>
     <?=form_open(uri_string(),array('class'=>'form-horizontal'));?>
     <?=form_hidden('id',$user['id']);?>
-    <?php echo form_hidden('email_old', $user['email']);?>
+    <?=form_hidden('email_old', $user['email']);?>
+    <?php print_data($user);?>
     <div class="panel-body">
       <div class="form-group"> <?=form_label('ชื่อผู้ใช้','',array('class'=>'control-label col-md-4'));?>
         <div class="col-md-8"> <?=form_input(array('name'=>'','class'=>'form-control','disabled'=>TRUE),set_value('',$user['username']));?> </div>
       </div>
       <div class="form-group"> <?=form_label('อีเมล์','email',array('class'=>'control-label col-md-4'));?>
         <div class="col-md-8"> <?=form_input(array('name'=>'email','class'=>'form-control'),set_value('email',$user['email']));?> </div>
+      </div>
+      <div class="form-group"> <?=form_label('รหัสผ่าน','password',array('class'=>'control-label col-md-4'));?>
+        <div class="col-md-8"> <?=form_password(array('name'=>'password','class'=>'form-control'));?> </div>
+      </div>
+      <div class="form-group"> <?=form_label('รหัสผ่าน(ยืนยัน)','password_comfirm',array('class'=>'control-label col-md-4'));?>
+        <div class="col-md-8"> <?=form_password(array('name'=>'password_confirm','class'=>'form-control'));?> </div>
       </div>
       <div class="form-group"> <?=form_label('วันที่สมัคร','',array('class'=>'control-label col-md-4'));?>
         <div class="col-md-8"> <?=form_input(array('name'=>'','class'=>'form-control','disabled'=>TRUE),set_value('',date('d-m-Y',$user['created_on'])));?> </div>

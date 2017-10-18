@@ -25,7 +25,7 @@ class Assets_model extends MY_Model {
   function get_all()
   {
     $assets = $this->db
-      ->select('as.id,as.file_name,as.image_size_str')
+      ->select('as.*')
       ->where('ab.user_id',$this->session->user_id)
       ->where('ab.is_avatar','0')
       ->join('assets_by as ab','ab.asset_id = as.id')

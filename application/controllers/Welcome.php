@@ -11,12 +11,11 @@ class Welcome extends Public_Controller {
 
 	public function index()
 	{
-		// $this->data['page_header'] = 'Page Header';
-		// $this->data['page_header_small'] = 'by Page Header Small';
-		// $this->data['header'] = array(
-		// 	$this->load->view('_partials/header',$this->data,TRUE),
-		// 	$this->load->view('_partials/jumbotron',NULL,TRUE)
-		// );
+		$this->data['page_header'] = 'หน้าหลัก';
+		$this->data['page_header_small'] = 'อธิบายขั้นตอนและวิธีการใช้งานเว็บไซต์';
+		$this->data['header'] = array(
+			$this->load->view('_partials/header',$this->data,TRUE)
+		);
 		$this->data['parent'] = 'home';
 		$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 		$this->data['body'] = $this->load->view('welcome/index',NULL,TRUE);

@@ -40,11 +40,7 @@
                     <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title">ระบุสถานะผลการสอบ</h4> </div>
                     <div class="modal-body">
                       <div class="form-group"> <?=form_label('ผลการสอบ','status',array('class'=>'control-label col-md-4'));?>
-                        <div class="col-md-8">
-                          <?=form_dropdown(array('name'=>'status','class'=>'form-control'),array(''=>'เลือกรายการ','ผ่าน'=>'ผ่าน','ไม่ผ่าน'=>'ไม่ผ่าน'),set_value('status',$value['status']));?>
-                          <!-- <div class="radio"> <label><?//=form_radio('status','ผ่าน',set_radio('status','ผ่าน',($value['status']==='ผ่าน')));?>ผ่าน</label> </div>
-                          <div class="radio"> <label><?//=form_radio('status','ไม่ผ่าน',set_radio('status','ไม่ผ่าน',($value['status']==='ไม่ผ่าน')));?>ไม่ผ่าน</label> </div> -->
-                        </div>
+                        <div class="col-md-8"> <?=form_dropdown(array('name'=>'status','class'=>'form-control'),array(''=>'เลือกรายการ','ผ่าน'=>'ผ่าน','ไม่ผ่าน'=>'ไม่ผ่าน'),set_value('status',$value['status']));?> </div>
                       </div>
                     </div>
                     <div class="modal-footer"> <button type="submit" class="btn btn-primary btn-block">ยืนยัน</button> </div>
@@ -66,7 +62,6 @@
                 <div class="modal-content">
                   <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title">เอกสารประกอบคำร้อง</h4> </div>
                   <div class="modal-body">
-                    <div class="row">
                       <table class="table table-hover">
                         <thead> <tr> <th>#</th> <th>ชื่อไฟล์</th> <th>ขนาดไฟล์</th> <th></th> </tr> </thead>
                         <tbody>
@@ -83,7 +78,6 @@
                         </tbody>
                       </table>
                     </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -96,20 +90,19 @@
               endif; ?>
               <div class="modal fade" id="reply<?=$value['date_create'];?>" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
                 <div class="modal-dialog">
-                  <?=form_open(uri_string(),array('class'=>'form-horizontal')).form_hidden('id',$value[rtrim($type,'s').'_id']);?>
+                  <?=form_open(uri_string(),array('class'=>'form-horizontal'));?>
+                  <?=form_hidden('id',$value[rtrim($type,'s').'_id']);?>
+                  <?=form_hidden('type',$type);?>
                   <div class="modal-content">
                     <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title">เงื่อนไขการปฏิเสธคำร้อง</h4> </div>
                     <div class="modal-body">
-                      <div class="form-group">
-                        <?=form_label('วันที่อนุมัติ','',array('class'=>'control-label col-md-4'));?>
+                      <div class="form-group"> <?=form_label('วันที่อนุมัติ','',array('class'=>'control-label col-md-4'));?>
                         <div class="col-md-8"> <?=form_input(array('name'=>'approve_date','class'=>'form-control','readonly'=>TRUE),date('d-m-Y',time()));?> </div>
                       </div>
-                      <div class="form-group">
-                        <?=form_label('สถานะการอนุมัติ','',array('class'=>'control-label col-md-4'));?>
+                      <div class="form-group"> <?=form_label('สถานะการอนุมัติ','',array('class'=>'control-label col-md-4'));?>
                         <div class="col-md-8"> <?=form_dropdown(array('name'=>'approve_status','class'=>'form-control'),array(''=>'เลือกรายการ','accept'=>'ตอบรับ','reject'=>'ปฎิเสธ'),set_value('approve_status',$value['approve_status']));?> </div>
                       </div>
-                      <div class="form-group">
-                        <?=form_label('หมายเหตุ','',array('class'=>'control-label col-md-4'));?>
+                      <div class="form-group"> <?=form_label('หมายเหตุ','',array('class'=>'control-label col-md-4'));?>
                         <div class="col-md-8"> <?=form_textarea(array('name'=>'approve_remark','class'=>'form-control','rows'=>'3','value'=>$value['approve_remark']));?> </div>
                       </div>
                     </div>

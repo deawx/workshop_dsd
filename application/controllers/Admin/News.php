@@ -49,13 +49,26 @@ class News extends Admin_Controller {
 			redirect('admin/news/index');
 		endif;
 
-		$this->data['css'] = array(link_tag('assets/css/wysihtml5.min.css'));
-		$this->data['js'] = array(script_tag('assets/js/wysihtml5.all.min.js'));
-
 		$this->data['news'] = $this->news->get_id($id);
 		$this->data['assets'] = $this->assets->get_all();
+		$this->data['css'] = array(link_tag('assets/css/wysihtml5.min.css'));
+		$this->data['js'] = array(script_tag('assets/js/wysihtml5.all.min.js'));
 		$this->data['body'] = $this->load->view('news/post',$this->data,TRUE);
 		$this->load->view('_layouts/boxed',$this->data);
+	}
+
+	function attachment()
+	{
+		$data = $this->input->post();
+		$data['assets_id'] = $this->input->post('assets_id') ? serialize($this->input->post('assets_id')) : NULL;
+
+		if ($this->news->save($data)) :
+			$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+		else:
+			$this->session->set_flashdata('danger','บันทึกข้อมูลล้มเหลว');
+		endif;
+
+		redirect('admin/news/post/'.$data['id']);
 	}
 
 	function pinned($id='')

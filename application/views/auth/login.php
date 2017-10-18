@@ -39,7 +39,6 @@
           <?php echo form_close();?>
         </div>
         <div class="panel-footer text-right">
-          <p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>
           <p><a href="register"><?php echo lang('create_user_heading');?></a></p>
         </div>
       </div>
