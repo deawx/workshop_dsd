@@ -51,12 +51,13 @@ $reference = unserialize($record['reference']);
               <td colspan="2">
                 <b>1. ข้อมูลส่วนบุคคล</b>
                 ชื่อ ..........<?=$profile['title'].nbs(2).$profile['firstname'];?> นามสกุล ..........<?=$profile['lastname'];?>
-                เพศ <?=form_checkbox('title','นาย',set_checkbox('title','นาย',($profile['title']==='นาย')));?> ชาย
-                <?=form_checkbox('title','น',set_checkbox('title','น',($profile['title']!=='นาย')));?> หญิง
+                เพศ <?=form_checkbox('title','นาย',set_checkbox('title','นาย',($profile['title']=='นาย')));?> ชาย
+                <?=form_checkbox('title','น',set_checkbox('title','น',($profile['title']!='นาย')));?> หญิง
                 <span class="col-md-12">
                   <p><b>1.1 ข้อมูลทั่วไป</b>
                     ..........<?=$profile['fullname'];?> สัญชาติ ..........<?=$profile['nationality'];?> ศาสนา ..........<?=$profile['religion'];?> <br>
-                    <?php $split = str_split($profile['id_card'],1);
+                    <?php $profile['id_card'] = (strlen($profile['id_card'])===13) ? $profile['id_card'] : str_repeat(0,13) ;
+                    $split = str_split($profile['id_card'],1);
                     foreach ($split as $key => $value) :
                     $split[$key] = '<span style="border:1px solid black;padding:0.1em;">'.$value.'</span>';
                     endforeach; ?>

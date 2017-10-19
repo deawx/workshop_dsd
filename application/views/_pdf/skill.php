@@ -45,7 +45,8 @@ $reference = unserialize($record['reference']);
           <p class="col-md-4 col-md-offset-8">วันที่ ..........<?=date('d');?> เดือน ..........<?=dropdown_month(date('m'));?> พ.ศ. ..........<?=date('Y')+543;?></p>
           <p>๑.ข้าพเจ้า ..........<?=$profile['title'].nbs().$profile['firstname'];?> นามสกุล ..........<?=$profile['lastname'];?></p>
           <p>เกิดวันที่ ..........<?=date('d',$profile['birthdate']);?> เดือน ..........<?=dropdown_month(date('m',$profile['birthdate']));?> พ.ศ. ..........<?=date('Y',$profile['birthdate'])+543;?> อายุ ..........<?=age_calculate($profile['birthdate']);?> ปี สัญชาติ ..........<?=$profile['nationality'];?> หมู่โลหิต ..........<?=$profile['blood'];?> </p>
-          <?php $split = str_split($profile['id_card'],1);
+          <?php $profile['id_card'] = (strlen($profile['id_card'])===13) ? $profile['id_card'] : str_repeat(0,13) ;
+          $split = str_split($profile['id_card'],1);
           foreach ($split as $key => $value) :
           $split[$key] = '<span style="border:1px solid black;padding:0.1em;">'.$value.'</span>';
           endforeach; ?>

@@ -97,11 +97,9 @@ class Request extends Private_Controller {
 			$m = $this->input->post('m');
 			$y = $this->input->post('y')-543;
 			$birthdate = strtotime($y.'-'.$m.'-'.$d);
-			if ($this->input->post('profile')) :
-				$data['profile'] = $this->input->post('profile');
-				$data['profile']['birthdate'] = $birthdate;
-				$data['profile'] = serialize($data['profile']);
-			endif;
+			$data['profile'] = $this->input->post('profile');
+			$data['profile']['birthdate'] = $birthdate;
+			$data['profile'] = serialize($data['profile']);
 			$data['address'] = $this->input->post('address') ? serialize($this->input->post('address')) : NULL;
 			$data['address_current'] = $this->input->post('address_current') ? serialize($this->input->post('address_current')) : serialize($this->input->post('address'));
 			$data['education'] = $this->input->post('education') ? serialize($this->input->post('education')) : NULL;
@@ -190,12 +188,9 @@ class Request extends Private_Controller {
 			$d = $this->input->post('d');
 			$m = $this->input->post('m');
 			$y = $this->input->post('y')-543;
-			$birthdate = strtotime($y.'-'.$m.'-'.$d);
-			if ($this->input->post('profile')) :
-				$data['profile'] = $this->input->post('profile');
-				$data['profile']['birthdate'] = $birthdate;
-				$data['profile'] = serialize($data['profile']);
-			endif;
+			$data['profile'] = $this->input->post('profile');
+			$data['profile']['birthdate'] = $birthdate;
+			$data['profile'] = serialize($data['profile']);
 			$data['address'] = $this->input->post('address') ? serialize($this->input->post('address')) : NULL;
 			$data['address_current'] = $this->input->post('address_current') ? serialize($this->input->post('address_current')) : serialize($this->input->post('address'));
 			$data['education'] = $this->input->post('education') ? serialize($this->input->post('education')) : NULL;
@@ -280,9 +275,9 @@ class Request extends Private_Controller {
 			$schedule[$key]['start'] = date('Y-m-d',$value['approve_schedule']);
 		endforeach;
 		$this->data['schedule'] = $schedule;
-		$request = $this->request->get_all($this->session->email,'accept');
+		$request = $this->request->get_all_id($this->id,'accept');
 		foreach ($request as $key => $value) :
-			if ($value['approve_schedule'] !== '') :
+			if ($value['approve_schedule'] != NULL) :
 				unset($request[$key]);
 			endif;
 		endforeach;

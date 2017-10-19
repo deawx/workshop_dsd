@@ -7,9 +7,9 @@
       <?php foreach ($requests as $key => $value) : ?>
         <tr class="rows" style="display:none;">
           <td><?=isset($value['category']) ? $value['category'] : 'หนังสือรับรองความรู้ความสามารถ';?></td>
-          <td><?=($value['approve_schedule'] !== '') ? date('d-m-Y',$value['approve_schedule']) : 'N/A';?></td>
-          <td><?=($value['approve_schedule'] !== '') ? anchor_popup('account/request/queue/'.$value['date_create'],'ดู',array('class'=>'label label-info')) : 'N/A';?></td>
-          <td><?=($value['approve_schedule'] !== '') ? $value['status'] : 'N/A';?></td>
+          <td><?=($value['approve_schedule']!=NULL) ? date('d-m-Y',$value['approve_schedule']) : 'N/A';?></td>
+          <td><?=($value['approve_schedule']!=NULL) ? anchor_popup('account/request/queue/'.$value['date_create'],'ดู',array('class'=>'label label-info')) : 'N/A';?></td>
+          <td><?=($value['approve_schedule']!=NULL) ? $value['status'] : 'N/A';?></td>
         </tr>
       <?php endforeach; ?>
     </tbody>

@@ -78,7 +78,7 @@ class Request_model extends MY_Model {
 
     $array = array_merge($standards,$skills);
     usort($array, function($a, $b) {
-      return ($a['admin_id'] !== '') ? $a['admin_id'] : $a['date_create'] < $b['date_create'];
+      return ($a['admin_id'] != NULL) ? $a['admin_id'] : $a['date_create'] < $b['date_create'];
     });
 
     return $array;
@@ -108,7 +108,7 @@ class Request_model extends MY_Model {
 
     $array = array_merge($standards,$skills);
     usort($array, function($a, $b) {
-      return ($a['admin_id'] !== '') ? $a['admin_id'] : $a['date_create'] < $b['date_create'];
+      return ($a['admin_id'] != NULL) ? $a['admin_id'] : $a['date_create'] < $b['date_create'];
     });
 
     return $array;
@@ -143,7 +143,7 @@ class Request_model extends MY_Model {
 
     $array = array();
     foreach ($events as $key => $value) :
-      if ($value['approve_schedule'] !== '') :
+      if ($value['approve_schedule'] != NULL) :
         $approve_schedule = date('Y-m-d',$value['approve_schedule']);
         if ($approve_schedule === $date) :
           $array[] = $value;
@@ -162,7 +162,7 @@ class Request_model extends MY_Model {
     $events = array_merge($standards,$skills);
 
     foreach ($events as $key => $value) :
-      if ($value['approve_schedule'] === '') :
+      if ($value['approve_schedule'] == NULL) :
         unset($events[$key]);
       endif;
     endforeach;

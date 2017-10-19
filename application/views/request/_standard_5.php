@@ -29,13 +29,13 @@
   <?php echo form_label('เอกสารที่แนบมาด้วย','reference',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <div class="checkbox">
-      <label><?=form_checkbox(array('name'=>'reference[]'),'สำเนาวุฒิการศึกษาหรือหนังสือรับรองการทำงาน');?>สำเนาวุฒิการศึกษาหรือหนังสือรับรองการทำงาน</label>
+      <label><?=form_checkbox(array('name'=>'reference[refer]'),'สำเนาวุฒิการศึกษาหรือหนังสือรับรองการทำงาน');?>สำเนาวุฒิการศึกษาหรือหนังสือรับรองการทำงาน</label>
     </div>
     <div class="checkbox">
-      <label><?=form_checkbox(array('name'=>'reference[]'),'สำเนาบัตรประจำตัวประชาชนหรือสำเนาทะเบียนบ้าน');?>สำเนาบัตรประจำตัวประชาชนหรือสำเนาทะเบียนบ้าน</label>
+      <label><?=form_checkbox(array('name'=>'reference[copy]'),'สำเนาบัตรประจำตัวประชาชนหรือสำเนาทะเบียนบ้าน');?>สำเนาบัตรประจำตัวประชาชนหรือสำเนาทะเบียนบ้าน</label>
     </div>
     <p class="help-block"></p>
-    <?=form_input(array('name'=>'reference[]','class'=>'form-control','placeholder'=>'อื่นๆ'),set_value(''));?>
+    <?=form_input(array('name'=>'reference[etc]','class'=>'form-control','placeholder'=>'อื่นๆ'),set_value(''));?>
     <p class="help-block">*ข้าพเจ้าขอรับรองว่าข้อความข้างต้นเป็นความจริงทุกประการและได้แนบหลักฐานการสมัครมาด้วย</p>
   </div>
 </div>
