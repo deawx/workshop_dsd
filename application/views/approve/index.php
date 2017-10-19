@@ -2,6 +2,7 @@
   <div class="panel-heading"> <h3 class="panel-title">ข้อมูลคำร้องทั้งหมด <?=count($requests);?> รายการ</h3> </div>
   <div class="panel-body">
     <?=form_open(uri_string(),array('method'=>'get','class'=>'form-inline pull-right'));?>
+    <div class="form-group"> <?=form_input(array('name'=>'date_create','class'=>'form-control'),set_value('email',$this->input->get('email')));?> </div>
     <div class="form-group"> <?=form_input(array('name'=>'email','class'=>'form-control','placeholder'=>'ค้นหาอีเมล์'),set_value('email',$this->input->get('email')));?> </div>
     <div class="form-group"> <?=form_submit('','ค้นหา',array('class'=>'btn btn-default pull-right'));?> </div>
     <?=form_close();?>

@@ -17,6 +17,7 @@
 $profile = unserialize($record['profile']);
 $address = unserialize($record['address']);
 $reference = unserialize($record['reference']);
+$type = isset($value['category']) ? $value['category'] : 'หนังสือรับรองความรู้ความสามารถ';
 ?>
 <body>
   <div style="padding:0.5cm 1.5cm;">
@@ -49,7 +50,7 @@ $reference = unserialize($record['reference']);
             echo date('d',$record['approve_date']).' '.dropdown_month(date('m',$record['approve_date'])).' '.(date('Y',$record['approve_date'])+543);
           endif; ?>
         </p>
-        <p>ประเภทการสอบ ..........<?=isset($value['category'])?$value['category']:'หนังสือรับรองความรู้ความสามารถ';?></p>
+        <p>ประเภทการสอบ ..........<?=$type;?></p>
         <br>
         <p>เอกสารที่ต้องนำมาด้วย มีดังนี้</p>
         <ul>
@@ -58,6 +59,11 @@ $reference = unserialize($record['reference']);
               <li><?=$r;?></li>
             <?php endif; ?>
           <?php endforeach; ?>
+        </ul>
+        <br>
+        <p>ค่าใช้จ่ายที่จำเป็น มีดังนี้</p>
+        <ul>
+          <li>ค่าธรรมเนียมในการประเมิน <?=($type=='หนังสือรับรองความรู้ความสามารถ')?'๑,๐๐ บาทถ้วน':'๑,๐๐๐ บาทถ้วน'?></li>
         </ul>
       </div>
     </div>

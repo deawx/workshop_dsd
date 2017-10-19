@@ -25,7 +25,7 @@ class Welcome extends Public_Controller {
 	function about()
 	{
 		$this->data['page_header'] = 'เกี่ยวกับเรา';
-		$this->data['page_header_small'] = 'ข้อมูลทั่วไปและประวัติความเป็นมาของเรา';
+		$this->data['page_header_small'] = 'ประกาศข้อกำหนด';
 		$this->data['header'] = array(
 			$this->load->view('_partials/header',$this->data,TRUE)
 		);

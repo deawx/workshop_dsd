@@ -1,33 +1,157 @@
 <div class="row">
+  <div class="col-md-12"> <img class="img-responsive img-rounded" src="<?=base_url('assets/images/about.jpg');?>" style="width:100%;"> <br> </div>
+</div>
+<div class="row">
   <div class="col-md-4">
-    <div class="list-group" role="tablist">
+    <ul class="list-group" role="tablist">
       <li class="list-group-item active" role="presentation"><a href="#1" aria-controls="1" role="tab" data-toggle="tab">วิธีการสมัครสมาชิก</a></li>
-      <li class="list-group-item" role="presentation"><a href="#2"  aria-controls="2" role="tab" data-toggle="tab">วิธีการเข้าสู่ระบบ</a></li>
-      <li class="list-group-item" role="presentation"><a href="#3"  aria-controls="3" role="tab" data-toggle="tab">วิธีการแก้ไขข้อมูลส่วนตัว</a></li>
-      <li class="list-group-item" role="presentation"><a href="#4"  aria-controls="4" role="tab" data-toggle="tab">วิธีการอัพโหลดไฟล์</a></li>
-      <li class="list-group-item" role="presentation"><a href="#5"  aria-controls="5" role="tab" data-toggle="tab">วิธีการขอทดสอบมาตรฐานฝีมือแรงงาน</a></li>
-      <li class="list-group-item" role="presentation"><a href="#6"  aria-controls="6" role="tab" data-toggle="tab">วิธีการขอสอบรับรองความรู้ความสามารถ</a></li>
-      <li class="list-group-item" role="presentation"><a href="#7"  aria-controls="7" role="tab" data-toggle="tab">วิธีการกำหนดวันสอบ</a></li>
-      <li class="list-group-item" role="presentation"><a href="#8"  aria-controls="8" role="tab" data-toggle="tab">วิธีการดูผลการทดสอบ</a></li>
-    </div>
+      <li class="list-group-item" role="presentation"><a href="#2" aria-controls="2" role="tab" data-toggle="tab">วิธีการเข้าสู่ระบบ</a></li>
+      <li class="list-group-item" role="presentation"><a href="#3" aria-controls="3" role="tab" data-toggle="tab">วิธีการแก้ไขข้อมูลส่วนตัว</a></li>
+      <li class="list-group-item" role="presentation"><a href="#4" aria-controls="4" role="tab" data-toggle="tab">วิธีการอัพโหลดไฟล์</a></li>
+      <li class="list-group-item" role="presentation"><a href="#5" aria-controls="5" role="tab" data-toggle="tab">วิธีการขอทดสอบมาตรฐานฝีมือแรงงาน</a></li>
+      <li class="list-group-item" role="presentation"><a href="#6" aria-controls="6" role="tab" data-toggle="tab">วิธีการขอสอบรับรองความรู้ความสามารถ</a></li>
+      <li class="list-group-item" role="presentation"><a href="#7" aria-controls="7" role="tab" data-toggle="tab">วิธีการกำหนดวันสอบ</a></li>
+      <li class="list-group-item" role="presentation"><a href="#8" aria-controls="8" role="tab" data-toggle="tab">วิธีการดูผลการทดสอบ</a></li>
+    </ul>
   </div>
   <div class="col-md-8">
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="1">
-        <h4>1</h4>
-        <p>1</p>
+        <h4>วิธีการสมัครสมาชิก</h4>
+        <ul>
+          <li>ไปที่เมนูเข้าสู่ระบบ/สมัครสมาชิก</li>
+          <li>ไปที่ลิงค์สร้างบัญชีผู้ใช้</li>
+          <li>กรอกข้อมูลอีเมล์</li>
+          <li>กรอกข้อมูลรหัสผ่าน</li>
+          <li>กรอกข้อมูลรหัสผ่านอีกครั้งเพื่อเป็นการยืนยัน</li>
+          <li>กดปุ่มสร้างผู้ใช้</li>
+        </ul>
+        <h4>หมายเหตุ</h4>
+        <ul>
+          <li>อีเมล์ที่ใช้จะต้องไม่ซ้ำกับที่มีอยู่ในระบบ</li>
+          <li>การกำหนดรหัสผ่านต้องเป็นตัวเลขหรือตัวอักษรเท่านั้น</li>
+          <li>ท่านสามารถเข้าสู่ระบบได้ทันทีหลังจากทำการสร้างบัญชีผู้ใช้</li>
+        </ul>
       </div>
       <div role="tabpanel" class="tab-pane" id="2">
-        <h4>2</h4>
-        <p>2</p>
+        <h4>วิธีการเข้าสู่ระบบ</h4>
+        <ul>
+          <li>ไปที่เมนูเข้าสู่ระบบ/สมัครสมาชิก</li>
+          <li>กรอกข้อมูลอีเมล์ที่ได้ลงทะเบียนไว้</li>
+          <li>กรอกข้อมูลรหัสผ่านที่ได้ยืนยันไว้</li>
+          <li>กดปุ่มล็อกอิน</li>
+        </ul>
+        <h4>หมายเหตุ</h4>
+        <ul>
+          <li>กรณีลืมรหัสผ่านหรือไม่สามารถเข้าสู่ระบบได้โดยปกติ กรุณาติดต่อเจ้าหน้าที่โดยทางตรง</li>
+          <li>หากกำการล็อกอินผิดพลาดมากกว่า 3 ครั้งระบบจะทำการป้องกันการเข้าสู่ระบบเป็นเวลา 5 นาที</li>
+        </ul>
       </div>
       <div role="tabpanel" class="tab-pane" id="3">
-        <h4>3</h4>
-        <p>3</p>
+        <h4>วิธีการแก้ไขข้อมูลส่วนตัว</h4>
+        <ul>
+          <li>ไปที่เมนูบัญชีของคุณ</li>
+          <li>ไปที่รายการข้อมูลส่วนตัว</li>
+          <li>เลือกเมนูแก้ไขข้อมูลส่วนตัว</li>
+          <li>กรอกข้อมูลให้ครบถ้วน</li>
+          <li>กดปุ่มยืนยัน</li>
+        </ul>
+        <h4>หมายเหตุ</h4>
+        <ul>
+          <li>กรุณากรอกข้อมูลที่จำเป็นให้ครบถ้วน</li>
+          <li>ข้อมูลหมายเลขบัตรประชาชนเป็นตัวเลขจำนวน 13 หลักเท่านั้น</li>
+        </ul>
       </div>
       <div role="tabpanel" class="tab-pane" id="4">
-        <h4>4</h4>
-        <p>4</p>
+        <h4>วิธีการอัพโหลดไฟล์</h4>
+        <ul>
+          <li>ไปที่เมนูบัญชีของคุณ</li>
+          <li>ไปที่รายการข้อมูลไฟล์เอกสาร</li>
+          <li>คลิกหรือลากไฟล์วางในช่องรับไฟล์</li>
+          <li>กดปุ่มอัพโหลด</li>
+        </ul>
+        <h4>หมายเหตุ</h4>
+        <ul>
+          <li>ควรตั้งชื่อไฟล์ให้ตรงกับข้อมูลไฟล์นั้นๆ ก่อนอัพโหลด</li>
+          <li>การตั้งชื่อไฟล์ต้องเป็นตัวเลขหรือตัวอักษรเท่านั้น</li>
+          <li>รองรับไฟล์นามสกุล jpg, jpeg, png</li>
+          <li>รองรับไฟล์ขนาดไม่เกิน 2 MB</li>
+          <li>สามารถอัพโหลดได้ครั้งละไม่เกิน 10 ไฟล์</li>
+        </ul>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="5">
+        <h4>วิธีการขอทดสอบมาตรฐานฝีมือแรงงาน</h4>
+        <ul>
+          <li>ไปที่เมนูบัญชีของคุณ</li>
+          <li>ไปที่รายการข้อมูลการสอบ</li>
+          <li>เลือกเมนูขอสอบมาตรฐานฝีมือแรงงาน</li>
+          <li>กรอกข้อมูลให้ครบถ้วน</li>
+          <li>กดปุ่มยืนยัน</li>
+          <li>อัพโหลดเอกสารที่จำเป็นที่รายการข้อมูลไฟล์เอกสาร</li>
+          <li>ทำการแนบไฟล์เอกสารที่เมนูประวัติการยื่นคำร้อง</li>
+        </ul>
+        <h4>หมายเหตุ</h4>
+        <ul>
+          <li>กรุณากรอกข้อมูลที่จำเป็นให้ครบถ้วน</li>
+          <li>ข้อมูลหมายเลขบัตรประชาชนเป็นตัวเลขจำนวน 13 หลักเท่านั้น</li>
+          <li>ข้อมูลหมายเลขโทรศัพท์-โทรสารเป็นตัวเลขจำนวน 10 หลักเท่านั้น</li>
+          <li>ข้อมูลหมายเลขรหัสไปรษณีย์เป็นตัวเลขจำนวน 5 หลักเท่านั้น</li>
+          <li>เอกสารมีอายุ 30 วันนับจากวันที่ยื่นคำร้อง</li>
+          <li>สามารถแก้ไขข้อมูลย้อนหลังได้</li>
+          <li>มีค่าธรรมเนียนการประเมินการสอบ 100 บาท</li>
+        </ul>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="6">
+        <h4>วิธีการขอสอบรับรองความรู้ความสามารถ</h4>
+        <ul>
+          <li>ไปที่เมนูบัญชีของคุณ</li>
+          <li>ไปที่รายการข้อมูลการสอบ</li>
+          <li>เลือกเมนูขอสอบรับรองความรู้ความสามารถ</li>
+          <li>กรอกข้อมูลให้ครบถ้วน</li>
+          <li>กดปุ่มยืนยัน</li>
+          <li>อัพโหลดเอกสารที่จำเป็นที่รายการข้อมูลไฟล์เอกสาร</li>
+          <li>ทำการแนบไฟล์เอกสารที่เมนูประวัติการยื่นคำร้อง</li>
+        </ul>
+        <h4>หมายเหตุ</h4>
+        <ul>
+          <li>กรุณากรอกข้อมูลที่จำเป็นให้ครบถ้วน</li>
+          <li>ข้อมูลหมายเลขบัตรประชาชนเป็นตัวเลขจำนวน 13 หลักเท่านั้น</li>
+          <li>ข้อมูลหมายเลขโทรศัพท์-โทรสารเป็นตัวเลขจำนวน 10 หลักเท่านั้น</li>
+          <li>ข้อมูลหมายเลขรหัสไปรษณีย์เป็นตัวเลขจำนวน 5 หลักเท่านั้น</li>
+          <li>เอกสารมีอายุ 30 วันนับจากวันที่ยื่นคำร้อง</li>
+          <li>สามารถแก้ไขข้อมูลย้อนหลังได้</li>
+          <li>มีค่าธรรมเนียนการประเมินการสอบ 1,000 บาท</li>
+        </ul>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="7">
+        <h4>วิธีการกำหนดวันสอบ</h4>
+        <ul>
+          <li>ไปที่เมนูบัญชีของคุณ</li>
+          <li>ไปที่รายการข้อมูลการสอบ</li>
+          <li>เลือกเมนูตารางเลือกวันสอบ</li>
+          <li>คลิกวันที่ต้องการเพื่อตรวจสอบรายการคิว</li>
+          <li>เลือกรายการคำร้องที่ต้องการสอบในวันนั้น</li>
+          <li>กดปุ่มบันทึกข้อมูล</li>
+        </ul>
+        <h4>หมายเหตุ</h4>
+        <ul>
+          <li>รายการสอบจะต้องได้รับการผ่านการอนุมัติแล้วเท่านั้น</li>
+          <li>รายการสอบไม่สามารถแก้ไขวันสอบย้อนหลังได้</li>
+        </ul>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="8">
+        <h4>วิธีการดูผลการทดสอบ</h4>
+        <ul>
+          <li>ไปที่เมนูบัญชีของคุณ</li>
+          <li>ไปที่รายการตรวจผลการสอบ</li>
+          <li>กดปุ่มดูบัตรคิวเพื่อพิมบัตรเข้าสอบ</li>
+          <li>ตรวจสถานะผลการสอบได้ที่ช่องรายการผลการสอบ</li>
+        </ul>
+        <h4>หมายเหตุ</h4>
+        <ul>
+          <li>สามารถกดดูและสั่งพิมพ์บัตรคิวได้หลังจากเลือกวันสอบแล้วเท่านั้น</li>
+          <li>บัตรคิวมีอายุ 1 วันตลอดช่วงเวลาสอบเช้าและบ่าย</li>
+        </ul>
       </div>
     </div>
   </div>
