@@ -15,7 +15,7 @@
     </p>
     <hr>
     <ul class="list-unstyled list-inline list-social-icons">
-      <li> <a href="#"><i class="fa fa-facebook-square fa-2x"></i></a> </li>
+      <li> <a href="https://www.facebook.com/prachuapkhirikhanskill/"><i class="fa fa-facebook-square fa-2x"></i></a> </li>
       <li> <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a> </li>
       <li> <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a> </li>
       <li> <a href="#"><i class="fa fa-google-plus-square fa-2x"></i></a> </li>

@@ -64,10 +64,10 @@ class Request extends Private_Controller {
 		// $this->form_validation->set_rules('reason','เหตุผลที่สมัครสอบ','');
 		// $this->form_validation->set_rules('source','แหล่งที่ทราบข่าว','');
 
-		// $this->form_validation->set_rules('profile[title]','คำนำหน้าชื่อ','required');
-		// $this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
-		// $this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
-		// $this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required');
+		$this->form_validation->set_rules('profile[title]','คำนำหน้าชื่อ','required');
+		$this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
+		$this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
+		$this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required');
 		// $this->form_validation->set_rules('religion','','required');
 		// $this->form_validation->set_rules('nationality','','required');
 		// $this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
@@ -158,10 +158,10 @@ class Request extends Private_Controller {
 	{
 		$this->session->set_flashdata('warning','');
 
-		// $this->form_validation->set_rules('profile[title]','คำนำหน้าชื่อ','required');
-		// $this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
-		// $this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
-		// $this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required');
+		$this->form_validation->set_rules('profile[title]','คำนำหน้าชื่อ','required');
+		$this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
+		$this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
+		$this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required');
 		// $this->form_validation->set_rules('profile[religion]','','required');
 		// $this->form_validation->set_rules('profile[blood]','','required');
 		// $this->form_validation->set_rules('profile[nationality]','','required');

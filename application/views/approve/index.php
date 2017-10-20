@@ -1,10 +1,17 @@
+<?php
+$uri_get = $this->input->get();
+$uri_get = http_build_query($uri_get);
+$uri_string = uri_string().'?'.$uri_get;
+?>
 <div class="panel panel-default">
   <div class="panel-heading"> <h3 class="panel-title">ข้อมูลคำร้องทั้งหมด <?=count($requests);?> รายการ</h3> </div>
   <div class="panel-body">
     <?=form_open(uri_string(),array('method'=>'get','class'=>'form-inline pull-right'));?>
-    <div class="form-group"> <?=form_input(array('name'=>'date_create','class'=>'form-control'),set_value('email',$this->input->get('email')));?> </div>
+    <div class="form-group"> <?=form_dropdown(array('name'=>'approve_status','class'=>'form-control'),array(''=>'เลือกทั้งหมด','accept'=>'ตอบรับ','reject'=>'ปฏิเสธ'),set_value('approve_status',$this->input->get('approve_status')));?> </div>
+    <div class="form-group"> <?=form_input(array('name'=>'date_create','class'=>'form-control datepicker','placeholder'=>'วันที่ยื่นคำร้อง'),set_value('date_create',$this->input->get('date_create')));?> </div>
     <div class="form-group"> <?=form_input(array('name'=>'email','class'=>'form-control','placeholder'=>'ค้นหาอีเมล์'),set_value('email',$this->input->get('email')));?> </div>
     <div class="form-group"> <?=form_submit('','ค้นหา',array('class'=>'btn btn-default pull-right'));?> </div>
+    <?=anchor_popup($uri_string.'&export=1','ส่งออก',array('class'=>'btn btn-default'));?>
     <?=form_close();?>
   </div>
   <table class="table table-condensed table-hover">
@@ -12,8 +19,7 @@
     <tbody>
       <?php foreach ($requests as $value) : ?>
         <?php $expired = strtotime('+30 days',$value['date_create']);
-        if (time() < $expired) :
-          $type = (isset($value['category'])?'standards':'skills'); ?>
+          $type = (isset($value['category']) ? 'standards' : 'skills'); ?>
           <tr class="rows" style="display:none;">
             <td>
               <?=isset($value['category']) ? $value['category'] : 'หนังสือรับรองความรู้ความสามารถ';
@@ -114,15 +120,22 @@
               </div>
             </td>
           </tr>
-        <?php endif; ?>
       <?php endforeach; ?>
     </tbody>
   </table>
   <div class="panel-footer"> <?=anchor('#','ก่อนหน้า',array('class'=>'label label-default','id'=>'more'));?> </div>
 </div>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.th.min.js"></script>
 <script type="text/javascript">
 $(function(){
+  $('.datepicker').datepicker({
+    language: 'th',
+    format: 'dd-mm-yyyy'
+  });
+
   var rows = $('.rows');
   var more = $('#more');
 

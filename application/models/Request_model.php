@@ -33,7 +33,7 @@ class Request_model extends MY_Model {
       ->result_array();
   }
 
-  function get_standard_all($q=array(),$status='')
+  function get_standard_all($q=array(),$status=NULL)
   {
     $this->db
       ->select('sd.id AS standard_id,sd.*,us.*')
@@ -52,7 +52,7 @@ class Request_model extends MY_Model {
     return $this->db->get('standards AS sd')->result_array();
   }
 
-  function get_skill_all($q=array(),$status='')
+  function get_skill_all($q=array(),$status=NULL)
   {
     $this->db
       ->select('sk.id AS skill_id,sk.*,us.*')
@@ -71,7 +71,7 @@ class Request_model extends MY_Model {
     return $this->db->get('skills AS sk')->result_array();
   }
 
-  function get_all($q=array(),$status='')
+  function get_all($q=array(),$status=NULL)
   {
     $standards = $this->get_standard_all($q,$status);
     $skills = $this->get_skill_all($q,$status);

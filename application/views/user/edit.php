@@ -4,7 +4,6 @@
     <?=form_open(uri_string(),array('class'=>'form-horizontal'));?>
     <?=form_hidden('id',$user['id']);?>
     <?=form_hidden('email_old', $user['email']);?>
-    <?php print_data($user);?>
     <div class="panel-body">
       <div class="form-group"> <?=form_label('ชื่อผู้ใช้','',array('class'=>'control-label col-md-4'));?>
         <div class="col-md-8"> <?=form_input(array('name'=>'','class'=>'form-control','disabled'=>TRUE),set_value('',$user['username']));?> </div>
