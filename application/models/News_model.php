@@ -20,7 +20,7 @@ class News_model extends MY_Model {
     $news = $this->db
       ->limit($limit)
       ->offset($offset)
-      ->order_by('id','ASC')
+      ->order_by('id','DESC')
       ->get($this->table_name);
 
     return $news->result_array();

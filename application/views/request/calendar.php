@@ -34,7 +34,6 @@
 
 <script type="text/javascript">
 $(function(){
-
   $.fullCalendar.locale("th", {
     buttonText: {
       month: "เดือน",

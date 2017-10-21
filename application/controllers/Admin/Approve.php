@@ -53,6 +53,8 @@ class Approve extends Admin_Controller {
 			$this->data['navbar'] = '';
 			$this->data['body'] = $this->load->view('_pdf/export',$this->data,TRUE);
 		else:
+			$this->data['css'] = array(link_tag('assets/css/datepicker.min.css'));
+			$this->data['js'] = array(script_tag('assets/js/datepicker.min.js'),script_tag('assets/js/datepicker.th.min.js'));
 			$this->data['body'] = $this->load->view('approve/index',$this->data,TRUE);
 		endif;
 		$this->load->view('_layouts/boxed',$this->data);

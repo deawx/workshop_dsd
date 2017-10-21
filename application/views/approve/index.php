@@ -15,7 +15,7 @@ $uri_string = uri_string().'?'.$uri_get;
     <?=form_close();?>
   </div>
   <table class="table table-condensed table-hover">
-    <thead> <tr> <th>ประเภทรายการ</th> <th>ผลสอบ</th> <th>ผู้ยื่นคำร้อง</th> <th>วันที่ยื่นคำร้อง</th> <th>วันที่แก้ไข</th> <th>วันที่หมดอายุ</th> <th></th> </tr> </thead>
+    <thead> <tr> <th>ประเภทรายการ</th> <th>ผลสอบ</th> <th>ผู้ยื่นคำร้อง</th> <th>วันที่ยื่นคำร้อง</th> <th>วันที่แก้ไข</th> <th>วันที่หมดอายุ</th> <th>วันที่เข้าสอบ</th> <th></th> </tr> </thead>
     <tbody>
       <?php foreach ($requests as $value) : ?>
         <?php $expired = strtotime('+30 days',$value['date_create']);
@@ -61,6 +61,7 @@ $uri_string = uri_string().'?'.$uri_get;
             <td><?=($value['date_create']) ? date('d-m-Y',$value['date_create']) : 'N/A';?></td>
             <td><?=($value['date_update']) ? date('d-m-Y',$value['date_update']) : 'N/A';?></td>
             <td><?=($value['date_create']) ? date('d-m-Y',$expired) : 'N/A'; ?></td>
+            <td><?=($value['approve_schedule']) ? date('d-m-Y',$value['approve_schedule']) : 'N/A';?></td>
             <td>
               <?=anchor('admin/approve/view/'.$value['date_create'],'ดู',array('class'=>'label label-default','target'=>'_blank'));?>
               <?=anchor('#','เอกสาร',array('class'=>'label label-default','data-toggle'=>'modal','data-target'=>'#attachment'.$value['date_create']));?>
@@ -126,9 +127,6 @@ $uri_string = uri_string().'?'.$uri_get;
   <div class="panel-footer"> <?=anchor('#','ก่อนหน้า',array('class'=>'label label-default','id'=>'more'));?> </div>
 </div>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.th.min.js"></script>
 <script type="text/javascript">
 $(function(){
   $('.datepicker').datepicker({

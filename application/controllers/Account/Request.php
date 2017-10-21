@@ -269,9 +269,9 @@ class Request extends Private_Controller {
 		$schedules = $this->request->get_future('','accept');
 		$schedule = array();
 		foreach ($schedules as $key => $value) :
-			// $title = (isset($value['category'])) ? $value['category'] : 'ใบรับรองความรู้ความสามารถ';
-			$title = $this->db->select('title,firstname,lastname')->where('id',$value['user_id'])->get('users')->row_array();
-			$schedule[$key]['title'] = $title['title'].' '.$title['firstname'].' '.$title['lastname'];
+			// $type = (isset($value['category'])) ? $value['category'] : 'ใบรับรองความรู้ความสามารถ';
+			// $title = $this->db->select('title,firstname,lastname')->where('id',$value['user_id'])->get('users')->row_array();
+			$schedule[$key]['title'] = $value['title'].' '.$value['firstname'].' '.$value['lastname'];
 			$schedule[$key]['start'] = date('Y-m-d',$value['approve_schedule']);
 		endforeach;
 		$this->data['schedule'] = $schedule;

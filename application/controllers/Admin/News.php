@@ -38,7 +38,9 @@ class News extends Admin_Controller {
 			else:
 				$data['date_create'] = time();
 			endif;
-			$data['assets_id'] = $this->input->post('assets_id') ? serialize($this->input->post('assets_id')) : NULL;
+			$data['assets_id'] = $this->input->post('assets_id') ? serialize($this->input->post('assets_id')) : '';
+
+			// print_data($data); die();
 
 			if ($this->news->save($data)) :
 				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
@@ -51,8 +53,8 @@ class News extends Admin_Controller {
 
 		$this->data['news'] = $this->news->get_id($id);
 		$this->data['assets'] = $this->assets->get_all();
-		$this->data['css'] = array(link_tag('assets/css/wysihtml5.min.css'));
-		$this->data['js'] = array(script_tag('assets/js/wysihtml5.all.min.js'));
+		$this->data['css'] = array(link_tag('assets/css/summernote.css'));
+		$this->data['js'] = array(script_tag('assets/js/summernote.js'));
 		$this->data['body'] = $this->load->view('news/post',$this->data,TRUE);
 		$this->load->view('_layouts/boxed',$this->data);
 	}
@@ -60,7 +62,7 @@ class News extends Admin_Controller {
 	function attachment()
 	{
 		$data = $this->input->post();
-		$data['assets_id'] = $this->input->post('assets_id') ? serialize($this->input->post('assets_id')) : NULL;
+		$data['assets_id'] = $this->input->post('assets_id') ? serialize($this->input->post('assets_id')) : '';
 
 		if ($this->news->save($data)) :
 			$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');

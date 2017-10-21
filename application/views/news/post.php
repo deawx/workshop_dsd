@@ -16,7 +16,7 @@
       <div class="col-md-9"> <?=form_input(array('name'=>'date_update','class'=>'form-control','disabled'=>TRUE,'value'=>($news['date_update']) ? date('d-m-Y',$news['date_update']) : ''));?> </div>
     </div>
     <div class="form-group"> <?=form_label('เนื้อหาข่าวสาร','',array('class'=>'control-label col-md-3'));?>
-      <div class="col-md-9"> <?=form_textarea(array('name'=>'detail','class'=>'form-control wysihtml5','value'=>$news['detail']),set_value('detail'));?> </div>
+      <div class="col-md-9"> <?=form_textarea(array('name'=>'detail','class'=>'form-control','id'=>'summernote','value'=>$news['detail']),set_value('detail'));?> </div>
     </div>
     <div class="form-group"> <?=form_label('','',array('class'=>'control-label col-md-3'));?>
       <div class="col-md-9">
@@ -35,7 +35,7 @@
     <div class="modal-content">
       <?=form_open('admin/news/attachment/').form_hidden('id',$news['id']);?>
       <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title">รายการแนบไฟล์เอกสาร</h4> </div>
-      <div class="modal-body" style="padding:0px;">.
+      <div class="modal-body" style="padding:0px;">
         <table class="table table-hover">
           <thead> <tr> <th>#</th> <th>ชื่อไฟล์</th> <th>ขนาดไฟล์</th> <th></th> </tr> </thead>
           <tbody>
@@ -59,6 +59,12 @@
 
 <script type="text/javascript">
 $(function(){
-  $('.wysihtml5').wysihtml5();
+  $('#summernote').summernote({
+    lang: 'th-TH',
+    height: 300,
+    minHeight: null,
+    maxHeight: null,
+    focus: true
+  });
 });
 </script>

@@ -208,7 +208,7 @@ class Profile extends Private_Controller {
 
 		if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) :
 			$upload = array(
-				'allowed_types'	=> 'jpg|jpeg|png',
+				'allowed_types'	=> 'jpg|jpeg|png|pdf',
 				'upload_path'	=> FCPATH.'uploads/attachments',
 				'file_ext_tolower' => TRUE,
 				'encrypt_name' => TRUE
@@ -223,11 +223,7 @@ class Profile extends Private_Controller {
 						'upload_date' => time()
 					),'assets_by')) :
 						$this->session->set_flashdata('success','อัพโหลดไฟล์เสร็จสิ้น');
-					else:
-						$this->session->set_flashdata('danger',$this->db->error());
 					endif;
-				else:
-					$this->session->set_flashdata('danger',$this->db->error());
 				endif;
 			else:
 				$this->session->set_flashdata('danger',$this->upload->display_errors());
