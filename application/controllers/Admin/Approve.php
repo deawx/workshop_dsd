@@ -19,6 +19,10 @@ class Approve extends Admin_Controller {
 			$data['admin_id'] = $this->session->user_id;
 			$data['approve_date'] = time();
 
+			if ($data['approve_status'] === 'reject') :
+				$data['approve_schedule'] = NULL;
+			endif;
+
 			// print_data($data); die();
 
 			if ($this->request->save($data,$data['type'])) :
