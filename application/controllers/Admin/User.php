@@ -80,7 +80,7 @@ class User extends Admin_Controller {
 
 	function delete($user_id = NULL)
 	{
-		if ( ! intval($user_id) > 0)
+		if ( ! intval($user_id) > 0 OR $user_id == '4')
 			show_404();
 
 		$this->auth->delete_user($user_id);
@@ -99,7 +99,7 @@ class User extends Admin_Controller {
 
 	public function deactivate($user_id = NULL)
 	{
-		if ( ! intval($user_id) > 0)
+		if ( ! intval($user_id) > 0 OR $user_id == '4')
 			show_404();
 
 		$this->auth->deactivate($user_id);

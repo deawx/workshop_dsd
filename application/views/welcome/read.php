@@ -16,7 +16,7 @@
         <tr>
           <td>ชื่อไฟล์ <?=$asset['client_name'];?></td>
           <td>ขนาดไฟล์ <?=byte_format($asset['file_size']);?></td>
-          <td><a href="uploads/attachments/<?=$asset['file_name'];?>" target="_blank">ดาวน์โหลด</a></td>
+          <td><a href="<?=base_url('uploads/attachments/'.$asset['file_name']);?>" target="_blank">ดาวน์โหลด</a></td>
         </tr>
       <?php endforeach; ?>
     </table>

@@ -1,10 +1,3 @@
-<?php
-$uri_get = $this->input->get();
-unset($uri_get['order_by']);
-$uri_get = http_build_query($uri_get);
-$uri_string = uri_string().'?'.$uri_get;
-$order_by = $this->input->get('order_by');
-?>
 <div class="panel panel-default">
   <div class="panel-heading"> <h3 class="panel-title">ข้อมูลสมาชิกทั้งหมด <?=count($users);?> รายการ</h3> </div>
   <div class="panel-body">
