@@ -48,6 +48,6 @@
 <div class="form-group">
   <?php echo form_label('หมายเลขบัตรประชาชน','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <?php echo form_input(array('name'=>'profile[id_card]','class'=>'form-control','id'=>'id_card','readonly'=>TRUE),set_value('id_card',$user['id_card']));?>
+    <?php echo form_input(array('name'=>'profile[id_card]','class'=>'form-control','id'=>'id_card'),set_value('id_card',$user['id_card']));?>
   </div>
 </div>

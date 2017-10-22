@@ -5,6 +5,7 @@ $address_current = unserialize($skill['address_current']);
 $education = unserialize($skill['education']);
 $work = unserialize($skill['work']);
 $reference = unserialize($skill['reference']);
+print_data($skill);
 ?>
 <?php $this->load->view('_partials/messages'); ?>
 *หมายเหตุจากผู้อนุมัติ : <p class="text-warning"> <?=$skill['approve_remark'];?></p>
@@ -43,7 +44,7 @@ $reference = unserialize($skill['reference']);
       <div class="col-md-8"> <?=form_input(array('name'=>'profile[blood]','class'=>'form-control'),set_value('blood',isset($profile['blood'])?$profile['blood']:NULL));?> </div>
     </div>
     <div class="form-group"> <?=form_label('หมายเลขบัตรประชาชน','',array('class'=>'control-label col-md-4'));?>
-      <div class="col-md-8"> <?=form_input(array('name'=>'profile[id_card]','class'=>'form-control','id'=>'id_card','readonly'=>TRUE),set_value('id_card',isset($profile['id_card'])?$profile['id_card']:NULL));?> </div>
+      <div class="col-md-8"> <?=form_input(array('name'=>'profile[id_card]','class'=>'form-control','id'=>'id_card'),set_value('id_card',isset($profile['id_card'])?$profile['id_card']:NULL));?> </div>
     </div>
 
     <div class="form-group"> <?=form_label('ที่อยู่เลขที่(ตามทะเบียนบ้าน)','',array('class'=>'control-label col-md-4'));?>

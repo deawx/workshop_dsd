@@ -28,7 +28,7 @@
 </div>
 <div class="form-group">
   <?=form_label('หมายเลขบัตรประชาชน','',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8"> <?=form_input(array('name'=>'profile[id_card]','class'=>'form-control','id'=>'id_card','readonly'=>TRUE),set_value('profile[id_card]',$user['id_card']));?> </div>
+  <div class="col-md-8"> <?=form_input(array('name'=>'profile[id_card]','class'=>'form-control','id'=>'id_card'),set_value('profile[id_card]',$user['id_card']));?> </div>
 </div>
 <div class="form-group">
   <?=form_label('ว/ด/ป เกิด','',array('class'=>'control-label col-md-4'));?>

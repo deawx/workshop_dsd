@@ -161,7 +161,7 @@ class Request extends Private_Controller {
 		$this->form_validation->set_rules('profile[title]','คำนำหน้าชื่อ','required');
 		$this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
 		$this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
-		$this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required');
+		// $this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required');
 		// $this->form_validation->set_rules('profile[religion]','','required');
 		// $this->form_validation->set_rules('profile[blood]','','required');
 		// $this->form_validation->set_rules('profile[nationality]','','required');
@@ -189,6 +189,7 @@ class Request extends Private_Controller {
 			$m = $this->input->post('m');
 			$y = $this->input->post('y')-543;
 			$data['profile'] = $this->input->post('profile');
+			$birthdate = strtotime($y.'-'.$m.'-'.$d);
 			$data['profile']['birthdate'] = $birthdate;
 			$data['profile'] = serialize($data['profile']);
 			$data['address'] = $this->input->post('address') ? serialize($this->input->post('address')) : NULL;

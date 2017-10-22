@@ -54,7 +54,7 @@ $reference = unserialize($standard['reference']);
       <div class="col-md-8"> <?=form_input(array('name'=>'profile[nationality]','class'=>'form-control'),set_value('profile[nationality]',isset($profile['nationality'])?$profile['nationality']:NULL));?> </div>
     </div>
     <div class="form-group"> <?=form_label('หมายเลขบัตรประชาชน','',array('class'=>'control-label col-md-4'));?>
-      <div class="col-md-8"> <?=form_input(array('name'=>'profile[id_card]','class'=>'form-control','id'=>'id_card','readonly'=>TRUE),set_value('profile[id_card]',isset($profile['id_card'])?$profile['id_card']:NULL));?> </div>
+      <div class="col-md-8"> <?=form_input(array('name'=>'profile[id_card]','class'=>'form-control','id'=>'id_card'),set_value('profile[id_card]',isset($profile['id_card'])?$profile['id_card']:NULL));?> </div>
     </div>
     <div class="form-group"> <?=form_label('ว/ด/ป เกิด','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-2"> <?php $d = array(''=>'วัน');
