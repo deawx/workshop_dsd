@@ -70,11 +70,11 @@ class Request extends Private_Controller {
 		$this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
 		$this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
 		$this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required');
-		// $this->form_validation->set_rules('religion','','required');
-		// $this->form_validation->set_rules('nationality','','required');
-		// $this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
-		// $this->form_validation->set_rules('m','เดือนเกิด','required|is_numeric');
-		// $this->form_validation->set_rules('y','ปีเกิด','required|is_numeric');
+		$this->form_validation->set_rules('religion','','required');
+		$this->form_validation->set_rules('nationality','','required');
+		$this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
+		$this->form_validation->set_rules('m','เดือนเกิด','required|is_numeric');
+		$this->form_validation->set_rules('y','ปีเกิด','required|is_numeric');
 		$this->form_validation->set_rules('address[address]','ที่อยู่เลขที่','required');
 		// $this->form_validation->set_rules('address[street]','ถนน','required');
 		$this->form_validation->set_rules('address[tambon]','ตำบล','required');
@@ -82,7 +82,7 @@ class Request extends Private_Controller {
 		$this->form_validation->set_rules('address[province]','จังหวัด','required');
 		$this->form_validation->set_rules('address[email]','อีเมล์','required|valid_email');
 		$this->form_validation->set_rules('address[phone]','โทรศัพท์','required|is_numeric|exact_length[10]');
-		$this->form_validation->set_rules('address[fax]','โทรสาร','required|is_numeric|exact_length[10]');
+		// $this->form_validation->set_rules('address[fax]','โทรสาร','required|is_numeric|exact_length[10]');
 		// $this->form_validation->set_rules('education[degree]','ระดับการศึกษา','required');
 		// $this->form_validation->set_rules('education[place]','สถานศึกษา','required');
 		// $this->form_validation->set_rules('education[department]','สาขาวิชา','required');
@@ -168,12 +168,12 @@ class Request extends Private_Controller {
 		$this->form_validation->set_rules('profile[title]','คำนำหน้าชื่อ','required');
 		$this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
 		$this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
-		// $this->form_validation->set_rules('profile[religion]','','required');
-		// $this->form_validation->set_rules('profile[blood]','','required');
-		// $this->form_validation->set_rules('profile[nationality]','','required');
-		// $this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
-		// $this->form_validation->set_rules('m','เดือนเกิด','required|is_numeric');
-		// $this->form_validation->set_rules('y','ปีเกิด','required|is_numeric');
+		$this->form_validation->set_rules('profile[religion]','','required');
+		$this->form_validation->set_rules('profile[blood]','','required');
+		$this->form_validation->set_rules('profile[nationality]','','required');
+		$this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
+		$this->form_validation->set_rules('m','เดือนเกิด','required|is_numeric');
+		$this->form_validation->set_rules('y','ปีเกิด','required|is_numeric');
 		$this->form_validation->set_rules('address[address]','ที่อยู่เลขที่','required');
 		// $this->form_validation->set_rules('address[street]','ถนน','required');
 		$this->form_validation->set_rules('address[tambon]','ตำบล','required');
@@ -183,7 +183,7 @@ class Request extends Private_Controller {
 		$this->form_validation->set_rules('address[province]','จังหวัด','required');
 		$this->form_validation->set_rules('address[email]','อีเมล์','required|valid_email');
 		$this->form_validation->set_rules('address[phone]','โทรศัพท์','required|is_numeric|exact_length[10]');
-		$this->form_validation->set_rules('address[fax]','โทรสาร','required|is_numeric|exact_length[10]');
+		// $this->form_validation->set_rules('address[fax]','โทรสาร','required|is_numeric|exact_length[10]');
 		$this->form_validation->set_rules('career[1]','สาขาอาชีพที่ 1','max_length[150]|differs[career[2]]|differs[career[3]]|differs[career[4]]|differs[career[5]]');
 		$this->form_validation->set_rules('career[2]','สาขาอาชีพที่ 2','max_length[150]|differs[career[1]]|differs[career[3]]|differs[career[4]]|differs[career[5]]');
 		$this->form_validation->set_rules('career[3]','สาขาอาชีพที่ 3','max_length[150]|differs[career[1]]|differs[career[2]]|differs[career[4]]|differs[career[5]]');
@@ -312,7 +312,7 @@ class Request extends Private_Controller {
 	function queue($code='')
 	{
 		$this->session->set_flashdata('warning','');
-		
+
 		if ( ! intval($code) && ! strlen($code) === '11')
 			show_404();
 
