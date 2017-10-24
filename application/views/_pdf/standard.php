@@ -50,25 +50,23 @@ $reference = unserialize($record['reference']);
             <tr>
               <td colspan="2">
                 <b>1. ข้อมูลส่วนบุคคล</b>
-                ชื่อ ..........<?=$profile['title'].nbs(2).$profile['firstname'];?> นามสกุล ..........<?=$profile['lastname'];?>
+                ชื่อ ..........<?=$profile['title'].nbs(2).$profile['firstname'];?>.......... นามสกุล ..........<?=$profile['lastname'];?>..........
                 เพศ <?=form_checkbox('title','นาย',set_checkbox('title','นาย',($profile['title']=='นาย')));?> ชาย
                 <?=form_checkbox('title','น',set_checkbox('title','น',($profile['title']!='นาย')));?> หญิง
                 <span class="col-md-12">
                   <p><b>1.1 ข้อมูลทั่วไป</b>
-                    ..........<?=$profile['fullname'];?> สัญชาติ ..........<?=$profile['nationality'];?> ศาสนา ..........<?=$profile['religion'];?> <br>
+                    ..........<?=$profile['fullname'];?>.......... สัญชาติ ..........<?=$profile['nationality'];?>.......... ศาสนา ..........<?=$profile['religion'];?>.......... <br>
                     <?php $profile['id_card'] = (strlen($profile['id_card'])===13) ? $profile['id_card'] : str_repeat(0,13) ;
                     $split = str_split($profile['id_card'],1);
-                    foreach ($split as $key => $value) :
-                    $split[$key] = '<span style="border:1px solid black;padding:0.1em;">'.$value.'</span>';
-                    endforeach; ?>
-                    เลขประจำตัวประชาชน <?=$split[0];?> - <?=$split[1].$split[2].$split[3].$split[4];?> - <?=$split[5].$split[6].$split[7].$split[8].$split[9];?> - <?=$split[10].$split[11];?> - <?=$split[12];?>
-                    วัน เดือน ปีเกิด <?=date('d',$profile['birthdate']);?> / <?=dropdown_month(date('m',$profile['birthdate']));?> / <?=date('Y',$profile['birthdate'])+543;?>
-                    อายุ ..........<?=age_calculate($profile['birthdate']);?> ปึ
+                    foreach ($split as $key => $value) : $split[$key] = '<span style="border:1px solid black;padding:0.1em;">'.$value.'</span>'; endforeach; ?>
+                    เลขประจำตัวประชาชน <?=$split[0];?> - <?=$split[1].nbs().$split[2].nbs().$split[3].nbs().$split[4];?> - <?=$split[5].nbs().$split[6].nbs().$split[7].nbs().$split[8].nbs().$split[9];?> - <?=$split[10].nbs().$split[11];?> - <?=$split[12];?>
+                    วัน เดือน ปีเกิด ..........<?=date('d',$profile['birthdate']);?> / <?=dropdown_month(date('m',$profile['birthdate']));?> / <?=date('Y',$profile['birthdate'])+543;?>..........
+                    อายุ ..........<?=age_calculate($profile['birthdate']);?>.......... ปึ
                   </p>
                   <p><b>1.2 ที่อยู่ติดต่อได้</b>
-                    บ้านเลขที่/หมู่ที่/หน่วยงาน/อาคาร ..........<?=$address['address'];?><br>
-                    ถนน/ตรอกซอย ..........<?=$address['street'];?> ตำบล ..........<?=$address['tambon'];?> อำเภอ ..........<?=$address['amphur'];?> จังหวัด ..........<?=$address['province'];?><br>
-                    รหัสไปรษณีย์ ..........<?=$address['zip'];?> โทรศัพท์ ..........<?=$address['phone'];?> โทรสาร ..........<?=$address['fax'];?> อีเมล์ ..........<?=$address['email'];?>
+                    บ้านเลขที่/หมู่ที่/หน่วยงาน/อาคาร ..........<?=$address['address'];?>..........<br>
+                    ถนน/ตรอกซอย ..........<?=$address['street'];?>.......... ตำบล ..........<?=$address['tambon'];?>.......... อำเภอ ..........<?=$address['amphur'];?>.......... จังหวัด ..........<?=$address['province'];?>..........<br>
+                    รหัสไปรษณีย์ ..........<?=$address['zip'];?>.......... โทรศัพท์ ..........<?=$address['phone'];?>.......... โทรสาร ..........<?=$address['fax'];?>.......... อีเมล์ ..........<?=$address['email'];?>..........
                   </p>
                   <p><b>1.3 ประเภทผู้สมัคร</b>
                     <?=form_checkbox('type','ผู้รับการฝึกจาก กพร.',set_checkbox('type','ผู้รับการฝึกจาก กพร.',($record['type']==='ผู้รับการฝึกจาก กพร.')));?>ผู้รับการฝึกจาก กพร.
@@ -84,14 +82,12 @@ $reference = unserialize($record['reference']);
                     <?=form_checkbox('health_status','การมองเห็น',set_checkbox('health_status','การมองเห็น',($record['health_status']==='การมองเห็น')));?>การมองเห็น
                     <?=form_checkbox('health_status','การได้ยิน',set_checkbox('health_status','การได้ยิน',($record['health_status']==='การได้ยิน')));?>การได้ยิน
                     <?=form_checkbox('health_status','การเคลื่อนไหว',set_checkbox('health_status','การเคลื่อนไหว',($record['health_status']==='การเคลื่อนไหว')));?>การเคลื่อนไหว
-                    ระบุ พิการ ..........<?=( ! in_array($record['health_status'],array('การมองเห็น','การได้ยิน','การเคลื่อนไหว'))) ? $record['health_status'] : '';?>
+                    ระบุ พิการ ..........<?=( ! in_array($record['health_status'],array('การมองเห็น','การได้ยิน','การเคลื่อนไหว'))) ? $record['health_status'] : '';?>..........
                   </p>
                   <p><b>1.5 ระดับการศึกษาสูงสุด</b>
                     <?php $edus = array('ประถมศึกษา','ม.3','ม.6','ปก.ศ.ต้น','ปก.ศ.สูง/อนุปริญญา','ปวช.','ปวท.','ปวส.','ปริญญาตรี','ปริญญาโท','ปริญญาเอก');
-                    foreach ($edus as $key => $value) :
-                    echo form_checkbox('education[degree]',$value,set_checkbox('education[degree]',$value,($education['degree']===$value))).$value.nbs(3);
-                    endforeach; ?>
-                    สาขาวิชา ..........<?=$education['branch'];?> สถานศึกษา ..........<?=$education['place'];?> จังหวัด ..........<?=$education['province'];?> ปี พ.ศ.ที่สำเร็จ ..........<?=$education['year'];?>
+                    foreach ($edus as $key => $value) : echo form_checkbox('education[degree]',$value,set_checkbox('education[degree]',$value,($education['degree']===$value))).$value.nbs(3); endforeach; ?>
+                    สาขาวิชา ..........<?=$education['branch'];?>.......... สถานศึกษา ..........<?=$education['place'];?>.......... จังหวัด ..........<?=$education['province'];?>.......... ปี พ.ศ.ที่สำเร็จ ..........<?=$education['year'];?>..........
                   </p>
                 </span>
               </td>
@@ -138,22 +134,22 @@ $reference = unserialize($record['reference']);
                     <?=form_checkbox('work_yes[income_amount]','40,001 บาทขึ้นไป',($work_yes['income_amount']=='40,001 บาทขึ้นไป'));?>40,001 บาทขึ้นไป
                   </span>
                   <span class="col-md-12">
-                    ตำแหน่ง/อาชีพ ..........<?=$work_yes['position'];?> อายุงาน ..........<?=$work_yes['age'];?> ปี
-                    <b>สถานที่ทำงาน</b> ชื่อสถานประกอบกิจการ/เลขที่/หมู่ที่/อาคาร ..........<?=$work_yes['place'];?>
-                    ถนน/ตรอกซอย ..........<?=$work_yes['street'];?> ตำบล ..........<?=$work_yes['tambon'];?> อำเภอ ..........<?=$work_yes['amphur'];?>
-                    <br>จังหวัด ..........<?=$work_yes['province'];?> รหัสไปรษณีย์ ..........<?=$work_yes['zip'];?> โทรศัพท์ ..........<?=$work_yes['phone'];?> โทรสาร ..........<?=$work_yes['fax'];?>
-                    <br>จำนวนลูกจ้างทั้งหมดในสถานประกอบการ ..........<?=$work_yes['employee_amount'];?>
+                    ตำแหน่ง/อาชีพ ..........<?=$work_yes['position'];?>.......... อายุงาน ..........<?=$work_yes['age'];?>.......... ปี
+                    <b>สถานที่ทำงาน</b> ชื่อสถานประกอบกิจการ/เลขที่/หมู่ที่/อาคาร ..........<?=$work_yes['place'];?>..........
+                    ถนน/ตรอกซอย ..........<?=$work_yes['street'];?>.......... ตำบล ..........<?=$work_yes['tambon'];?>.......... อำเภอ ..........<?=$work_yes['amphur'];?>..........
+                    <br>จังหวัด ..........<?=$work_yes['province'];?>.......... รหัสไปรษณีย์ ..........<?=$work_yes['zip'];?>.......... โทรศัพท์ ..........<?=$work_yes['phone'];?>.......... โทรสาร ..........<?=$work_yes['fax'];?>..........
+                    <br>จำนวนลูกจ้างทั้งหมดในสถานประกอบการ ..........<?=$work_yes['employee_amount'];?>..........
                   </span>
                   <span class="col-md-3"><b>กลุ่มอุตสาหกรรมที่ทำงาน</b></span>
                   <span class="col-md-9">
                     (ตอบเฉพาะผู้ทำงานภาคเอกชน รัฐวิสาหกิจ ประกอบธุรกิจส่วนตัว และช่วยธุรกิจครัวเรือน)<br>
                     <?php $grp = array('ยานยนต์และชิ้นส่วน','เหล็กและเหล็กกล้า','เฟอร์นิเจอร์','อาหาร','ซอฟต์แวร์','ปิโตรเคมี','ไฟฟ้าและอิเล็กทรอนิกส์','สิ่งทอและแฟชั่น','เซรามิกส์','แม่พิมพ์','ก่อสร้าง','โลจิสติกส์','ท่องเที่ยวและบริการ','ผลิตภัณฑ์ยาง');
                     foreach ($grp as $key => $value) :
-                    echo form_checkbox('work_yes[group]',$value,($work_yes['group']==$value)).$value.nbs(3);
+                      echo form_checkbox('work_yes[group]',$value,($work_yes['group']==$value)).$value.nbs(3);
                     endforeach;
                     $work_yes_etc = '';
                     if ($work_yes['group'] != '' && ! in_array($work_yes['group'],$grp)) :
-                    $work_yes_etc = '<span style="border:1px solid black;padding:0.1em;">'.$work_yes['group'].'</span>';
+                      $work_yes_etc = '<span style="border:1px solid black;padding:0.1em;">'.$work_yes['group'].'</span>';
                     endif;
                     echo form_checkbox('work_yes[group]',$work_yes_etc,($work_yes['group']==$work_yes_etc)).' อื่นๆ ระบุ '.$work_yes_etc; ?>
                   </span>
@@ -163,11 +159,11 @@ $reference = unserialize($record['reference']);
                   <span class="col-md-9">
                     <?php $wn = array('อยู่ระหว่างหางาน','นักเรียน/นักศึกษา','ทหารก่อนปลดประจำการ','ผู้อยู่ในสถานพินิจ','ผู้ต้องขัง','ผู้ประกันตนที่ถูกเลิกจ้าง');
                     foreach ($wn as $key => $value) :
-                    echo form_radio('work_no',$value,($record['work_no']==$value)).$value.nbs(3);
+                      echo form_radio('work_no',$value,($record['work_no']==$value)).$value.nbs(3);
                     endforeach;
                     $work_no_etc = '';
                     if ($record['work_no'] != '' && ! in_array($record['work_no'],$wn)) :
-                    $work_no_etc = '<span style="border:1px solid black;padding:0.1em;">'.$record['work_no'].'</span>';
+                      $work_no_etc = '<span style="border:1px solid black;padding:0.1em;">'.$record['work_no'].'</span>';
                     endif;
                     echo form_radio('work_yes[group]',$work_no_etc,($record['work_no']==$work_no_etc)).' อื่นๆ ระบุ '.$work_no_etc; ?>
                   </span>
@@ -203,10 +199,10 @@ $reference = unserialize($record['reference']);
               <td colspan="2">
                 <b>5. กรณีทดสอบฝีมือคนหางานเพื่อไปทำงานในต่างประเทศ / ทดสอบฝีมือแรงงานตามความต้องการของสถานประกอบกิจการ</b>
                 <span class="col-md-12">
-                  ชื่อบริษัทจัดหางาน/สถานประกอบกิจการที่ขอทดสอบ ..........<?=$work_abroad['agent'];?>
-                  <br>เลขที่/หมู่ที่/ชื่อหน่วยงาน ..........<?=$work_abroad['address'];?> ถนน/ตรอกซอย ..........<?=$work_abroad['street'];?> ตำบล ..........<?=$work_abroad['tambon'];?>
-                  <br>อำเภอ ..........<?=$work_abroad['amphur'];?> จังหวัด ..........<?=$work_abroad['province'];?> รหัสไปรษณีย์ ..........<?=$work_abroad['zip'];?> โทรศัพท์ ..........<?=$work_abroad['phone'];?> โทรสาร ..........<?=$work_abroad['fax'];?>
-                  <br>ชื่อบริษัทนายจ้างต่างประเทศ ..........<?=$work_abroad['company'];?> ประเทศที่จะไปทำงาน ..........<?=$work_abroad['country'];?> ระยะเวลาจ้าง ..........<?=$work_abroad['duration'];?> ปี
+                  ชื่อบริษัทจัดหางาน/สถานประกอบกิจการที่ขอทดสอบ ..........<?=$work_abroad['agent'];?>..........
+                  <br>เลขที่/หมู่ที่/ชื่อหน่วยงาน ..........<?=$work_abroad['address'];?>.......... ถนน/ตรอกซอย ..........<?=$work_abroad['street'];?>.......... ตำบล ..........<?=$work_abroad['tambon'];?>..........
+                  <br>อำเภอ ..........<?=$work_abroad['amphur'];?>.......... จังหวัด ..........<?=$work_abroad['province'];?>.......... รหัสไปรษณีย์ ..........<?=$work_abroad['zip'];?> โทรศัพท์ ..........<?=$work_abroad['phone'];?>.......... โทรสาร ..........<?=$work_abroad['fax'];?>..........
+                  <br>ชื่อบริษัทนายจ้างต่างประเทศ ..........<?=$work_abroad['company'];?>.......... ประเทศที่จะไปทำงาน ..........<?=$work_abroad['country'];?>.......... ระยะเวลาจ้าง ..........<?=$work_abroad['duration'];?>.......... ปี
                 </span>
               </td>
             </tr>
@@ -265,7 +261,7 @@ $reference = unserialize($record['reference']);
                   <p>ข้าพเจ้าขอรับรองว่าข้อความข้างต้นเป็นจริงทุกประการ และได้แนบหลักฐานประกอบการสมัครมาด้วย</p>
                   <p><?=form_checkbox('reference[copy]','สำเนาวุฒิการศึกษาหรือหนังสือรับรองประสบการณ์ทำงาน',(isset($reference['copy'])));?> สำเนาวุฒิการศึกษาหรือหนังสือรับรองประสบการณ์ทำงาน </p>
                   <p><?=form_checkbox('reference[refer]','สำเนาบัตรประจำตัวประชาชนหรือสำเนาทะเบียนบ้าน',(isset($reference['refer'])));?> สำเนาบัตรประจำตัวประชาชนหรือสำเนาทะเบียนบ้าน </p>
-                  <p><?=form_checkbox('reference[etc]','อื่นๆ',(isset($reference['etc'])&&$reference['etc']!=''));?> อื่นๆ <?=((isset($reference['etc'])&&$reference['etc']!='')?$reference['etc']:'');?></p>
+                  <p><?=form_checkbox('reference[etc]','อื่นๆ',(isset($reference['etc'])&&$reference['etc']!=''));?> อื่นๆ ..........<?=((isset($reference['etc'])&&$reference['etc']!='')?$reference['etc']:'');?>..........</p>
                   <br>
                   <p style="text-indent:4em;">ลงชื่อ ........................................ ผู้สมัคร</p>
                   <p style="text-indent:4em;">วันที่ ........................................</p>
