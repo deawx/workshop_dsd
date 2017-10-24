@@ -70,8 +70,8 @@ class Request extends Private_Controller {
 		$this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
 		$this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
 		$this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required');
-		$this->form_validation->set_rules('religion','','required');
-		$this->form_validation->set_rules('nationality','','required');
+		$this->form_validation->set_rules('religion','ศาสนา','required');
+		$this->form_validation->set_rules('nationality','สัญชาติ','required');
 		$this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
 		$this->form_validation->set_rules('m','เดือนเกิด','required|is_numeric');
 		$this->form_validation->set_rules('y','ปีเกิด','required|is_numeric');
@@ -169,7 +169,7 @@ class Request extends Private_Controller {
 		$this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
 		$this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
 		$this->form_validation->set_rules('profile[religion]','ศาสนา','required');
-		$this->form_validation->set_rules('profile[blood]','กรุ๊ปเลือด','required');
+		$this->form_validation->set_rules('profile[blood]','หมู่โลหิต','required');
 		$this->form_validation->set_rules('profile[nationality]','สัญชาติ','required');
 		$this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
 		$this->form_validation->set_rules('m','เดือนเกิด','required|is_numeric');
