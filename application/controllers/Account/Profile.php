@@ -27,6 +27,7 @@ class Profile extends Private_Controller {
     $this->form_validation->set_rules('lastname','นามสกุล','required|max_length[100]');
 		$this->form_validation->set_rules('nationality','สัญชาติ','required|max_length[100]');
     $this->form_validation->set_rules('religion','ศาสนา','required|max_length[100]');
+    $this->form_validation->set_rules('id_card','หมายเลขบัตรประชาชน','required|exact_length[10]');
 		if ($this->input->post('id_card') !== $this->input->post('id_card_old')) :
 	    $this->form_validation->set_rules('id_card','หมายเลขบัตรประชาชน','required|is_numeric|exact_length[13]|is_unique[users.id_card]');
 		else:
@@ -68,8 +69,12 @@ class Profile extends Private_Controller {
 
   function address()
   {
-		$this->form_validation->set_rules('address[zip]','','is_numeric|max_length[5]');
-		$this->form_validation->set_rules('address_current[zip]','','is_numeric|max_length[5]');
+		$this->form_validation->set_rules('address[address]','ที่อยู่','required');
+		// $this->form_validation->set_rules('address[street]','ถนน','required');
+		$this->form_validation->set_rules('address[tambon]','ตำบล','required');
+		$this->form_validation->set_rules('address[amphur]','อำเภอ','required');
+		$this->form_validation->set_rules('address[province]','จังหวัด','required');
+		$this->form_validation->set_rules('address[zip]','รหัสไปรษณีย์','is_numeric|max_length[5]');
 
 		if ($this->form_validation->run() == FALSE) :
 			$this->session->set_flashdata('warning',validation_errors());

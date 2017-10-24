@@ -177,7 +177,7 @@ class Request extends Private_Controller {
 		// $this->form_validation->set_rules('address[street]','ถนน','required');
 		$this->form_validation->set_rules('address[tambon]','ตำบล','required');
 		$this->form_validation->set_rules('address[moo]','หมู่','required');
-		$this->form_validation->set_rules('address[soi]','ซอย','required');
+		// $this->form_validation->set_rules('address[soi]','ซอย','required');
 		$this->form_validation->set_rules('address[amphur]','อำเภอ','required');
 		$this->form_validation->set_rules('address[province]','จังหวัด','required');
 		$this->form_validation->set_rules('address[email]','อีเมล์','required|valid_email');
