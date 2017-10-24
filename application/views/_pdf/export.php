@@ -37,7 +37,7 @@
           <tbody>
             <?php foreach ($requests as $key => $value) :
               $expired = strtotime('+30 days',$value['date_create']);
-              $type = (isset($value['category'])?'standards':'skills');
+              $type = (isset($value['category'])?$value['category']:'สอบรับรองความรู้ความสามารถ');
               $profile = unserialize($value['profile']); ?>
               <tr>
                 <td class="text-center"><?=++$key;?></td>

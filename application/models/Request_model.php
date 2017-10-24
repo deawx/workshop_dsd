@@ -143,10 +143,12 @@ class Request_model extends MY_Model {
 
     $array = array();
     foreach ($events as $key => $value) :
-      if ($value['approve_schedule'] != NULL) :
-        $approve_schedule = date('Y-m-d',$value['approve_schedule']);
-        if ($approve_schedule === $date) :
-          $array[] = $value;
+      if ($value['approve_status'] === 'accept') :
+        if (strlen($value['approve_schedule']) > 0) :
+          $approve_schedule = date('d-m-Y',$value['approve_schedule']);
+          if ($approve_schedule === $date) :
+            $array[] = $value;
+          endif;
         endif;
       endif;
     endforeach;

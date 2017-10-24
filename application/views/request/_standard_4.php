@@ -15,7 +15,8 @@
   </div>
   <div class="form-group">
     <?php echo form_label('กลุ่มอุตสาหกรรม','need_work_group',array('class'=>'control-label col-md-4'));?>
-    <div class="col-md-8"> <?=form_input(array('name'=>'need_work_group','class'=>'form-control'),set_value('need_work_group')); ?> <p class="help-block">*ให้เลือกกรรณีจัดหางานในประเทศ</p>
+    <div class="col-md-8"> <?=form_input(array('name'=>'need_work_group','class'=>'form-control'),set_value('need_work_group')); ?>
+      <p class="help-block">*ให้เลือกกรณีจัดหางานในประเทศ</p>
     </div>
   </div>
 </div>

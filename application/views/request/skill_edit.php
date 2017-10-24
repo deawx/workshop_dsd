@@ -5,7 +5,6 @@ $address_current = unserialize($skill['address_current']);
 $education = unserialize($skill['education']);
 $work = unserialize($skill['work']);
 $reference = unserialize($skill['reference']);
-print_data($skill);
 ?>
 <?php $this->load->view('_partials/messages'); ?>
 *หมายเหตุจากผู้อนุมัติ : <p class="text-warning"> <?=$skill['approve_remark'];?></p>
@@ -149,8 +148,8 @@ print_data($skill);
 
     <div class="form-group"> <?=form_label('เอกสารหลักฐานประกอบการยื่นคำขอ','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8">
-        <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[picture]'),'picture',set_checkbox('reference[picture]','picture',isset($reference['picture'])));?>(๑)รูปถ่ายหน้าตรง ขนาด ๑ X ๑.๕ นิ้ว พื้นหลังสีขาว ซึ่งถ่ายมาแล้วไม่เกินหกเดือน จำนวน ๒ รูป</label> </div>
-        <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[copy]'),'copy',set_checkbox('reference[copy]','copy',isset($reference['copy'])));?>(๒)สำเนาบัตรประจำตัวประชาชน</label> </div>
+        <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[picture]'),'picture',set_checkbox('reference[picture]','picture',isset($reference['picture'])));?>(1)รูปถ่ายหน้าตรง ขนาด 1 X 1.5 นิ้ว พื้นหลังสีขาว ซึ่งถ่ายมาแล้วไม่เกินหกเดือน จำนวน 2 รูป</label> </div>
+        <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[copy]'),'copy',set_checkbox('reference[copy]','copy',isset($reference['copy'])));?>(2)สำเนาบัตรประจำตัวประชาชน</label> </div>
         <p class="help-block"></p>
         <?=form_input(array('name'=>'reference[etc]','class'=>'form-control','placeholder'=>'(๓)เอกสารอื่นๆ โปรดระบุ'),set_value('reference[copy]',$reference['etc']));?>
         <p class="help-block">*ข้าพเจ้าขอรับรองว่าข้อความดังกล่าวข้างต้นและเอกสารหลักฐานที่แนบคำขอถูกต้องและเป็นความจริงทุกประการ</p>

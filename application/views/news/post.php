@@ -21,7 +21,7 @@
     <div class="form-group"> <?=form_label('','',array('class'=>'control-label col-md-3'));?>
       <div class="col-md-9">
         <?=form_submit('','ยืนยัน',array('class'=>'btn btn-primary'));?>
-        <?=form_reset('','ล้าง',array('class'=>'btn btn-default'));?>
+        <?=anchor('admin/news','ย้อนกลับ',array('class'=>'btn btn-default'));?>
         <?=anchor('#','แนบไฟล์เอกสาร',array('class'=>'btn btn-link pull-right','data-toggle'=>'modal','data-target'=>'#attachment'));?>
       </div>
     </div>
