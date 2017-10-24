@@ -1,17 +1,17 @@
 <div class="form-group">
-  <?php echo form_label('หน่วยงาน','department',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8"> <?php echo form_input(array('name'=>'department','class'=>'form-control'),set_value('department'));?> </div>
+  <?=form_label('หน่วยงาน','department',array('class'=>'control-label col-md-4'));?>
+  <div class="col-md-8"> <?=form_input(array('name'=>'department','class'=>'form-control'),set_value('department','ศูนย์พัฒนาฝีมือแรงงานจังหวัดประจวบคีรีขันธ์'));?> </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('สาขาอาชีพ','branch',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8"> <?php echo form_input(array('name'=>'branch','class'=>'form-control'),set_value('branch'));?> </div>
+  <?=form_label('สาขาอาชีพ','branch',array('class'=>'control-label col-md-4'));?>
+  <div class="col-md-8"> <?=form_input(array('name'=>'branch','class'=>'form-control'),set_value('branch'));?> </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('ระดับ','level',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8"> <?php echo form_input(array('name'=>'level','class'=>'form-control'),set_value('level'));?> </div>
+  <?=form_label('ระดับ','level',array('class'=>'control-label col-md-4'));?>
+  <div class="col-md-8"> <?=form_dropdown(array('name'=>'level','class'=>'form-control'),array(''=>'เลือกรายการ','1'=>'1','2'=>'2','3'=>'3'),set_value('level'));?> </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('ประเภทการสอบ','category',array('class'=>'control-label col-md-4'));?>
+  <?=form_label('ประเภทการสอบ','category',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?php $c = array(''=>'เลือกรายการ',
       'ทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ'=>'ทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ',
@@ -22,13 +22,13 @@
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('ประวัติการเข้าทดสอบ','used',array('class'=>'control-label col-md-4'));?>
+  <?=form_label('ประวัติการเข้าทดสอบ','used',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8"> <?php $tf = array(''=>'เลือกรายการ','เคย'=>'เคย','ไม่เคย'=>'ไม่เคย');
     echo form_dropdown(array('name'=>'used','class'=>'form-control','id'=>'tf'),$tf,set_value('used'));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('สถานที่เข้ารับการทดสอบ','used_place',array('class'=>'control-label col-md-4'));?>
+  <?=form_label('สถานที่เข้ารับการทดสอบ','used_place',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?php $t = array(''=>'เลือกรายการ',
       'จากกรมพัฒนาฝีมือแรงงาน'=>'จากกรมพัฒนาฝีมือแรงงาน',
@@ -39,7 +39,7 @@
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('เหตุผลที่สมัครทดสอบ','reason',array('class'=>'control-label col-md-4'));?>
+  <?=form_label('เหตุผลที่สมัครทดสอบ','reason',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?php $r = array(
       'ต้องการทราบฝีมือและความสามารถ'=>'ต้องการทราบฝีมือและความสามารถ',
@@ -51,7 +51,7 @@
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('แหล่งที่ทราบข่าว','source',array('class'=>'control-label col-md-4'));?>
+  <?=form_label('แหล่งที่ทราบข่าว','source',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?php $s = array(
       'วิทยุ'=>'วิทยุ','โทรทัศน์'=>'โทรทัศน์','สื่อสิ่งพิมพ์'=>'สื่อสิ่งพิมพ์',

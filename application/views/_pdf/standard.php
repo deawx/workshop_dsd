@@ -35,7 +35,7 @@ $reference = unserialize($record['reference']);
           <tr>
             <td style="width:70%;">
               <h4 class="text-center">ใบสมัครเข้ารับการทดสอบฝีมือแรงงาน</h4>
-              <p><img src="<?=base_url('assets/images/logo.jpg');?>" class="" style="width:55px;height:55px"> กรมพัฒนาฝีมือแรงงาน กระทรวงแรงงาน</p>
+              <p><img src="<?=base_url('assets/images/logo.jpg');?>" class="" style="width:100px;height:100px"> กรมพัฒนาฝีมือแรงงาน กระทรวงแรงงาน</p>
               <span class="col-md-8">
                 <?=form_checkbox('category','ทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ',set_checkbox('category','ทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ',($record['category']==='ทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ')));?>ทดสอบมาตรฐานฝีมือแรงงานแห่งชาติ<br>
                 <?=form_checkbox('category','ทดสอบฝีมือคนหางานเพื่อไปทำงานในต่างประเทศ',set_checkbox('category','ทดสอบฝีมือคนหางานเพื่อไปทำงานในต่างประเทศ',($record['category']==='ทดสอบฝีมือคนหางานเพื่อไปทำงานในต่างประเทศ')));?>ทดสอบฝีมือคนหางานเพื่อไปทำงานในต่างประเทศ<br>
@@ -87,7 +87,7 @@ $reference = unserialize($record['reference']);
                   <p><b>1.5 ระดับการศึกษาสูงสุด</b>
                     <?php $edus = array('ประถมศึกษา','ม.3','ม.6','ปก.ศ.ต้น','ปก.ศ.สูง/อนุปริญญา','ปวช.','ปวท.','ปวส.','ปริญญาตรี','ปริญญาโท','ปริญญาเอก');
                     foreach ($edus as $key => $value) : echo form_checkbox('education[degree]',$value,set_checkbox('education[degree]',$value,($education['degree']===$value))).$value.nbs(3); endforeach; ?>
-                    สาขาวิชา ..........<?=$education['branch'];?>.......... สถานศึกษา ..........<?=$education['place'];?>.......... จังหวัด ..........<?=$education['province'];?>.......... ปี พ.ศ.ที่สำเร็จ ..........<?=$education['year'];?>..........
+                    <br>สาขาวิชา ..........<?=$education['branch'];?>.......... สถานศึกษา ..........<?=$education['place'];?>.......... จังหวัด ..........<?=$education['province'];?>.......... ปี พ.ศ.ที่สำเร็จ ..........<?=$education['year'];?>..........
                   </p>
                 </span>
               </td>
@@ -99,24 +99,24 @@ $reference = unserialize($record['reference']);
                   <span class="col-md-3"> <b>2.1 ผู้มีงานทำ</b> <br><b>สถานภาพการทำงาน</b> </span>
                   <span class="col-md-9">
                     <br><?=form_checkbox('work_yes[category]','ทำงานภาครัฐ',($work_yes['category']=='ทำงานภาครัฐ'));?>ทำงานภาครัฐ
-                    <?=form_radio('work_yes[type]','ข้าราชการพลเรือน',($work_yes['type']=='ข้าราชการพลเรือน'));?>ข้าราชการพลเรือน
-                    <?=form_radio('work_yes[type]','ข้าราชการตำรวจ',($work_yes['type']=='ข้าราชการตำรวจ'));?>ข้าราชการตำรวจ
-                    <?=form_radio('work_yes[type]','ข้าราชการทหาร',($work_yes['type']=='ข้าราชการทหาร'));?>ข้าราชการทหาร
-                    <?=form_radio('work_yes[type]','ข้าราชการครู',($work_yes['type']=='ข้าราชการครู'));?>ข้าราชการครู
-                    <?=form_radio('work_yes[type]','ข้าราชการอัยการ',($work_yes['type']=='ข้าราชการอัยการ'));?>ข้าราชการอัยการ
-                    <?=form_radio('work_yes[type]','ลูกจ้างประจำ',($work_yes['type']=='ลูกจ้างประจำ'));?>ลูกจ้างประจำ
-                    <?=form_radio('work_yes[type]','พนักงานราชการ',($work_yes['type']=='พนักงานราชการ'));?>พนักงานราชการ
-                    <?=form_radio('work_yes[type]','พนักงานจ้างเหมา',($work_yes['type']=='พนักงานจ้างเหมา'));?>พนักงานจ้างเหมา
+                    <br>( <?=form_radio('work_yes[type]','ข้าราชการพลเรือน',($work_yes['type']=='ข้าราชการพลเรือน'));?>)ข้าราชการพลเรือน
+                    ( <?=form_radio('work_yes[type]','ข้าราชการตำรวจ',($work_yes['type']=='ข้าราชการตำรวจ'));?>)ข้าราชการตำรวจ
+                    ( <?=form_radio('work_yes[type]','ข้าราชการทหาร',($work_yes['type']=='ข้าราชการทหาร'));?>)ข้าราชการทหาร
+                    <br>( <?=form_radio('work_yes[type]','ข้าราชการครู',($work_yes['type']=='ข้าราชการครู'));?>)ข้าราชการครู
+                    ( <?=form_radio('work_yes[type]','ข้าราชการอัยการ',($work_yes['type']=='ข้าราชการอัยการ'));?>)ข้าราชการอัยการ
+                    ( <?=form_radio('work_yes[type]','ลูกจ้างประจำ',($work_yes['type']=='ลูกจ้างประจำ'));?>)ลูกจ้างประจำ
+                    ( <?=form_radio('work_yes[type]','พนักงานราชการ',($work_yes['type']=='พนักงานราชการ'));?>)พนักงานราชการ
+                    ( <?=form_radio('work_yes[type]','พนักงานจ้างเหมา',($work_yes['type']=='พนักงานจ้างเหมา'));?>)พนักงานจ้างเหมา
                     <br><?=form_checkbox('work_yes[category]','ทำงานภาคเอกชน',($work_yes['category']=='ทำงานภาคเอกชน'));?>ทำงานภาคเอกชน
-                    <?=form_radio('work_yes[type]','พนักงาน/ลูกจ้างภาคเอกชน',($work_yes['type']=='พนักงาน/ลูกจ้างภาคเอกชน'));?>พนักงาน/ลูกจ้างภาคเอกชน
+                    ( <?=form_radio('work_yes[type]','พนักงาน/ลูกจ้างภาคเอกชน',($work_yes['type']=='พนักงาน/ลูกจ้างภาคเอกชน'));?>)พนักงาน/ลูกจ้างภาคเอกชน
                     <br><?=form_checkbox('work_yes[category]','ทำงานรัฐวิสาหกิจ',($work_yes['category']=='ทำงานรัฐวิสาหกิจ'));?>ทำงานรัฐวิสาหกิจ
-                    <?=form_radio('work_yes[type]','พนักงาน/ลูกจ้างรัฐวิสาหกิจ',($work_yes['type']=='พนักงาน/ลูกจ้างรัฐวิสาหกิจ'));?>พนักงาน/ลูกจ้างรัฐวิสาหกิจ
+                    ( <?=form_radio('work_yes[type]','พนักงาน/ลูกจ้างรัฐวิสาหกิจ',($work_yes['type']=='พนักงาน/ลูกจ้างรัฐวิสาหกิจ'));?>)พนักงาน/ลูกจ้างรัฐวิสาหกิจ
                     <br><?=form_checkbox('work_yes[category]','ประกอบธุรกิจส่วนตัว/ประกอบอาชีพอิสระ',($work_yes['category']=='ประกอบธุรกิจส่วนตัว/ประกอบอาชีพอิสระ'));?>ประกอบธุรกิจส่วนตัว/ประกอบอาชีพอิสระ
-                    <?=form_radio('work_yes[type]','ผู้รวมกลุ่มอาชีพ/วิสาหกิจชุมชน',($work_yes['type']=='ผู้รวมกลุ่มอาชีพ/วิสาหกิจชุมชน'));?>ผู้รวมกลุ่มอาชีพ/วิสาหกิจชุมชน
-                    <?=form_radio('work_yes[type]','ผู้รับจ้างทั่วไปโดยไม่มีนายจ้าง',($work_yes['type']=='ผู้รับจ้างทั่วไปโดยไม่มีนายจ้าง'));?>ผู้รับจ้างทั่วไปโดยไม่มีนายจ้าง
-                    <?=form_radio('work_yes[type]','เกษตรกร(ทำไร่/ทำนา/ทำสวน/เลี้ยงสัตว์)',($work_yes['type']=='เกษตรกร(ทำไร่/ทำนา/ทำสวน/เลี้ยงสัตว์)'));?>เกษตรกร(ทำไร่/ทำนา/ทำสวน/เลี้ยงสัตว์)
+                    ( <?=form_radio('work_yes[type]','ผู้รวมกลุ่มอาชีพ/วิสาหกิจชุมชน',($work_yes['type']=='ผู้รวมกลุ่มอาชีพ/วิสาหกิจชุมชน'));?>)ผู้รวมกลุ่มอาชีพ/วิสาหกิจชุมชน
+                    ( <?=form_radio('work_yes[type]','ผู้รับจ้างทั่วไปโดยไม่มีนายจ้าง',($work_yes['type']=='ผู้รับจ้างทั่วไปโดยไม่มีนายจ้าง'));?>)ผู้รับจ้างทั่วไปโดยไม่มีนายจ้าง
+                    <br>( <?=form_radio('work_yes[type]','เกษตรกร(ทำไร่/ทำนา/ทำสวน/เลี้ยงสัตว์)',($work_yes['type']=='เกษตรกร(ทำไร่/ทำนา/ทำสวน/เลี้ยงสัตว์)'));?>)เกษตรกร(ทำไร่/ทำนา/ทำสวน/เลี้ยงสัตว์)
                     <br><?=form_checkbox('work_yes[category]','ช่วยธุรกิจครัวเรือน',($work_yes['category']=='ช่วยธุรกิจครัวเรือน'));?>ช่วยธุรกิจครัวเรือน
-                    <?=form_radio('work_yes[type]','ลูกจ้างธุรกิจในครัวเรือน',($work_yes['type']=='ลูกจ้างธุรกิจในครัวเรือน'));?>ลูกจ้างธุรกิจในครัวเรือน
+                    ( <?=form_radio('work_yes[type]','ลูกจ้างธุรกิจในครัวเรือน',($work_yes['type']=='ลูกจ้างธุรกิจในครัวเรือน'));?>)ลูกจ้างธุรกิจในครัวเรือน
                   </span>
                   <span class="col-md-3"> <br><b>ประเภทการจ้าง/รายได้</b> <br>รายได้เฉลี่ยต่อเดือน </span>
                   <span class="col-md-9">
@@ -146,12 +146,13 @@ $reference = unserialize($record['reference']);
                     <?php $grp = array('ยานยนต์และชิ้นส่วน','เหล็กและเหล็กกล้า','เฟอร์นิเจอร์','อาหาร','ซอฟต์แวร์','ปิโตรเคมี','ไฟฟ้าและอิเล็กทรอนิกส์','สิ่งทอและแฟชั่น','เซรามิกส์','แม่พิมพ์','ก่อสร้าง','โลจิสติกส์','ท่องเที่ยวและบริการ','ผลิตภัณฑ์ยาง');
                     foreach ($grp as $key => $value) :
                       echo form_checkbox('work_yes[group]',$value,($work_yes['group']==$value)).$value.nbs(3);
+                      echo ($key%5 == 4) ? '<br>' : '';
                     endforeach;
                     $work_yes_etc = '';
                     if ($work_yes['group'] != '' && ! in_array($work_yes['group'],$grp)) :
                       $work_yes_etc = '<span style="border:1px solid black;padding:0.1em;">'.$work_yes['group'].'</span>';
                     endif;
-                    echo form_checkbox('work_yes[group]',$work_yes_etc,($work_yes['group']==$work_yes_etc)).' อื่นๆ ระบุ '.$work_yes_etc; ?>
+                    echo form_checkbox('work_yes[group]',$work_yes_etc,($work_yes['group']==$work_yes_etc)).' อื่นๆ ระบุ ..........'.$work_yes_etc; ?>..........
                   </span>
                 </p>
                 <p>
@@ -159,13 +160,14 @@ $reference = unserialize($record['reference']);
                   <span class="col-md-9">
                     <?php $wn = array('อยู่ระหว่างหางาน','นักเรียน/นักศึกษา','ทหารก่อนปลดประจำการ','ผู้อยู่ในสถานพินิจ','ผู้ต้องขัง','ผู้ประกันตนที่ถูกเลิกจ้าง');
                     foreach ($wn as $key => $value) :
-                      echo form_radio('work_no',$value,($record['work_no']==$value)).$value.nbs(3);
+                      echo '( '.form_radio('work_no',$value,($record['work_no']==$value)).')'.$value.nbs(3);
+                      echo ($key%5 == 4) ? '<br>' : '';
                     endforeach;
                     $work_no_etc = '';
                     if ($record['work_no'] != '' && ! in_array($record['work_no'],$wn)) :
                       $work_no_etc = '<span style="border:1px solid black;padding:0.1em;">'.$record['work_no'].'</span>';
                     endif;
-                    echo form_radio('work_yes[group]',$work_no_etc,($record['work_no']==$work_no_etc)).' อื่นๆ ระบุ '.$work_no_etc; ?>
+                    echo form_radio('work_yes[group]',$work_no_etc,($record['work_no']==$work_no_etc)).' อื่นๆ ระบุ ..........'.$work_no_etc; ?>..........
                   </span>
                 </p>
               </td>
@@ -176,9 +178,9 @@ $reference = unserialize($record['reference']);
                 <span class="col-md-9">
                   <?=form_checkbox('used','เคย',($record['used']=='เคย'));?> เคย
                   <?=form_checkbox('used','ไม่เคย',($record['used']=='ไม่เคย'));?> ไม่เคย
-                  <?=form_radio('used_place','จากกรมพัฒนาฝีมือแรงงาน',($record['used_place']=='จากกรมพัฒนาฝีมือแรงงาน'));?> จากกรมพัฒนาฝีมือแรงงาน
-                  <?=form_radio('used_place','ในสถานประกอบกิจการ',($record['used_place']=='ในสถานประกอบกิจการ'));?> ในสถานประกอบกิจการ
-                  <?=form_radio('used_place','จากหน่วยราชการอื่น',($record['used_place']=='จากหน่วยราชการอื่น'));?> จากหน่วยราชการอื่น
+                  ( <?=form_radio('used_place','จากกรมพัฒนาฝีมือแรงงาน',($record['used_place']=='จากกรมพัฒนาฝีมือแรงงาน'));?>) จากกรมพัฒนาฝีมือแรงงาน
+                  ( <?=form_radio('used_place','ในสถานประกอบกิจการ',($record['used_place']=='ในสถานประกอบกิจการ'));?>) ในสถานประกอบกิจการ
+                  ( <?=form_radio('used_place','จากหน่วยราชการอื่น',($record['used_place']=='จากหน่วยราชการอื่น'));?>) จากหน่วยราชการอื่น
                 </span>
               </td>
             </tr>
@@ -186,12 +188,12 @@ $reference = unserialize($record['reference']);
               <td colspan="2">
                 <span class="col-md-12" style="padding:0px;">
                   <b>4. ความต้องการหางาน</b> มีความประสงค์จะให้กรมการจัดหางาน หางานให้เมื่อผ่านการทดสอบมาตรฐานฝีมือแรงงาน
-                  <?=form_radio('need_work_status','ไม่ต้องการ',($record['need_work_status']=='ไม่ต้องการ'));?> ไม่ต้องการ
+                  ( <?=form_radio('need_work_status','ไม่ต้องการ',($record['need_work_status']=='ไม่ต้องการ'));?>) ไม่ต้องการ
                 </span>
                 <span class="col-md-3"> </span>
                 <span class="col-md-9">
-                  <?=form_radio('need_work_status','ต้องการจัดหางานในประเทศ',($record['need_work_status']=='ต้องการจัดหางานในประเทศ'));?> ต้องการจัดหางานในประเทศ ตำแหน่ง/อาชีพ <?=$record['need_work_position'];?> กลุ่มอุตสาหกรรม <?=$record['need_work_group'];?>
-                  <br><?=form_radio('need_work_status','ต้องการจัดหางานในต่างประเทศ',($record['need_work_status']=='ต้องการจัดหางานในต่างประเทศ'));?> ต้องการจัดหางานในต่างประเทศ ประเทศที่จะไปทำงาน <?=$record['need_work_country'];?>
+                  ( <?=form_radio('need_work_status','ต้องการจัดหางานในประเทศ',($record['need_work_status']=='ต้องการจัดหางานในประเทศ'));?>) ต้องการจัดหางานในประเทศ ตำแหน่ง/อาชีพ <?=$record['need_work_position'];?> กลุ่มอุตสาหกรรม <?=$record['need_work_group'];?>
+                  <br>( <?=form_radio('need_work_status','ต้องการจัดหางานในต่างประเทศ',($record['need_work_status']=='ต้องการจัดหางานในต่างประเทศ'));?>) ต้องการจัดหางานในต่างประเทศ ประเทศที่จะไปทำงาน <?=$record['need_work_country'];?>
                 </span>
               </td>
             </tr>

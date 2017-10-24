@@ -41,14 +41,14 @@ $reference = unserialize($record['reference']);
           </div>
         </div>
         <div class="col-md-12">
-          <p class="col-md-4 col-md-offset-8">เขียนที่ ............................................................</p>
-          <p class="col-md-4 col-md-offset-8">วันที่ ..........<?=date('d');?> เดือน ..........<?=dropdown_month(date('m'));?> พ.ศ. ..........<?=date('Y')+543;?></p>
+          <p class="col-md-4 col-md-offset-8">เขียนที่ ........................................</p>
+          <p class="col-md-4 col-md-offset-8">วันที่ .....<?=date('d');?> เดือน .....<?=dropdown_month(date('m'));?> พ.ศ. .....<?=date('Y')+543;?></p>
           <p>1.ข้าพเจ้า ..........<?=$profile['title'].nbs().$profile['firstname'];?>.......... นามสกุล ..........<?=$profile['lastname'];?>..........</p>
           <p>เกิดวันที่ ..........<?=date('d',$profile['birthdate']);?> เดือน ..........<?=dropdown_month(date('m',$profile['birthdate']));?> พ.ศ. ..........<?=date('Y',$profile['birthdate'])+543;?> อายุ ..........<?=age_calculate($profile['birthdate']);?> ปี สัญชาติ ..........<?=$profile['nationality'];?> หมู่โลหิต ..........<?=$profile['blood'];?> </p>
           <?php $profile['id_card'] = (strlen($profile['id_card'])===13) ? $profile['id_card'] : str_repeat(0,13) ;
           $split = str_split($profile['id_card'],1);
           foreach ($split as $key => $value) :
-          $split[$key] = '<span style="border:1px solid black;padding:0.1em;">'.$value.'</span>';
+            $split[$key] = '<span style="border:1px solid black;padding:0.1em;">'.$value.'</span>';
           endforeach; ?>
           <p>เลขประจำตัวประชาชน <?=$split[0];?>  <?=$split[1].nbs().$split[2].nbs().$split[3].nbs().$split[4];?>  <?=$split[5].nbs().$split[6].nbs().$split[7].nbs().$split[8].nbs().$split[9];?>  <?=$split[10].nbs().$split[11];?>  <?=$split[12];?></p>
           <p>ที่อยู่ตามทะเบียนบ้าน เลขที่ ..........<?=$address['address'];?>.......... หมู่ ..........<?=$address['moo'];?>.......... ซอย ..........<?=$address['soi'];?>.......... ถนน ..........<?=$address['street'];?>..........</p>
