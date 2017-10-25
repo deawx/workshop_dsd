@@ -48,17 +48,18 @@
 
 <script type="text/javascript">
 $(function() {
-  $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+  $('a[data-toggle="tab"]').on('show.bs.tab',function(e) {
     var $target = $(e.target);
+    console.log($target);
     if ($target.parent().hasClass('disabled')) {
       return false;
     }
   });
-  $(".next-step").click(function (e) {
+  $(".next-step").click(function(e) {
     var $active = $('.nav-pills li.active');
     nextTab($active);
   });
-  $(".prev-step").click(function (e) {
+  $(".prev-step").click(function(e) {
     var $active = $('.nav-pills li.active');
     prevTab($active);
   });

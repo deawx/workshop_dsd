@@ -1,6 +1,6 @@
 <div class="" id="calendar"> </div> <br>
-<p>*การสอบมาตรฐานฝีมือแรงงานแห่งชาติ 15คน/วัน</p>
-<p>*การสอบรับรองความรู้ความสามารถ 26คน/วัน</p>
+<p>*การสอบมาตรฐานฝีมือแรงงานแห่งชาติ 26คน/วัน แบ่งเป็น เช้า13คน/บ่าย13คน</p>
+<p>*การสอบรับรองความรู้ความสามารถ 15คน/วัน</p>
 
 <div class="modal fade" id="dayClick" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
   <div class="modal-dialog">
@@ -21,13 +21,16 @@
           <div class="form-group"> <?=form_label('วันที่เลือกสอบ','',array('class'=>'control-label col-md-3'));?>
             <div class="col-md-9"> <?=form_input(array('name'=>'approve_schedule','class'=>'form-control','id'=>'dayTime','readonly'=>TRUE));?> </div>
           </div>
+          <div class="form-group"> <?=form_label('ช่วงเวลาสอบ','',array('class'=>'control-label col-md-3'));?>
+            <div class="col-md-9"> <?=form_dropdown(array('name'=>'approve_time','class'=>'form-control'),array(''=>'เลือกรายการ','ช่วงเช้า 09.00 - 12.00 น.'=>'ช่วงเช้า 09.00 - 12.00 น.','ช่วงบ่าย 13.00 - 16.00 น.'=>'ช่วงบ่าย 13.00 - 16.00 น.'));?> </div>
+          </div>
           <div class="form-group"> <?=form_label('','',array('class'=>'control-label col-md-3'));?>
             <div class="col-md-9"> <?=form_submit('','บันทึกข้อมูล',array('class'=>'btn btn-primary btn-block'));?> </div>
           </div>
         </div>
       </div>
       <?=form_close();?>
-      <div class="modal-footer" style="padding:0;"> <table class="table table-bordered"> <thead> <tr> <th>ประเภทการสอบ</th> <th>ผู้เข้าสอบ</th> </tr> </thead> <tbody> </tbody></table> </div>
+      <div class="modal-footer" style="padding:0;"> <table class="table table-bordered"> <thead> <tr> <th>ผู้เข้าสอบ</th> <th>ช่วงเวลา</th> </tr> </thead> <tbody> </tbody></table> </div>
     </div>
   </div>
 </div>
@@ -131,7 +134,7 @@ $(function(){
         if (typeof v.category === 'undefined') {
           v.category = 'ใบรับรองความรู้ความสามารถ';
         }
-        modal.find('table>tbody').append('<tr><td class="text-left">'+v.category+'</td><td>'+v.firstname+' '+v.lastname+'</td></tr>');
+        modal.find('table>tbody').append('<tr><td class="text-left">'+v.firstname+' '+v.lastname+'</td><td>'+v.approve_time+'</td></tr>');
       });
     });
   });

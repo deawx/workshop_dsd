@@ -38,7 +38,9 @@ class News extends Admin_Controller {
 			else:
 				$data['date_create'] = time();
 			endif;
-			$data['assets_id'] = $this->input->post('assets_id') ? serialize($this->input->post('assets_id')) : '';
+			if ($this->input->post('assets_id')) :
+				$data['assets_id'] = serialize($this->input->post('assets_id'));
+			endif;
 
 			// print_data($data); die();
 

@@ -34,23 +34,23 @@ $type = isset($value['category']) ? $value['category'] : 'หนังสือ�
           <span>วันที่เข้าสอบ ..........
             <?php if ($record['approve_schedule']!=='') :
               echo date('d',$record['approve_schedule']).' '.dropdown_month(date('m',$record['approve_schedule'])).' '.(date('Y',$record['approve_schedule'])+543);
-            endif; ?>
+            endif; ?>..........
             </span>
-          <span class="pull-right">ช่วงเวลาสอบ ..........เช้า/บ่าย</span>
+          <span class="pull-right">ช่วงเวลาสอบ ..........<?=$record['approve_time'];?>..........</span>
         </p>
         <br>
-        <p>ชื่อผู้สอบ ..........<?=$profile['title'].nbs(2).$profile['firstname'].nbs(2).$profile['lastname'];?></p>
+        <p>ชื่อผู้สอบ ..........<?=$profile['title'].nbs(2).$profile['firstname'].nbs(2).$profile['lastname'];?>..........</p>
         <p>วันที่ยื่นคำร้อง ..........
           <?php if ($record['date_create']!=='') :
             echo date('d',$record['date_create']).' '.dropdown_month(date('m',$record['date_create'])).' '.(date('Y',$record['date_create'])+543);
-          endif; ?>
+          endif; ?>..........
         </p>
         <p>วันที่อนุมัติ ..........
           <?php if ($record['approve_date']!=='') :
             echo date('d',$record['approve_date']).' '.dropdown_month(date('m',$record['approve_date'])).' '.(date('Y',$record['approve_date'])+543);
-          endif; ?>
+          endif; ?>..........
         </p>
-        <p>ประเภทการสอบ ..........<?=$type;?></p>
+        <p>ประเภทการสอบ ..........<?=$type;?>..........</p>
         <br>
         <p>เอกสารที่ต้องนำมาด้วย มีดังนี้</p>
         <ul>

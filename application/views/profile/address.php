@@ -8,7 +8,7 @@ $address_current = unserialize($user['address_current']);
     <?=form_open(uri_string(),array('class'=>'form-horizontal'));?>
     <?=form_hidden('id', $user['id']);?>
     <?=form_hidden('profile_id', $user['id']);?>
-    <div class="form-group"> <?=form_label('ที่อยู่เลขที่(ตามทะเบียนบ้าน)','',array('class'=>'control-label col-md-4'));?>
+    <div class="form-group"> <?=form_label('ที่อยู่เลขที่(ตามทะเบียนบ้าน)*','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8"> <?=form_input(array('name'=>'address[address]','class'=>'form-control'),set_value('address[address]',$address['address']));?> </div>
     </div>
     <div class="form-group"> <?=form_label('ถนน','',array('class'=>'control-label col-md-4'));?>
@@ -20,10 +20,10 @@ $address_current = unserialize($user['address_current']);
     <div class="form-group"> <?=form_label('อำเภอ','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8"> <?=form_input(array('name'=>'address[amphur]','class'=>'form-control'),set_value('address[amphur]',$address['amphur']));?> </div>
     </div>
-    <div class="form-group"> <?=form_label('จังหวัด','',array('class'=>'control-label col-md-4'));?>
+    <div class="form-group"> <?=form_label('จังหวัด*','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8"> <?=form_input(array('name'=>'address[province]','class'=>'form-control'),set_value('address[province]',$address['province']));?> </div>
     </div>
-    <div class="form-group"> <?=form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
+    <div class="form-group"> <?=form_label('รหัสไปรษณีย์*','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8"> <?=form_input(array('name'=>'address[zip]','class'=>'form-control zip','maxlength'=>'5'),set_value('address[zip]',$address['zip']));?> </div>
     </div>
     <hr>

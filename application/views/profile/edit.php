@@ -7,7 +7,7 @@
     <div class="form-group"> <?php echo form_label('ชื่อผู้ใช้','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8"> <?php echo form_input(array('name'=>'','class'=>'form-control','disabled'=>TRUE),set_value('',$user['username']));?> </div>
     </div>
-    <div class="form-group"> <?php echo form_label('อีเมล์','email',array('class'=>'control-label col-md-4'));?>
+    <div class="form-group"> <?php echo form_label('อีเมล์*','email',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8"> <?php echo form_input(array('name'=>'email','class'=>'form-control'),set_value('email',$user['email']));?> </div>
     </div>
     <div class="form-group"> <?php echo form_label('วันที่สมัคร','',array('class'=>'control-label col-md-4'));?>
@@ -16,7 +16,7 @@
     <div class="form-group"> <?php echo form_label('เข้าใช้ล่าสุด','',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8"> <?php echo form_input(array('name'=>'','class'=>'form-control','disabled'=>TRUE),set_value('',date('d-m-Y',$user['last_login'])));?> </div>
     </div>
-    <div class="form-group"> <?php echo form_label('โทรศัพท์','phone',array('class'=>'control-label col-md-4'));?>
+    <div class="form-group"> <?php echo form_label('โทรศัพท์*','phone',array('class'=>'control-label col-md-4'));?>
       <div class="col-md-8"> <?php echo form_input(array('name'=>'phone','class'=>'form-control tel','maxlength'=>'10'),set_value('phone',$user['phone']));?> </div>
     </div>
     <div class="form-group"> <?php echo form_label('โทรสาร','fax',array('class'=>'control-label col-md-4'));?>

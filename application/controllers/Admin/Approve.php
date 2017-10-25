@@ -52,7 +52,7 @@ class Approve extends Admin_Controller {
 			endif;
 		endforeach;
 
-		$this->data['requests'] = $requests;
+		$this->data['requests'] = array_values($requests);
 		if (isset($q['export']) && $q['export']=='1') :
 			$this->data['navbar'] = '';
 			$this->data['body'] = $this->load->view('_pdf/export',$this->data,TRUE);

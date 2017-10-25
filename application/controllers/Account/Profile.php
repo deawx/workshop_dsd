@@ -22,43 +22,46 @@ class Profile extends Private_Controller {
   public function index()
   {
     //ตรวจสอบความถูกต้องจากฟอร์มที่ถูกส่งมา
-    $this->form_validation->set_rules('title','คำนำหน้าชื่อ','required');
-    $this->form_validation->set_rules('firstname','ชื่อ','required|max_length[100]');
-    $this->form_validation->set_rules('lastname','นามสกุล','required|max_length[100]');
-		$this->form_validation->set_rules('nationality','สัญชาติ','required|max_length[100]');
-    $this->form_validation->set_rules('religion','ศาสนา','required|max_length[100]');
-    $this->form_validation->set_rules('id_card','หมายเลขบัตรประชาชน','required|exact_length[10]');
-		if ($this->input->post('id_card') !== $this->input->post('id_card_old')) :
-	    $this->form_validation->set_rules('id_card','หมายเลขบัตรประชาชน','required|is_numeric|exact_length[13]|is_unique[users.id_card]');
-		else:
-			$this->form_validation->set_rules('id_card','หมายเลขบัตรประชาชน','required|is_numeric|exact_length[13]');
-		endif;
-    $this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
-    $this->form_validation->set_rules('m','เดือนเกิด','required|is_numeric');
-    $this->form_validation->set_rules('y','ปีเกิด','required|is_numeric');
-		if ($this->form_validation->run() == FALSE) :
-			$this->session->set_flashdata('warning',validation_errors());
-		else:
-			$d = $this->input->post('d');
-			$m = $this->input->post('m');
-			$y = $this->input->post('y')-543;
-			$birthdate = strtotime($y.'-'.$m.'-'.$d);
-			$data = array(
-				'id' => $this->id,
-				'title' => $this->input->post('title'),
-				'firstname' => $this->input->post('firstname'),
-				'lastname' => $this->input->post('lastname'),
-				'nationality' => $this->input->post('nationality'),
-				'religion' => $this->input->post('religion'),
-				'id_card' => $this->input->post('id_card'),
-				'birthdate' => $birthdate
-			);
-			if ($this->profile->save($data,'users')) :
-				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+		if ($this->input->post()) :
+	    $this->form_validation->set_rules('title','คำนำหน้าชื่อ','required');
+	    $this->form_validation->set_rules('firstname','ชื่อ','required|max_length[100]');
+	    $this->form_validation->set_rules('lastname','นามสกุล','required|max_length[100]');
+			$this->form_validation->set_rules('nationality','สัญชาติ','required|max_length[100]');
+	    $this->form_validation->set_rules('religion','ศาสนา','required|max_length[100]');
+	    $this->form_validation->set_rules('id_card','หมายเลขบัตรประชาชน','required|exact_length[10]');
+			if ($this->input->post('id_card') !== $this->input->post('id_card_old')) :
+		    $this->form_validation->set_rules('id_card','หมายเลขบัตรประชาชน','required|is_numeric|exact_length[13]|is_unique[users.id_card]');
 			else:
-				$this->session->set_flashdata('warning',validation_errors());
+				$this->form_validation->set_rules('id_card','หมายเลขบัตรประชาชน','required|is_numeric|exact_length[13]');
 			endif;
-			redirect('account/profile');
+	    $this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
+	    $this->form_validation->set_rules('m','เดือนเกิด','required|is_numeric');
+	    $this->form_validation->set_rules('y','ปีเกิด','required|is_numeric');
+			if ($this->form_validation->run() === FALSE) :
+				$this->session->set_flashdata('warning',validation_errors());
+			else:
+				$d = $this->input->post('d');
+				$m = $this->input->post('m');
+				$y = $this->input->post('y')-543;
+				$birthdate = strtotime($y.'-'.$m.'-'.$d);
+				$data = array(
+					'id' => $this->id,
+					'title' => $this->input->post('title'),
+					'firstname' => $this->input->post('firstname'),
+					'lastname' => $this->input->post('lastname'),
+					'nationality' => $this->input->post('nationality'),
+					'religion' => $this->input->post('religion'),
+					'id_card' => $this->input->post('id_card'),
+					'birthdate' => $birthdate
+				);
+				if ($this->profile->save($data,'users')) :
+					$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+					redirect('account/profile');
+				else:
+					$this->session->set_flashdata('warning','บันทึกข้อมูลล้มเหลว');
+					redirect('account/profile');
+				endif;
+			endif;
 		endif;
 
     $this->data['menu'] = 'profile';
@@ -76,7 +79,7 @@ class Profile extends Private_Controller {
 		$this->form_validation->set_rules('address[province]','จังหวัด','required');
 		$this->form_validation->set_rules('address[zip]','รหัสไปรษณีย์','is_numeric|max_length[5]');
 
-		if ($this->form_validation->run() == FALSE) :
+		if ($this->form_validation->run() === FALSE) :
 			$this->session->set_flashdata('warning',validation_errors());
 		else:
 			$address = $this->input->post('address');
@@ -84,16 +87,14 @@ class Profile extends Private_Controller {
 			$data = array(
 				'id' => $this->id,
 				'address' => serialize($address),
-				'address_current' => ($this->input->post('exist')) ? serialize($address) : serialize($address_current),
-				'email' => $this->input->post('email'),
-				'phone' => $this->input->post('phone'),
-				'fax' => $this->input->post('fax')
+				'address_current' => ($this->input->post('exist')) ? serialize($address) : serialize($address_current)
 			);
 
 			if ($this->profile->save($data,'users')) :
 				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+				redirect('account/profile/address');
 			else:
-				$this->session->set_flashdata('warning',validation_errors());
+				$this->session->set_flashdata('warning','บันทึกข้อมูลล้มเหลว');
 				redirect('account/profile/address');
 			endif;
 		endif;
@@ -106,28 +107,31 @@ class Profile extends Private_Controller {
 
   function edit()
   {
-		if ($this->input->post('email') != $this->input->post('email_old')) :
-			$this->form_validation->set_rules('email','อีเมล์','valid_email|max_length[100]|is_unique[users.email]');
-		else:
-			$this->form_validation->set_rules('email','อีเมล์','valid_email|max_length[100]');
-		endif;
-		$this->form_validation->set_rules('phone','เบอร์โทรศัพท์','is_numeric|max_length[10]');
-		$this->form_validation->set_rules('fax','แฟกซ์','is_numeric|max_length[10]');
-
-		if ($this->form_validation->run() == FALSE) :
-			$this->session->set_flashdata('warning',validation_errors());
-		else:
-			$data = array(
-				'id' => $this->id,
-				'email' => $this->input->post('email'),
-				'phone' => $this->input->post('phone'),
-				'fax' => $this->input->post('fax')
-			);
-			if ($this->profile->save($data,'users')) :
-				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+		if ($this->input->post()) :
+			if ($this->input->post('email') != $this->input->post('email_old')) :
+				$this->form_validation->set_rules('email','อีเมล์','valid_email|max_length[100]|is_unique[users.email]');
 			else:
+				$this->form_validation->set_rules('email','อีเมล์','valid_email|max_length[100]');
+			endif;
+			$this->form_validation->set_rules('phone','เบอร์โทรศัพท์','is_numeric|max_length[10]');
+			$this->form_validation->set_rules('fax','แฟกซ์','is_numeric|max_length[10]');
+
+			if ($this->form_validation->run() === FALSE) :
 				$this->session->set_flashdata('warning',validation_errors());
-				redirect('account/profile/edit');
+			else:
+				$data = array(
+					'id' => $this->id,
+					'email' => $this->input->post('email'),
+					'phone' => $this->input->post('phone'),
+					'fax' => $this->input->post('fax')
+				);
+				if ($this->profile->save($data,'users')) :
+					$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+					redirect('account/profile/address');
+				else:
+					$this->session->set_flashdata('warning','บันทึกข้อมูลล้มเหลว');
+					redirect('account/profile/edit');
+				endif;
 			endif;
 		endif;
 

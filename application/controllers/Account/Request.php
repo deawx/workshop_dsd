@@ -69,7 +69,7 @@ class Request extends Private_Controller {
 		$this->form_validation->set_rules('profile[title]','คำนำหน้าชื่อ','required');
 		$this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
 		$this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
-		$this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required');
+		$this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required|alpha_numeric_spaces');
 		$this->form_validation->set_rules('profile[religion]','ศาสนา','required');
 		$this->form_validation->set_rules('profile[nationality]','สัญชาติ','required');
 		$this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
@@ -265,22 +265,39 @@ class Request extends Private_Controller {
 		$this->session->set_flashdata('warning','');
 
 		$this->form_validation->set_rules('code','ประเภทการสอบ','required');
+		$this->form_validation->set_rules('approve_time','ช่วงเวลาสอบ','required');
 		if ($this->form_validation->run() == FALSE) :
 			$this->session->set_flashdata('warning',validation_errors());
 		else:
 			$code = $this->input->post('code');
 			$approve_schedule = $this->input->post('approve_schedule');
+			$approve_time = $this->input->post('approve_time');
 			$record = $this->request->get_code($code);
 			$type = (isset($record['category'])) ? 'standards' : 'skills';
-			if ($this->request->save(array(
-				'id'=>$record['id'],
-				'approve_schedule'=>strtotime($approve_schedule),
-			),$type)) :
-				$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+
+			$records = $this->request->get_date($approve_schedule);
+			$times = array_column($records,'approve_time');
+			$morning = array_filter($times,function($v) { return strpos($v,'เช้า') == TRUE; });
+			$afternoon = array_filter($times,function($v) { return strpos($v,'บ่าย') == TRUE; });
+
+			if ($type === 'standards' && strpos($approve_time,'เช้า') && count($morning) >= 13) :
+				$this->session->set_flashdata('info','ขออภัย ช่วงเวลาเช้าครบจำนวนคิวแล้ว');
+				redirect('account/request/calendar');
+			elseif ($type === 'standards' && strpos($approve_time,'บ่าย') && count($afternoon) >= 13) :
+				$this->session->set_flashdata('info','ขออภัย ช่วงเวลาบ่ายครบจำนวนคิวแล้ว');
+				redirect('account/request/calendar');
 			else:
-				$this->session->set_flashdata('danger','บันทึกข้อมูลล้มเหลว');
+				if ($this->request->save(array(
+					'id'=>$record['id'],
+					'approve_schedule'=>strtotime($approve_schedule),
+					'approve_time'=>$approve_time
+					),$type)) :
+					$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
+				else:
+					$this->session->set_flashdata('danger','บันทึกข้อมูลล้มเหลว');
+				endif;
+				redirect('account/request/result');
 			endif;
-			redirect('account/request/result');
 		endif;
 
 		$this->data['menu'] = 'calendar';

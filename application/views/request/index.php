@@ -5,7 +5,8 @@
     <thead> <tr> <th>ประเภทรายการ</th> <th>วันที่ยื่นคำร้อง</th> <th>วันที่หมดอายุ</th> <th></th> </tr> </thead>
     <tbody>
       <?php foreach ($requests as $key => $value) : ?>
-        <?php if ($value['approve_status'] !== 'accept') : ?>
+        <?php $expired = strtotime('+30 days',$value['date_create']);
+        if ($value['approve_status'] !== 'accept' && time() < $expired) : ?>
           <tr class="rows" style="display:none;">
             <td>
               <?php echo isset($value['category']) ? $value['category'] : 'หนังสือรับรองความรู้ความสามารถ';
@@ -16,10 +17,7 @@
               <?php endif; ?>
             </td>
             <td><?=date('d-m-Y',$value['date_create']);?></td>
-            <td>
-              <?php $expired = strtotime('+30 days',$value['date_create']);
-              echo ($value['date_create']) ? date('d-m-Y',$expired) : 'N/A'; ?>
-            </td>
+            <td><?php echo ($value['date_create']) ? date('d-m-Y',$expired) : 'N/A'; ?> </td>
             <td>
                 <?php $req = isset($value['category']) ? 'standard' : 'skill'; ?>
                 <?=anchor('account/request/'.$req.'/'.$value[$req.'_id'],'แก้ไข',array('class'=>'label label-info','target'=>'_blank'));?>
@@ -36,22 +34,32 @@
                           <tbody>
                             <?php $assets_id = unserialize($value['assets_id']);
                             foreach ($assets as $asset) : ?>
-                            <tr>
-                              <td><?=form_checkbox(array('name'=>'assets_id[]'),$asset['id'],set_checkbox('assets_id',$asset['id'],(any_in_array($asset['id'],$assets_id))));?></td>
-                              <td><?=$asset['client_name'];?></td>
-                              <td><?=byte_format($asset['file_size']);?></td>
-                              <td><?=anchor('uploads/attachments/'.$asset['file_name'],'ดู',array('class'=>'label label-info','target'=>'_blank'));?></td>
-                            </tr>
-                          <?php endforeach; ?>
-                        </tbody>
-                      </table>
-                    </div>
+                              <tr>
+                                <td><?=form_checkbox(array('name'=>'assets_id[]'),$asset['id'],set_checkbox('assets_id',$asset['id'],(any_in_array($asset['id'],$assets_id))));?></td>
+                                <td><?=$asset['client_name'];?></td>
+                                <td><?=byte_format($asset['file_size']);?></td>
+                                <td><?=anchor('uploads/attachments/'.$asset['file_name'],'ดู',array('class'=>'label label-info','target'=>'_blank'));?></td>
+                              </tr>
+                            <?php endforeach; ?>
+                          </tbody>
+                        </table>
+                      </div>
                     <div class="modal-footer"> <button type="submit" class="btn btn-primary btn-block">ยืนยัน</button> </div>
                     <?=form_close();?>
                   </div>
                 </div>
               </div>
             </td>
+          </tr>
+        <?php else: ?>
+          <tr class="rows text-muted" style="display:none;">
+            <td> <?php echo isset($value['category']) ? $value['category'] : 'หนังสือรับรองความรู้ความสามารถ'; ?> </td>
+            <td><?=date('d-m-Y',$value['date_create']);?></td>
+            <td>
+              <?php $expired = strtotime('+30 days',$value['date_create']);
+              echo ($value['date_create']) ? date('d-m-Y',$expired) : 'N/A'; ?>
+            </td>
+            <td> </td>
           </tr>
         <?php endif; ?>
       <?php endforeach; ?>

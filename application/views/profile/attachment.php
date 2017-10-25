@@ -6,10 +6,11 @@
       <div class="col-md-8"> <?=form_open_multipart(uri_string(),array('class'=>'dropzone','id'=>'dropzone-upload'));?> </div>
       <div class="col-md-4">
         <?=form_submit('','อัพโหลด',array('class'=>'btn btn-primary btn-block','id'=>'dropzone-submit'));?>
-        <?//=anchor(uri_string(),'รีเฟรช',array('class'=>'btn btn-default btn-block'));?>
+        <?=anchor(uri_string(),'รีเฟรช',array('class'=>'btn btn-default btn-block'));?>
         <p class="help-block">*รองรับไฟล์นามสกุล jpg, jpeg, png, pdf</p>
         <p class="help-block">*รองรับไฟล์ขนาดไม่เกิน 2 MB</p>
         <p class="help-block">*สามารถอัพโหลดได้ครั้งละไม่เกิน 10 ไฟล์</p>
+        <p class="help-block">*การสอบมาตรฐานฝีมือแรงงาน มีเอกสารที่ต้องแนบมาด้วยดังนี้ ไฟล์รูปสำเนาบัตรประชาชนหรือสำเนาทะเบียนบ้าน, วุฒิการศึกษา, อื่นๆ</p>
       </div>
       <?=form_close(); ?>
     </div>
@@ -55,7 +56,6 @@ Dropzone.options.dropzoneUpload = {
     myDropzone = this;
     submitButton.addEventListener("click",function(){
       myDropzone.processQueue();
-      location.reload();
     });
   }
 };

@@ -1,35 +1,35 @@
 <div class="form-group">
-  <?php echo form_label('วุฒิการศึกษา','',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('วุฒิการศึกษา*','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?php echo form_input(array('name'=>'education[degree]','class'=>'form-control'),set_value('education[degree]'));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('สาขา','',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('สาขา*','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?php echo form_input(array('name'=>'education[branch]','class'=>'form-control'),set_value('education[branch]'));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('สถานศึกษา','',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('สถานศึกษา*','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?php echo form_input(array('name'=>'education[place]','class'=>'form-control'),set_value('education[place]'));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('อาชีพ','',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('อาชีพ*','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?php echo form_input(array('name'=>'work[career]','class'=>'form-control'),set_value('work[career]'));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('สถานที่ทำงาน','',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('สถานที่ทำงาน*','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?php echo form_input(array('name'=>'work[place]','class'=>'form-control'),set_value('work[place]'));?>
   </div>
 </div>
 <div class="form-group">
-  <?php echo form_label('มีความประสงค์จะขอหนังสือรับรองความรู้ความสามารถ ในสาขาอาชีพ','',array('class'=>'control-label col-md-4'));?>
+  <?php echo form_label('มีความประสงค์จะขอหนังสือรับรองความรู้ความสามารถ ในสาขาอาชีพ*','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
     <?php echo form_input(array('name'=>'career[1]','class'=>'form-control','id'=>'career1','placeholder'=>'สาขาอาชีพ..'),set_value('career[1]'));?>
     <p class="help-block"></p>
