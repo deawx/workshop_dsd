@@ -106,7 +106,7 @@
     <div class="col-md-8"> <?=form_input(array('name'=>'work_yes[position]','class'=>'form-control'),set_value('work_yes[position]'));?> </div>
   </div>
   <div class="form-group"> <?=form_label('อายุงาน(ปี)*','',array('class'=>'control-label col-md-4'));?>
-    <div class="col-md-8"> <?=form_input(array('name'=>'work_yes[age]','class'=>'form-control'),set_value('work_yes[age]'));?> </div>
+    <div class="col-md-8"> <?=form_input(array('name'=>'work_yes[age]','class'=>'form-control','id'=>'age'),set_value('work_yes[age]'));?> </div>
   </div>
   <div class="form-group"> <?=form_label('ชื่อสถานที่ทำงาน*','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8"> <?=form_input(array('name'=>'work_yes[place]','class'=>'form-control'),set_value('work_yes[place]'));?> </div>

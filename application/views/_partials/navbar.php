@@ -1,6 +1,4 @@
-<?php
-$parent = isset($parent) ? $parent : '';
-?>
+<?php $parent = isset($parent) ? $parent : ''; ?>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -25,6 +23,14 @@ $parent = isset($parent) ? $parent : '';
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">บัญชีของคุณ <b class="caret"></b></a>
             <ul class="dropdown-menu">
+              <li class="text-center">
+                <?php if ($this->session->has_userdata('avatar')) : ?>
+                  <?=img('uploads/profiles/'.$this->session->avatar,'',array('class'=>'img-circle','style'=>'width:100px;height:100px;'));?>
+                <?php else: ?>
+                  <i class="fa fa-user fa-2x"></i>
+                <?php endif; ?>
+              </li>
+              <li class="divider"></li>
               <li> <a href="<?=site_url('account/profile');?>">ข้อมูลส่วนตัว</a> </li>
               <li> <a href="<?=site_url('account/profile/attachment');?>">ข้อมูลไฟล์เอกสาร</a> </li>
               <li class="divider"></li>

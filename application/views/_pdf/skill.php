@@ -75,7 +75,7 @@ $reference = unserialize($record['reference']);
           <span class="col-md-12">
             <p> <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[picture]'),'picture',set_checkbox('reference[picture]','picture',isset($reference['picture'])));?>(1)รูปถ่ายหน้าตรง ขนาด 1 X 1.5 นิ้ว พื้นหลังสีขาว ซึ่งถ่ายมาแล้วไม่เกินหกเดือน จำนวน 2 รูป</label> </div> </p>
             <p> <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[copy]'),'copy',set_checkbox('reference[copy]','copy',isset($reference['copy'])));?>(2)สำเนาบัตรประจำตัวประชาชน</label> </div> </p>
-            <p> <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[etc]'),'etc',set_checkbox('reference[etc]','etc',isset($reference['etc'])));?>(3)เอกสารอื่นๆ (โปรดระบุ)</label> ..........<?=(isset($reference['etc'])&&$reference['etc']!='')?$reference['etc']:NULL;?>..........</div> </p>
+            <p> <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[etc]'),'etc',set_checkbox('reference[etc]','etc',(isset($reference['etc'])&&$reference['etc']!='')));?>(3)เอกสารอื่นๆ (โปรดระบุ)</label> ..........<?=(isset($reference['etc'])&&$reference['etc']!='')?$reference['etc']:NULL;?>..........</div> </p>
             <p style="text-indent:1em;">*ข้าพเจ้าขอรับรองว่าข้อความดังกล่าวข้างต้นและเอกสารหลักฐานที่แนบคำขอถูกต้องและเป็นความจริงทุกประการ</p>
           </span>
         </div>

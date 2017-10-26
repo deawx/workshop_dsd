@@ -109,9 +109,9 @@ class Profile extends Private_Controller {
   {
 		if ($this->input->post()) :
 			if ($this->input->post('email') != $this->input->post('email_old')) :
-				$this->form_validation->set_rules('email','อีเมล์','valid_email|max_length[100]|is_unique[users.email]');
+				$this->form_validation->set_rules('email','อีเมล์','required|valid_email|max_length[100]|is_unique[users.email]');
 			else:
-				$this->form_validation->set_rules('email','อีเมล์','valid_email|max_length[100]');
+				$this->form_validation->set_rules('email','อีเมล์','required|valid_email|max_length[100]');
 			endif;
 			$this->form_validation->set_rules('phone','เบอร์โทรศัพท์','is_numeric|max_length[10]');
 			$this->form_validation->set_rules('fax','แฟกซ์','is_numeric|max_length[10]');
@@ -127,7 +127,7 @@ class Profile extends Private_Controller {
 				);
 				if ($this->profile->save($data,'users')) :
 					$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
-					redirect('account/profile/address');
+					redirect('account/profile/edit');
 				else:
 					$this->session->set_flashdata('warning','บันทึกข้อมูลล้มเหลว');
 					redirect('account/profile/edit');
@@ -227,10 +227,10 @@ class Profile extends Private_Controller {
 				$data = $this->upload->data();
 				if ($this->assets->save($data)) :
 					if ($this->assets->save(array(
-						'asset_id' => $this->db->insert_id(),
-						'user_id' => $this->id,
-						'upload_date' => time()
-					),'assets_by')) :
+							'asset_id' => $this->db->insert_id(),
+							'user_id' => $this->id,
+							'upload_date' => time()
+						),'assets_by')) :
 						$this->session->set_flashdata('success','อัพโหลดไฟล์เสร็จสิ้น');
 					endif;
 				endif;

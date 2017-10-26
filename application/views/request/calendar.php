@@ -22,7 +22,10 @@
             <div class="col-md-9"> <?=form_input(array('name'=>'approve_schedule','class'=>'form-control','id'=>'dayTime','readonly'=>TRUE));?> </div>
           </div>
           <div class="form-group"> <?=form_label('ช่วงเวลาสอบ','',array('class'=>'control-label col-md-3'));?>
-            <div class="col-md-9"> <?=form_dropdown(array('name'=>'approve_time','class'=>'form-control'),array(''=>'เลือกรายการ','ช่วงเช้า 09.00 - 12.00 น.'=>'ช่วงเช้า 09.00 - 12.00 น.','ช่วงบ่าย 13.00 - 16.00 น.'=>'ช่วงบ่าย 13.00 - 16.00 น.'));?> </div>
+            <div class="col-md-9">
+              <?=form_dropdown(array('name'=>'approve_time','class'=>'form-control'),array(''=>'เลือกรายการ','ช่วงเช้า 09.00 - 12.00 น.'=>'ช่วงเช้า 09.00 - 12.00 น.','ช่วงบ่าย 13.00 - 16.00 น.'=>'ช่วงบ่าย 13.00 - 16.00 น.'));?>
+              <p class="help-block">*ให้เลือกในกรณีสอบมาตรฐานฝีมือแรงงาน</p>
+            </div>
           </div>
           <div class="form-group"> <?=form_label('','',array('class'=>'control-label col-md-3'));?>
             <div class="col-md-9"> <?=form_submit('','บันทึกข้อมูล',array('class'=>'btn btn-primary btn-block'));?> </div>

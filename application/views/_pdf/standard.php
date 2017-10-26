@@ -152,7 +152,7 @@ $reference = unserialize($record['reference']);
                     if ($work_yes['group'] != '' && ! in_array($work_yes['group'],$grp)) :
                       $work_yes_etc = '<span style="border:1px solid black;padding:0.1em;">'.$work_yes['group'].'</span>';
                     endif;
-                    echo form_checkbox('work_yes[group]',$work_yes_etc,($work_yes['group']==$work_yes_etc)).' อื่นๆ ระบุ ..........'.$work_yes_etc; ?>..........
+                    echo form_checkbox('work_yes[group]',$work_yes_etc,($work_yes['group']===$work_yes_etc)).' อื่นๆ ระบุ ..........'.$work_yes_etc; ?>..........
                   </span>
                 </p>
                 <p>
@@ -167,7 +167,7 @@ $reference = unserialize($record['reference']);
                     if ($record['work_no'] != '' && ! in_array($record['work_no'],$wn)) :
                       $work_no_etc = '<span style="border:1px solid black;padding:0.1em;">'.$record['work_no'].'</span>';
                     endif;
-                    echo form_radio('work_yes[group]',$work_no_etc,($record['work_no']==$work_no_etc)).' อื่นๆ ระบุ ..........'.$work_no_etc; ?>..........
+                    echo form_radio('work_yes[group]',$work_no_etc,($record['work_no']===$work_no_etc)).' อื่นๆ ระบุ ..........'.$work_no_etc; ?>..........
                   </span>
                 </p>
               </td>

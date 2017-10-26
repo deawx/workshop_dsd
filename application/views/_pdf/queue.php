@@ -30,14 +30,16 @@ $type = isset($value['category']) ? $value['category'] : 'หนังสือ�
       <div class="row">
         <h2 class="text-center">บัตรนัดกำหนดการสอบ</h2>
         <br>
-        <p>
-          <span>วันที่เข้าสอบ ..........
+        <div class="pull-right">
+          <p> วันที่เข้าสอบ ..........
             <?php if ($record['approve_schedule']!=='') :
               echo date('d',$record['approve_schedule']).' '.dropdown_month(date('m',$record['approve_schedule'])).' '.(date('Y',$record['approve_schedule'])+543);
             endif; ?>..........
-            </span>
-          <span class="pull-right">ช่วงเวลาสอบ ..........<?=$record['approve_time'];?>..........</span>
-        </p>
+          </p>
+          <p>ช่วงเวลาสอบ ..........
+            <?=($record['approve_time']!=NULL)?$record['approve_time']:'';?>..........
+          </p>
+        </div>
         <br>
         <p>ชื่อผู้สอบ ..........<?=$profile['title'].nbs(2).$profile['firstname'].nbs(2).$profile['lastname'];?>..........</p>
         <p>วันที่ยื่นคำร้อง ..........

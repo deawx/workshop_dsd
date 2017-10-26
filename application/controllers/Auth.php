@@ -52,8 +52,8 @@ class Auth extends Public_Controller {
 		$this->data['title'] = $this->lang->line('login_heading');
 
 		//validate form input
-		$this->form_validation->set_rules('identity', str_replace(':', '', $this->lang->line('login_identity_label')), 'required');
-		$this->form_validation->set_rules('password', str_replace(':', '', $this->lang->line('login_password_label')), 'required');
+		$this->form_validation->set_rules('identity',str_replace(':','',$this->lang->line('login_identity_label')),'required');
+		$this->form_validation->set_rules('password',str_replace(':','',$this->lang->line('login_password_label')),'required');
 
 		if ($this->form_validation->run() == true)
 		{
@@ -61,11 +61,26 @@ class Auth extends Public_Controller {
 			// check for "remember me"
 			$remember = (bool) $this->input->post('remember');
 
-			if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember))
+			if ($this->ion_auth->login($this->input->post('identity'),$this->input->post('password'),$remember))
 			{
 				//if the login is successful
 				//redirect them back to the home page
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				$this->session->set_flashdata('message',$this->ion_auth->messages());
+
+				$asset = $this->db
+				  ->select('asset_id')
+				  ->where('user_id',$this->session->user_id)
+				  ->where('is_avatar','1')
+				  ->get('assets_by');
+				if ($asset->num_rows() > 0) :
+				  $asset_id = $asset->row_array();
+				  $avatar = $this->db
+				    ->select('file_name')
+				    ->where('id',$asset_id['asset_id'])
+				    ->get('assets')
+				    ->row_array();
+					$this->session->set_userdata('avatar',$avatar['file_name']);
+				endif;
 
 				if ($this->ion_auth->in_group('admin',$this->session->user_id)) :
 					redirect('admin/news', 'refresh');
@@ -77,7 +92,7 @@ class Auth extends Public_Controller {
 			{
 				// if the login was un-successful
 				// redirect them back to the login page
-				$this->session->set_flashdata('message', $this->ion_auth->errors());
+				$this->session->set_flashdata('message',$this->ion_auth->errors());
 				redirect('auth/login', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
 			}
 		}

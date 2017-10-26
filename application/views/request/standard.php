@@ -171,6 +171,7 @@ $(function() {
   $('#work_group').editableSelect();
   $('#health_status').editableSelect();
 
+  $('#age').inputmask('99');
   $('#id_card').inputmask('9999999999999');
   $('.zip').inputmask('99999');
   $('.tel').inputmask('9999999999');

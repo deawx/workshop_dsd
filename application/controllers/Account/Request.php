@@ -65,11 +65,10 @@ class Request extends Private_Controller {
 		// $this->form_validation->set_rules('used_place','สถานที่เข้ารับการทดสอบ','');
 		// $this->form_validation->set_rules('reason','เหตุผลที่สมัครสอบ','');
 		// $this->form_validation->set_rules('source','แหล่งที่ทราบข่าว','');
-
 		$this->form_validation->set_rules('profile[title]','คำนำหน้าชื่อ','required');
 		$this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
 		$this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
-		$this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required|alpha_numeric_spaces');
+		$this->form_validation->set_rules('profile[fullname]','ชื่อเต็ม(ภาษาอังกฤษ)','required|alpha_numeric_spaces',array('alpha_numeric_spaces'=>'ข้อมูล %s. จะต้องประกอบด้วยตัวอักษรภาษาอังกฤษเท่านั้น'));
 		$this->form_validation->set_rules('profile[religion]','ศาสนา','required');
 		$this->form_validation->set_rules('profile[nationality]','สัญชาติ','required');
 		$this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
@@ -122,9 +121,9 @@ class Request extends Private_Controller {
 				$data['work_yes'] = NULL;
 				$data['work_no'] = NULL;
 			endif;
-			if ($this->input->post('need_work_status') === 'ต้องการจัดหางานในประเทศ') :
+			if ($this->input->post('need_work_status') == 'ต้องการจัดหางานในประเทศ') :
 				$data['need_work_country'] = NULL;
-			elseif ($this->input->post('need_work_status') === 'ต้องการจัดหางานในต่างประเทศ') :
+			elseif ($this->input->post('need_work_status') == 'ต้องการจัดหางานในต่างประเทศ') :
 				$data['need_work_position'] = NULL;
 				$data['need_work_group'] = NULL;
 			else:
@@ -265,7 +264,6 @@ class Request extends Private_Controller {
 		$this->session->set_flashdata('warning','');
 
 		$this->form_validation->set_rules('code','ประเภทการสอบ','required');
-		$this->form_validation->set_rules('approve_time','ช่วงเวลาสอบ','required');
 		if ($this->form_validation->run() == FALSE) :
 			$this->session->set_flashdata('warning',validation_errors());
 		else:
@@ -274,6 +272,11 @@ class Request extends Private_Controller {
 			$approve_time = $this->input->post('approve_time');
 			$record = $this->request->get_code($code);
 			$type = (isset($record['category'])) ? 'standards' : 'skills';
+
+			if ($type == 'standards' && ! $this->input->post('approve_time')) :
+				$this->session->set_flashdata('info','กรุณาเลือกช่วงเวลาสอบ');
+				redirect('account/request/calendar');
+			endif;
 
 			$records = $this->request->get_date($approve_schedule);
 			$times = array_column($records,'approve_time');
@@ -288,9 +291,9 @@ class Request extends Private_Controller {
 				redirect('account/request/calendar');
 			else:
 				if ($this->request->save(array(
-					'id'=>$record['id'],
-					'approve_schedule'=>strtotime($approve_schedule),
-					'approve_time'=>$approve_time
+						'id'=>$record['id'],
+						'approve_schedule'=>strtotime($approve_schedule),
+						'approve_time'=>$approve_time
 					),$type)) :
 					$this->session->set_flashdata('success','บันทึกข้อมูลสำเร็จ');
 				else:
