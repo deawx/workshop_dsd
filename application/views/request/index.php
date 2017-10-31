@@ -4,9 +4,11 @@
   <table class="table table-hover">
     <thead> <tr> <th>ประเภทรายการ</th> <th>วันที่ยื่นคำร้อง</th> <th>วันที่หมดอายุ</th> <th></th> </tr> </thead>
     <tbody>
-      <?php foreach ($requests as $key => $value) : ?>
-        <?php $expired = strtotime('+30 days',$value['date_create']);
-        if ($value['approve_status'] !== 'accept' && time() < $expired) : ?>
+      <?php foreach ($requests as $key => $value) :
+        $exist = NULL;
+        $expired = strtotime('+30 days',$value['date_create']);
+        if ($value['approve_status'] !== 'accept' && time() < $expired) :
+          $exist++; ?>
           <tr class="rows" style="display:none;">
             <td>
               <?php echo isset($value['category']) ? $value['category'] : 'หนังสือรับรองความรู้ความสามารถ';
@@ -67,6 +69,13 @@
   </table>
   <div class="panel-footer"> <?=anchor('#','ก่อนหน้า',array('class'=>'label label-default','id'=>'more'));?> </div>
 </div>
+
+<?php if ($exist) : ?>
+  <div class="alert alert-info">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong>*หมายเหตุ</strong> พบรายการคำร้องอยู่ในระหว่างดำเนินการ ท่านไม่สามารถยื่นคำร้องเพิ่มเติมได้
+  </div>
+<?php endif; ?>
 
 <script type="text/javascript">
 $(function(){

@@ -52,9 +52,6 @@ class Request extends Private_Controller {
 	{
 		$this->session->set_flashdata('warning','');
 
-		/*
-		ฟังก์ชั่นตรวจสอบความถูกต้องของการกรอกแบบฟอร์มก่อนการบันทึกเข้าสู่ฐานข้อมูล
-		*/
 		$this->form_validation->set_rules('department','หน่วยงาน','required');
 		$this->form_validation->set_rules('branch','สาขาอาชีพ','required');
 		$this->form_validation->set_rules('level','ระดับ','required');
@@ -121,12 +118,13 @@ class Request extends Private_Controller {
 				$data['work_yes'] = NULL;
 				$data['work_no'] = NULL;
 			endif;
-			if ($this->input->post('need_work_status') == 'ต้องการจัดหางานในประเทศ') :
-				$data['need_work_country'] = NULL;
-			elseif ($this->input->post('need_work_status') == 'ต้องการจัดหางานในต่างประเทศ') :
+			$need_work_status = $this->input->post('need_work_status');
+			if ($need_work_status == 'ต้องการจัดหางานในต่างประเทศ') :
 				$data['need_work_position'] = NULL;
 				$data['need_work_group'] = NULL;
-			else:
+			elseif ($need_work_status == 'ต้องการจัดหางานในประเทศ') :
+				$data['need_work_country'] = NULL;
+			elseif ($need_work_status == 'ไม่ต้องการ') :
 				$data['need_work_position'] = NULL;
 				$data['need_work_group'] = NULL;
 				$data['need_work_country'] = NULL;
@@ -155,7 +153,11 @@ class Request extends Private_Controller {
 			$this->data['menu'] = 'standard';
 			$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 			$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
-			$this->data['body'] = $this->load->view('request/standard',$this->data,TRUE);
+			if ($this->session->has_userdata('standard')) :
+				$this->data['body'] = 'ท่านได้ผ่านการสอบมาตรฐานฝีมือแรงงานไปเรียบร้อยแล้ว';
+			else:
+				$this->data['body'] = $this->load->view('request/standard',$this->data,TRUE);
+			endif;
 			$this->load->view('_layouts/rightside',$this->data);
 		endif;
 	}
@@ -175,7 +177,7 @@ class Request extends Private_Controller {
 		$this->form_validation->set_rules('address[address]','ที่อยู่เลขที่','required');
 		// $this->form_validation->set_rules('address[street]','ถนน','required');
 		$this->form_validation->set_rules('address[tambon]','ตำบล','required');
-		$this->form_validation->set_rules('address[moo]','หมู่','required');
+		// $this->form_validation->set_rules('address[moo]','หมู่','required');
 		// $this->form_validation->set_rules('address[soi]','ซอย','required');
 		$this->form_validation->set_rules('address[amphur]','อำเภอ','required');
 		$this->form_validation->set_rules('address[province]','จังหวัด','required');
@@ -240,7 +242,11 @@ class Request extends Private_Controller {
 			$this->data['menu'] = 'skill';
 			$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 			$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
-			$this->data['body'] = $this->load->view('request/skill',$this->data,TRUE);
+			if ($this->session->has_userdata('skill')) :
+				$this->data['body'] = 'ท่านได้ผ่านการสอบรับรองความรู้ความสามารถไปเรียบร้อยแล้ว';
+			else:
+				$this->data['body'] = $this->load->view('request/skill',$this->data,TRUE);
+			endif;
 			$this->load->view('_layouts/rightside',$this->data);
 		endif;
 	}
@@ -279,6 +285,12 @@ class Request extends Private_Controller {
 			endif;
 
 			$records = $this->request->get_date($approve_schedule);
+			$user_id = array_column($records,'user_id');
+			if (in_array($record['user_id'],$user_id)) :
+				$this->session->set_flashdata('info','ขออภัย ท่านมีรายการสอบในวันนี้อยู่แล้ว');
+				redirect('account/request/calendar');
+			endif;
+
 			$times = array_column($records,'approve_time');
 			$morning = array_filter($times,function($v) { return strpos($v,'เช้า') == TRUE; });
 			$afternoon = array_filter($times,function($v) { return strpos($v,'บ่าย') == TRUE; });
@@ -306,22 +318,25 @@ class Request extends Private_Controller {
 		$this->data['menu'] = 'calendar';
 		$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 		$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
-		$schedules = $this->request->get_future('','accept');
+
 		$schedule = array();
+		$schedules = $this->request->get_future('','accept');
 		foreach ($schedules as $key => $value) :
-			// $type = (isset($value['category'])) ? $value['category'] : 'ใบรับรองความรู้ความสามารถ';
-			// $title = $this->db->select('title,firstname,lastname')->where('id',$value['user_id'])->get('users')->row_array();
-			$schedule[$key]['title'] = $value['title'].' '.$value['firstname'].' '.$value['lastname'];
+			$profile = unserialize($value['profile']);
+			$schedule[$key]['title'] = $profile['title'].' '.$profile['firstname'].' '.$profile['lastname'];
 			$schedule[$key]['start'] = date('Y-m-d',$value['approve_schedule']);
 		endforeach;
-		$this->data['schedule'] = $schedule;
+
 		$request = $this->request->get_all_id($this->id,'accept');
 		foreach ($request as $key => $value) :
 			if ($value['approve_schedule'] != NULL) :
 				unset($request[$key]);
 			endif;
 		endforeach;
+
+		$this->data['schedule'] = $schedule;
 		$this->data['request'] = $request;
+
 		$this->data['css'] = array(link_tag('assets/css/fullcalendar.css'),link_tag('assets/css/fullcalendar.print.css','stylesheet','text/css','fullcalendar','print'));
 		$this->data['js'] = array(script_tag('assets/js/moment.min.js'),script_tag('assets/js/moment.th.js'),script_tag('assets/js/fullcalendar.js'));
 		$this->data['body'] = $this->load->view('request/calendar',$this->data,TRUE);
@@ -392,25 +407,44 @@ class Request extends Private_Controller {
 			->set_output(json_encode($type));
 	}
 
-	function get_event($date)
+	function get_events($date)
 	{
+		$event = array();
 		$events = $this->request->get_date($date);
-
 		$standard = count(array_column($events,'category'));
 		$skill = count($events)-$standard;
+		$times = array_column($events,'approve_time');
+		$morning = count(array_filter($times,function($v) { return strpos($v,'เช้า') == TRUE; }));
+		$afternoon = count(array_filter($times,function($v) { return strpos($v,'บ่าย') == TRUE; }));
+		foreach ($events as $key => $value) :
+			$profile = unserialize($value['profile']);
+			$event[$key]['name'] = $profile['title'].' '.$profile['firstname'].' '.$profile['lastname'];
+			$event[$key]['job'] = isset($value['category'])
+				? mb_substr($value['category'],0,25,'UTF-8').'..'
+				: mb_substr('สอบรับรองความรู้ความสามารถ',0,25,'UTF-8').'..';
+			$event[$key]['time'] = isset($value['approve_time']) ? $value['approve_time'] : '';
+		endforeach;
 
-		$events['standard'] = $standard;
-		if ($standard >= 15) :
-			$events['standard'] = 'full';
-		endif;
-		$events['skill'] = $skill;
-		if ($skill >= 26) :
-			$events['skill'] = 'full';
-		endif;
+		$request = $this->request->get_all_id($this->id,'accept');
+		foreach ($request as $key => $value) :
+			if ($value['approve_schedule']!=NULL) :
+				unset($request[$key]);
+			endif;
+		endforeach;
+
+		$this->data['standard'] = $standard;
+		$this->data['skill'] = $skill;
+		$this->data['morning'] = $morning;
+		$this->data['afternoon'] = $afternoon;
+		$this->data['approve_schedule'] = $date;
+		$this->data['events'] = $event;
+		$this->data['requests'] = $request;
+
+		$content = $this->load->view('request/_events',$this->data,TRUE);
 
 		$this->output
 			->set_content_type('application/json','utf-8')
-			->set_output(json_encode($events));
+			->set_output(json_encode($content));
 	}
 
 }

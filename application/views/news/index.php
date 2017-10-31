@@ -1,7 +1,5 @@
 <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">ข้อมูลข่าวสารทั้งหมด <?=count($news);?> รายการ</h3>
-  </div>
+  <div class="panel-heading"> <h3 class="panel-title">ข้อมูลข่าวสารทั้งหมด <?=count($news);?> รายการ</h3> </div>
   <div class="panel-body">
     <?=anchor('admin/news/post','เพิ่มโพสต์',array('class'=>'btn btn-default'));?>
     <?=form_open(uri_string(),array('method'=>'get','class'=>'form-inline pull-right'));?>

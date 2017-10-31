@@ -22,8 +22,8 @@
 </div>
 <div class="form-group"> <?=form_label('เอกสารที่แนบมาด้วย*','reference',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[refer]'),'สำเนาวุฒิการศึกษาหรือหนังสือรับรองการทำงาน');?>สำเนาวุฒิการศึกษาหรือหนังสือรับรองการทำงาน</label> </div>
-    <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[copy]'),'สำเนาบัตรประจำตัวประชาชนหรือสำเนาทะเบียนบ้าน');?>สำเนาบัตรประจำตัวประชาชนหรือสำเนาทะเบียนบ้าน</label> </div>
+    <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[refer]'),'สำเนาวุฒิการศึกษาหรือหนังสือรับรองการทำงาน',set_value('reference[refer]'));?>สำเนาวุฒิการศึกษาหรือหนังสือรับรองการทำงาน</label> </div>
+    <div class="checkbox"> <label><?=form_checkbox(array('name'=>'reference[copy]'),'สำเนาบัตรประจำตัวประชาชนหรือสำเนาทะเบียนบ้าน',set_value('reference[copy]'));?>สำเนาบัตรประจำตัวประชาชนหรือสำเนาทะเบียนบ้าน</label> </div>
     <p class="help-block"></p>
     <?=form_input(array('name'=>'reference[etc]','class'=>'form-control','placeholder'=>'อื่นๆ'),set_value(''));?>
     <p class="help-block">*ข้าพเจ้าขอรับรองว่าข้อความข้างต้นเป็นความจริงทุกประการและได้แนบหลักฐานการสมัครมาด้วย</p>
@@ -31,7 +31,7 @@
 </div>
 <div class="form-group"> <?=form_label('ยอมรับการเปิดเผยข้อมูล*','allow',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8">
-    <div class="checkbox"> <label><?=form_checkbox(array('name'=>'allow'),TRUE);?>ยอมรับ</label> </div>
+    <div class="checkbox"> <label><?=form_checkbox(array('name'=>'allow'),TRUE,set_value('allow'));?>ยอมรับ</label> </div>
     <br>
     <p>*ข้าพเจ้ายินยอมเปิดเผยข้อมูลส่วนบุคคลให้กับหน่วยงานของรัฐและเอกชนทราบเพื่อประโยชน์ในการจัดหางานและบริหารแรงงานต่อไป</p>
     <p>*มีค่าธรรมเนียมในการประเมิน 100 บาทถ้วน</p>

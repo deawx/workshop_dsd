@@ -1,39 +1,12 @@
 <div class="" id="calendar"> </div> <br>
 <p>*การสอบมาตรฐานฝีมือแรงงานแห่งชาติ 26คน/วัน แบ่งเป็น เช้า13คน/บ่าย13คน</p>
 <p>*การสอบรับรองความรู้ความสามารถ 15คน/วัน</p>
+<p>*สามารถเข้าสอบได้เพียง 1 รายการต่อวันเท่านั้น</p>
 
 <div class="modal fade" id="dayClick" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-  <div class="modal-dialog">
+  <?=form_input(array('id'=>'dayTime','hidden'=>TRUE));?>
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title">กำหนดตารางวันสอบของท่าน</h4> </div>
-      <?=form_open(uri_string(),array('class'=>'form-horizontal'));?>
-      <div class="modal-body">
-        <h4 class="text-center" id="full">รายการลงทะเบียนเต็มแล้ว</h4>
-        <div id="form">
-          <div class="form-group"> <?=form_label('รายการคำร้อง','',array('class'=>'control-label col-md-3'));?>
-            <div class="col-md-9"> <?php foreach ($request as $key => $value) :
-              $category = isset($value['category']) ? $value['category'] : 'ใบรับรองความรู้ความสามารถ';
-              $type = isset($value['category']) ? 'standard' : 'skill'; ?>
-              <label><?=form_radio('code',$value['date_create'],set_radio('code',$value['date_create']),array('data-type'=>$type));?><?=$category;?></label>
-              <?php endforeach; ?>
-            </div>
-          </div>
-          <div class="form-group"> <?=form_label('วันที่เลือกสอบ','',array('class'=>'control-label col-md-3'));?>
-            <div class="col-md-9"> <?=form_input(array('name'=>'approve_schedule','class'=>'form-control','id'=>'dayTime','readonly'=>TRUE));?> </div>
-          </div>
-          <div class="form-group"> <?=form_label('ช่วงเวลาสอบ','',array('class'=>'control-label col-md-3'));?>
-            <div class="col-md-9">
-              <?=form_dropdown(array('name'=>'approve_time','class'=>'form-control'),array(''=>'เลือกรายการ','ช่วงเช้า 09.00 - 12.00 น.'=>'ช่วงเช้า 09.00 - 12.00 น.','ช่วงบ่าย 13.00 - 16.00 น.'=>'ช่วงบ่าย 13.00 - 16.00 น.'));?>
-              <p class="help-block">*ให้เลือกในกรณีสอบมาตรฐานฝีมือแรงงาน</p>
-            </div>
-          </div>
-          <div class="form-group"> <?=form_label('','',array('class'=>'control-label col-md-3'));?>
-            <div class="col-md-9"> <?=form_submit('','บันทึกข้อมูล',array('class'=>'btn btn-primary btn-block'));?> </div>
-          </div>
-        </div>
-      </div>
-      <?=form_close();?>
-      <div class="modal-footer" style="padding:0;"> <table class="table table-bordered"> <thead> <tr> <th>ผู้เข้าสอบ</th> <th>ช่วงเวลา</th> </tr> </thead> <tbody> </tbody></table> </div>
     </div>
   </div>
 </div>
@@ -71,38 +44,8 @@ $(function(){
       },
       <?php endforeach; ?>
     ],
-    // eventRender: function(event,element){
-    //   $(element).each(function(){
-    //       $(this).attr('date-num',event.start.format('YYYY-MM-DD'));
-    //   });
-    //   element.attr('href', 'javascript:void(0);');
-    //   element.click(function() {
-    //     $("#startTime").html(moment(event.start).format('MMM Do h:mm A'));
-    //     $("#endTime").html(moment(event.end).format('MMM Do h:mm A'));
-    //     $("#eventInfo").html(event.description);
-    //     $("#eventContent").dialog({ modal: true, title: event.title, width:350});
-    //   });
-    // },
-    // dayRender: function(date,cell) {
-    // },
-    // eventAfterAllRender: function(view) {
-    //   for(cDay = view.start.clone(); cDay.isBefore(view.end); cDay.add(1,'day')) {
-    //     var dateNum = cDay.format('YYYY-MM-DD');
-    //     var dayEl = $('.fc-day[data-date="' + dateNum + '"]');
-    //     var eventCount = $('.fc-event[date-num="' + dateNum + '"]').length;
-    //     if (eventCount > 15) {
-    //       dayEl.css('background-color','red');
-    //       var html = '<span class="label label-success">'+eventCount+' รายการ</span>';
-    //       dayEl.append(html);
-    //     }
-    //   }
-    // },
-    // eventClick: function(calEvent,jsEvent,view) {
-    //   console.log(': ' + calEvent);
-    //   console.log('Event: ' + calEvent.title);
-    // },
     dayClick: function(date,jsEvent,view) {
-      $("#dayTime").val(date.format('DD-MM-YYYY'));
+      $("input#dayTime").val(date.format('DD-MM-YYYY'));
       modal.modal('show');
     }
   });
@@ -111,34 +54,9 @@ $(function(){
     var related = $(e.relatedTarget);
     var date = $('input#dayTime').val();
     var modal = $(this);
-    modal.find('.modal-body#full').hide();
-    $.post('get_event/'+date,function(d) {
-      modal.find(':radio[data-type="standard"]').removeAttr('disabled').prop('checked',false);
-      modal.find(':radio[data-type="skill"]').removeAttr('disabled').prop('checked',false);
-      modal.find('#form').show();
-      modal.find('#full').hide();
-      if (d.standard === 'full' && d.skill === 'full') {
-        modal.find('#form').hide();
-        modal.find('#full').show();
-      } else if (d.skill == 'full') {
-        modal.find('#form').show();
-        modal.find(':radio[data-type="skill"]').prop('disabled',true);
-      } else if (d.standard == 'full') {
-        modal.find('#form').show();
-        modal.find(':radio[data-type="standard"]').prop('disabled',true);
-      } else {
-        modal.find('#form').show();
-        modal.find('#full').hide();
-      }
-      delete d.standard;
-      delete d.skill;
-      modal.find('table>tbody').empty();
-      $.each(d,function(k,v) {
-        if (typeof v.category === 'undefined') {
-          v.category = 'ใบรับรองความรู้ความสามารถ';
-        }
-        modal.find('table>tbody').append('<tr><td class="text-left">'+v.firstname+' '+v.lastname+'</td><td>'+v.approve_time+'</td></tr>');
-      });
+    modal.find('.modal-content').empty();
+    $.post('get_events/'+date,function(d) {
+      modal.find('.modal-content').html(d);
     });
   });
 

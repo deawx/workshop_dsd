@@ -65,7 +65,7 @@ class Auth extends Public_Controller {
 			{
 				//if the login is successful
 				//redirect them back to the home page
-				$this->session->set_flashdata('message',$this->ion_auth->messages());
+				$this->session->set_flashdata('success','ท่านได้เข้าสู่ระบบเรียบร้อยแล้ว');
 
 				$asset = $this->db
 				  ->select('asset_id')
@@ -81,6 +81,20 @@ class Auth extends Public_Controller {
 				    ->row_array();
 					$this->session->set_userdata('avatar',$avatar['file_name']);
 				endif;
+
+				$standard = $this->db
+					->where('user_id',$this->session->user_id)
+					->where('status','ผ่าน')
+					->get('standards');
+				if ($standard->num_rows() > 0)
+					$this->session->set_userdata('standard',TRUE);
+
+				$skill = $this->db
+					->where('user_id',$this->session->user_id)
+					->where('status','ผ่าน')
+					->get('skills');
+				if ($skill->num_rows() > 0)
+					$this->session->set_userdata('skill',TRUE);
 
 				if ($this->ion_auth->in_group('admin',$this->session->user_id)) :
 					redirect('admin/news', 'refresh');

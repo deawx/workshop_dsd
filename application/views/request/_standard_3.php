@@ -114,10 +114,10 @@
   <div class="form-group"> <?=form_label('ถนน','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8"> <?=form_input(array('name'=>'work_yes[street]','class'=>'form-control'),set_value('work_yes[street]'));?> </div>
   </div>
-  <div class="form-group"> <?=form_label('ตำบล','',array('class'=>'control-label col-md-4'));?>
+  <div class="form-group"> <?=form_label('ตำบล*','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8"> <?=form_input(array('name'=>'work_yes[tambon]','class'=>'form-control'),set_value('work_yes[tambon]'));?> </div>
   </div>
-  <div class="form-group"> <?=form_label('อำเภอ','',array('class'=>'control-label col-md-4'));?>
+  <div class="form-group"> <?=form_label('อำเภอ*','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8"> <?=form_input(array('name'=>'work_yes[amphur]','class'=>'form-control'),set_value('work_yes[amphur]'));?> </div>
   </div>
   <div class="form-group"> <?=form_label('จังหวัด*','',array('class'=>'control-label col-md-4'));?>

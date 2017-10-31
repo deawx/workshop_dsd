@@ -1,6 +1,6 @@
 <div class="list-group">
-  <a href="<?=site_url('account/request/standard');?>" class="list-group-item <?=($menu === 'standard') ? 'active' : '';?>">ขอสอบมาตรฐานฝีมือแรงงาน</a>
-  <a href="<?=site_url('account/request/skill');?>" class="list-group-item <?=($menu === 'skill') ? 'active' : '';?>">
+  <a href="<?=site_url('account/request/standard');?>" class="list-group-item <?=($menu=='standard')?'active':'';?>">ขอสอบมาตรฐานฝีมือแรงงาน</a>
+  <a href="<?=site_url('account/request/skill');?>" class="list-group-item <?=($menu=='skill')?'active':'';?>">
     ขอสอบรับรองความรู้ความสามารถ <span class="text-muted">(ผู้สมัครต้องผ่านการสอบมาตรฐานฝีมือแรงงานมาแล้วเท่านั้น)</span>
   </a>
 </div>

@@ -1,5 +1,10 @@
-<div class="form-group"> <?=form_label('วุฒิการศึกษา*','',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8"> <?=form_input(array('name'=>'education[degree]','class'=>'form-control'),set_value('education[degree]'));?> </div>
+<div class="form-group"> <?=form_label('ระดับการศึกษาสูงสุด*','',array('class'=>'control-label col-md-4'));?>
+  <div class="col-md-8"> <?php $e = array(''=>'เลือกรายการ',
+      'ประถมศึกษา'=>'ประถมศึกษา','ม.3'=>'ม.3','ม.6'=>'ม.6','ปก.ศ.ต้น'=>'ปก.ศ.ต้น',
+      'ปก.ศ.สูง/อนุปริญญา'=>'ปก.ศ.สูง/อนุปริญญา','ปวช.'=>'ปวช.','ปวท.'=>'ปวท.','ปวส.'=>'ปวส.',
+      'ปริญญาตรี'=>'ปริญญาตรี','ปริญญาโท'=>'ปริญญาโท','ปริญญาเอก'=>'ปริญญาเอก');
+    echo form_dropdown(array('name'=>'education[degree]','class'=>'form-control'),$e,set_value('education[degree]'));?>
+  </div>
 </div>
 <div class="form-group"> <?=form_label('สาขา*','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8"> <?=form_input(array('name'=>'education[branch]','class'=>'form-control'),set_value('education[branch]'));?> </div>

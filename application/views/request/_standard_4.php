@@ -9,8 +9,8 @@
   </div>
 </div>
 <div id="local">
-  <div class="form-group"> <?=form_label('ตำแหน่ง/อาชีพ*','neeed_work_position',array('class'=>'control-label col-md-4'));?>
-    <div class="col-md-8"> <?=form_input(array('name'=>'neeed_work_position','class'=>'form-control'),set_value('neeed_work_position')); ?> </div>
+  <div class="form-group"> <?=form_label('ตำแหน่ง/อาชีพ*','need_work_position',array('class'=>'control-label col-md-4'));?>
+    <div class="col-md-8"> <?=form_input(array('name'=>'need_work_position','class'=>'form-control'),set_value('need_work_position')); ?> </div>
   </div>
   <div class="form-group"> <?=form_label('กลุ่มอุตสาหกรรม*','need_work_group',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8"> <?=form_input(array('name'=>'need_work_group','class'=>'form-control'),set_value('need_work_group')); ?>
@@ -48,10 +48,10 @@
   <div class="form-group"> <?=form_label('อำเภอ','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8"> <?=form_input(array('name'=>'work_abroad[amphur]','class'=>'form-control'),set_value('work_abroad[amphur]'));?> </div>
   </div>
-  <div class="form-group"> <?=form_label('จังหวัด','',array('class'=>'control-label col-md-4'));?>
+  <div class="form-group"> <?=form_label('จังหวัด*','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8"> <?=form_input(array('name'=>'work_abroad[province]','class'=>'form-control'),set_value('work_abroad[province]'));?> </div>
   </div>
-  <div class="form-group"> <?=form_label('รหัสไปรษณีย์','',array('class'=>'control-label col-md-4'));?>
+  <div class="form-group"> <?=form_label('รหัสไปรษณีย์*','',array('class'=>'control-label col-md-4'));?>
     <div class="col-md-8"> <?=form_input(array('name'=>'work_abroad[zip]','class'=>'form-control zip'),set_value('work_abroad[zip]'));?> </div>
   </div>
   <div class="form-group"> <?=form_label('เบอร์โทรศัพท์*','',array('class'=>'control-label col-md-4'));?>

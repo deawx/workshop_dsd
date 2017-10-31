@@ -1,6 +1,5 @@
 <div class="form-group"> <?=form_label('คำนำหน้าชื่อ*','',array('class'=>'control-label col-md-4'));?>
-  <div class="col-md-8"> <?php $tt = array(''=>'เลือกรายการ','นาย'=>'นาย','นาง'=>'นาง','นางสาว'=>'นางสาว');
-    echo form_dropdown(array('name'=>'profile[title]','class'=>'form-control'),$tt,set_value('profile[title]',$user['title']));?>
+  <div class="col-md-8"> <?=form_dropdown(array('name'=>'profile[title]','class'=>'form-control'),dropdown_title(),set_value('profile[title]',$user['title']));?>
   </div>
 </div>
 <div class="form-group"> <?=form_label('ชื่อ*','',array('class'=>'control-label col-md-4'));?>

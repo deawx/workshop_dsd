@@ -22,7 +22,9 @@
       <div class="col-md-9">
         <?=form_submit('','ยืนยัน',array('class'=>'btn btn-primary'));?>
         <?=anchor('admin/news','ย้อนกลับ',array('class'=>'btn btn-default'));?>
-        <?=anchor('#','แนบไฟล์เอกสาร',array('class'=>'btn btn-link pull-right','data-toggle'=>'modal','data-target'=>'#attachment'));?>
+        <?php if (count($news['id']) > 0) : ?>
+          <?=anchor('#','แนบไฟล์เอกสาร',array('class'=>'btn btn-link pull-right','data-toggle'=>'modal','data-target'=>'#attachment'));?>
+        <?php endif; ?>
       </div>
     </div>
     <?=form_close();?>
