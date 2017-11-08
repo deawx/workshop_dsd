@@ -904,8 +904,8 @@ class Auth extends Public_Controller {
 		{
 			// check to see if we are creating the user
 			// redirect them back to the admin page
-			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth", 'refresh');
+			$this->session->set_flashdata('success','สร้างบัญชีเสร็จสิ้น กรุณาล็อกอินเข้าสู่ระบบ');
+			redirect("auth/login", 'refresh');
 		}
 		else
 		{

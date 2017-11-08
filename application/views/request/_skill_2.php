@@ -8,7 +8,7 @@ $address_current = unserialize($user['address_current']);
 <div class="form-group"> <?=form_label('ถนน','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8"> <?=form_input(array('name'=>'address[street]','class'=>'form-control'),set_value('address[street]',$address['street']));?> </div>
 </div>
-<div class="form-group"> <?=form_label('ตำบล','',array('class'=>'control-label col-md-4'));?>
+<div class="form-group"> <?=form_label('ตำบล*','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8"> <?=form_input(array('name'=>'address[tambon]','class'=>'form-control'),set_value('address[tambon]',$address['tambon']));?> </div>
 </div>
 <div class="form-group"> <?=form_label('หมู่','',array('class'=>'control-label col-md-4'));?>
@@ -17,7 +17,7 @@ $address_current = unserialize($user['address_current']);
 <div class="form-group"> <?=form_label('ซอย','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8"> <?=form_input(array('name'=>'address[soi]','class'=>'form-control'),set_value('address[soi]'));?> </div>
 </div>
-<div class="form-group"> <?=form_label('อำเภอ','',array('class'=>'control-label col-md-4'));?>
+<div class="form-group"> <?=form_label('อำเภอ*','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8"> <?=form_input(array('name'=>'address[amphur]','class'=>'form-control'),set_value('address[amphur]',$address['amphur']));?> </div>
 </div>
 <div class="form-group"> <?=form_label('จังหวัด*','',array('class'=>'control-label col-md-4'));?>

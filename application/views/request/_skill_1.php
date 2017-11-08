@@ -24,7 +24,7 @@
 <div class="form-group"> <?=form_label('สัญชาติ*','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8"> <?=form_input(array('name'=>'profile[nationality]','class'=>'form-control'),set_value('profile[nationality]',$user['nationality']));?> </div>
 </div>
-<div class="form-group"> <?=form_label('หมู่โลหิต*','',array('class'=>'control-label col-md-4'));?>
+<div class="form-group"> <?=form_label('หมู่โลหิต','',array('class'=>'control-label col-md-4'));?>
   <div class="col-md-8"> <?=form_input(array('name'=>'profile[blood]','class'=>'form-control'),set_value('profile[blood]'));?> </div>
 </div>
 <div class="form-group"> <?=form_label('หมายเลขบัตรประชาชน*','',array('class'=>'control-label col-md-4'));?>

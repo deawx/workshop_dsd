@@ -39,6 +39,9 @@ class Approve extends Admin_Controller {
 			if (time() > strtotime('+30 days',$value['date_create'])) :
 				unset($requests[$key]);
 			endif;
+			if ($value['assets_id'] == NULL) :
+				unset($requests[$key]);
+			endif;
 			if ($q) :
 				if (isset($q['email']) && $q['email']!='' && $q['email']!=$value['email']) :
 					unset($requests[$key]);

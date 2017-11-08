@@ -4,6 +4,7 @@
       <div class="panel panel-success">
         <div class="panel-heading"> <h3 class="panel-title"> <?php echo lang('login_heading');?> <small><?php echo lang('login_subheading');?></small> </h3> </div>
         <div class="panel-body">
+          <div id="infoMessage"><?php echo $message;?></div>
           <?php echo form_open("auth/login",array('class'=>'form-horizontal','autocomplete'=>'off'));?>
           <div class="form-group"> <?php echo form_label('ชื่อผู้ใช้:', 'identity',array('class'=>'control-label col-md-4'));?>
             <div class="col-md-8"> <?php echo form_input($identity,'',array('class'=>'form-control'));?> </div>
@@ -20,5 +21,5 @@
       </div>
     </div>
   </div>
-  <div id="infoMessage"><?php echo $message;?></div>
+  <?php $this->load->view('_partials/messages'); ?>
 </div>

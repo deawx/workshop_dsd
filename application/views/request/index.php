@@ -12,10 +12,13 @@
           <tr class="rows" style="display:none;">
             <td>
               <?php echo isset($value['category']) ? $value['category'] : 'หนังสือรับรองความรู้ความสามารถ';
-                if ($value['approve_status'] == NULL) : ?>
+              if ($value['approve_status'] == NULL) : ?>
                 <span class="label label-primary">ใหม่</span>
               <?php elseif ($value['approve_status'] === 'reject'): ?>
                 <span class="label label-info">รอ</span>
+              <?php endif;
+              if ($value['assets_id'] == NULL) : ?>
+                <span class="label label-warning">รอแนบไฟล์</span>
               <?php endif; ?>
             </td>
             <td><?=date('d-m-Y',$value['date_create']);?></td>
@@ -70,7 +73,11 @@
   <div class="panel-footer"> <?=anchor('#','ก่อนหน้า',array('class'=>'label label-default','id'=>'more'));?> </div>
 </div>
 
-<?php if ($exist) : ?>
+<p>*ใหม่ หมายถึงคำร้องที่ยังไม่ได้รับการตรวจสอบจากผู้ดูแลระบบ</p>
+<p>*รอ หมายถึงคำร้องที่ได้รับการปฎิเสธและรอการแก้ไขตอบกลับจากผู้ยื่นคำร้อง</p>
+<p>*รอแนบไฟล์ หมายถึงคำร้องที่ยังไม่ได้รับการแนบไฟล์เอกสารจึงยังไม่ได้รับการตรวจสอบ</p>
+
+<?php if (isset($exist)) : ?>
   <div class="alert alert-info">
     <a href="#" class="close" data-dismiss="alert">&times;</a>
     <strong>*หมายเหตุ</strong> พบรายการคำร้องอยู่ในระหว่างดำเนินการ ท่านไม่สามารถยื่นคำร้องเพิ่มเติมได้

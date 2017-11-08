@@ -169,7 +169,7 @@ class Request extends Private_Controller {
 		$this->form_validation->set_rules('profile[title]','คำนำหน้าชื่อ','required');
 		$this->form_validation->set_rules('profile[firstname]','ชื่อ','required');
 		$this->form_validation->set_rules('profile[lastname]','นามสกุล','required');
-		$this->form_validation->set_rules('profile[blood]','หมู่โลหิต','required');
+		// $this->form_validation->set_rules('profile[blood]','หมู่โลหิต','required');
 		$this->form_validation->set_rules('profile[nationality]','สัญชาติ','required');
 		$this->form_validation->set_rules('d','วันเกิด','required|is_numeric');
 		$this->form_validation->set_rules('m','เดือนเกิด','required|is_numeric');
