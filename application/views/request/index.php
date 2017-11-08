@@ -1,3 +1,4 @@
+<?php echo strtotime('30/11/2016'); ?>
 <div class="panel panel-success">
   <div class="panel-heading"> <h3 class="panel-title">ประวัติการลงทะเบียนคำร้องของคุณทั้งหมด <?=count($requests);?> รายการ</h3> </div>
   <div class="panel-body"> </div>
@@ -5,7 +6,7 @@
     <thead> <tr> <th>ประเภทรายการ</th> <th>วันที่ยื่นคำร้อง</th> <th>วันที่หมดอายุ</th> <th></th> </tr> </thead>
     <tbody>
       <?php foreach ($requests as $key => $value) :
-        $exist = NULL;
+        $exist = '';
         $expired = strtotime('+30 days',$value['date_create']);
         if ($value['approve_status'] !== 'accept' && time() < $expired) :
           $exist++; ?>

@@ -84,16 +84,31 @@ class Auth extends Public_Controller {
 
 				$standard = $this->db
 					->where('user_id',$this->session->user_id)
-					->where('status','ผ่าน')
-					->get('standards');
-				if ($standard->num_rows() > 0)
+					->get('standards')
+					->result_array();
+				foreach ($standard as $key => $value) :
+					$expired = strtotime('+30 days',$value['date_create']);
+					if (time() > $expired && $value['status'] != 'ผ่าน') :
+						$this->db->where('id',$value['id'])->delete('standards');
+						unset($standard[$key]);
+					endif;
+				endforeach;
+
+				if (count($standard) > 0)
 					$this->session->set_userdata('standard',TRUE);
 
 				$skill = $this->db
 					->where('user_id',$this->session->user_id)
-					->where('status','ผ่าน')
-					->get('skills');
-				if ($skill->num_rows() > 0)
+					->get('skills')
+					->result_array();
+				foreach ($skill as $key => $value) :
+					$expired = strtotime('+30 days',$value['date_create']);
+					if (time() > $expired && $value['status'] != 'ผ่าน') :
+						$this->db->where('id',$value['id'])->delete('skills');
+						unset($skill[$key]);
+					endif;
+				endforeach;
+				if (count($skill) > 0)
 					$this->session->set_userdata('skill',TRUE);
 
 				if ($this->ion_auth->in_group('admin',$this->session->user_id)) :

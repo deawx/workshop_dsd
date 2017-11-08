@@ -154,7 +154,7 @@ class Request extends Private_Controller {
 			$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 			$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
 			if ($this->session->has_userdata('standard')) :
-				$this->data['body'] = 'ท่านได้ผ่านการสอบมาตรฐานฝีมือแรงงานไปเรียบร้อยแล้ว';
+				$this->data['body'] = 'ท่านได้ยื่นคำร้องขอสอบมาตรฐานฝีมือแรงงานไปเรียบร้อยแล้ว';
 			else:
 				$this->data['body'] = $this->load->view('request/standard',$this->data,TRUE);
 			endif;
@@ -243,7 +243,7 @@ class Request extends Private_Controller {
 			$this->data['navbar'] = $this->load->view('_partials/navbar',$this->data,TRUE);
 			$this->data['rightbar'] = $this->load->view('_partials/rightbar',$this->data,TRUE);
 			if ($this->session->has_userdata('skill')) :
-				$this->data['body'] = 'ท่านได้ผ่านการสอบรับรองความรู้ความสามารถไปเรียบร้อยแล้ว';
+				$this->data['body'] = 'ท่านได้ยื่นคำร้องขอสอบรับรองความรู้ความสามารถไปเรียบร้อยแล้ว';
 			else:
 				$this->data['body'] = $this->load->view('request/skill',$this->data,TRUE);
 			endif;
